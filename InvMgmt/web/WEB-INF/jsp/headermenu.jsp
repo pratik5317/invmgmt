@@ -1,3 +1,4 @@
+    <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!-- Fixed navbar -->
 <header role="banner" id="top" class="header1">
     <div class="container logo_paddingtop">
