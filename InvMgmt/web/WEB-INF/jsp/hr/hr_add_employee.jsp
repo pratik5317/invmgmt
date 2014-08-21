@@ -1,4 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
@@ -53,32 +55,33 @@
                 </div>
                 <div class="col-md-9">
                     <div class="catagory-main-box top-radius">
+                    <form:form action="addemployee.html"  method="post"  modelAttribute="employee">
                         <div class="cat-box-title top-radius"></div>
 
                         <div class="row tb-margin">
                             <div class="col-sm-2"></div>
                             <div class="col-sm-8">
 
-                                <div class="form-group">
+<!--                                <div class="form-group">
                                     <label class="col-sm-4 col-xs-12 control-label search-text"> Employee Number:</label>
                                     <div class="col-sm-8 col-xs-12">
                                         <input id="filter" class="form-control" type="text"/>
                                     </div>
-                                </div>
+                                </div>-->
 
                                 <div class="form-group">
                                     <label class="col-sm-4 col-xs-12 control-label search-text"> First Name:</label>
                                     <div class="col-sm-8 col-xs-12">
-                                        <input id="filter" class="form-control" type="text"/>
+                                        <form:input path="firstName"/>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+<!--                                <div class="form-group">
                                     <label class="col-sm-4 col-xs-12 control-label search-text"> Date of Birth:</label>
                                     <div class="col-sm-8 col-xs-12">
-                                        <input id="filter" class="form-control" type="text"/>
+                                        <form:input path="dateOfBirth"/>
                                     </div>
-                                </div>
+                                </div>-->
 
                                 <div class="form-group">
                                     <label class="col-sm-4 col-xs-12 control-label search-text">Department:</label>
@@ -108,18 +111,18 @@
                         </div>
                         <div class="row text-pad-top visible-lg visible-md visible-sm">
                             <div class="div-center">
-                                <button type="button" class="btn btn-orange">Save</button>
+                                <button type="submit" class="btn btn-orange">Save</button>
                                 <button type="button" class="btn btn-orange" onclick="javascript:history.back()">Cancel</button>
                             </div>
                         </div>
                         <div class="row text-pad-top visible-xs ">
                             <div class="div-center-xs">
-                                <button type="button" class="btn btn-orange">Save</button>
+                                <button type="submit" class="btn btn-orange">Save</button>
                                 <button type="button" class="btn btn-orange" onclick="javascript:history.back()">Cancel</button>
                             </div>
                         </div>
-
-
+                        
+                    </form:form>
                     </div>
                 </div>
 
