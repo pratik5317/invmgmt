@@ -4,6 +4,7 @@
  */
 package com.tss.ocean.controller;
 
+import com.tss.ocean.pojo.Employees;
 import com.tss.ocean.pojo.Users;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -98,6 +99,7 @@ public class ViewController {
     @RequestMapping(value="/addemployee.html",method= RequestMethod.GET)
     public String hr_addemployee(Model model,HttpServletRequest request) throws Exception {
         logger.log(Level.OFF,"hr_addemployee called.");
+        model.addAttribute("employee",new Employees());
         return "hr/hr_add_employee";
     }
     
