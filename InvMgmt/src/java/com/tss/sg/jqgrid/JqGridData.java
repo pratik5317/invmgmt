@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public class JqGridData {
@@ -65,7 +67,7 @@ public class JqGridData {
 
     public String getJsonString() {
 
-        ObjectMapper maper = new ObjectMapper();
+       ObjectMapper maper = new ObjectMapper();
 
         Map<String, Object> map;
         map = new HashMap();
@@ -76,11 +78,14 @@ public class JqGridData {
         String json = "";
         try {
             json = maper.writeValueAsString(map);
-
-            //  return JSONValue.toJSONString(map);
+        } catch (JsonGenerationException ex) {
+            Logger.getLogger(JqGridData.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JsonMappingException ex) {
+            Logger.getLogger(JqGridData.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(JqGridData.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //  return JSONValue.toJSONString(map);
         return json;
     }
 }
