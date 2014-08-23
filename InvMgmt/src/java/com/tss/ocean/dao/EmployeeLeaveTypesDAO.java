@@ -3,7 +3,12 @@ package com.tss.ocean.dao;
 import com.tss.ocean.idao.IEmployeeLeaveTypesDAO;
 import com.techshark.hibernate.base.GenericDAOImpl;
 import com.tss.ocean.pojo.EmployeeLeaveTypes;
+import org.springframework.stereotype.Repository;
 
-public class EmployeeLeaveTypesDAO extends GenericDAOImpl<EmployeeLeaveTypes, Integer> implements IEmployeeLeaveTypesDAO{
-
+/**
+ *
+ * @author bhavik.ambani
+ */
+@Repository("employeeLeaveTypesDAO")
+public class EmployeeLeaveTypesDAO extends GenericDAOImpl<EmployeeLeaveTypes, Integer> implements IEmployeeLeaveTypesDAO {
 }
