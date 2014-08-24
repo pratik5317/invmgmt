@@ -44,6 +44,8 @@
     
     <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
     <context:component-scan base-package="com.tss.ocean.controller" />
+    <context:component-scan base-package="com.tss.ocean.dao" />
+    <context:component-scan base-package="com.tss.ocean.pojo"/>
  
         <bean id="localeResolver"
         class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
