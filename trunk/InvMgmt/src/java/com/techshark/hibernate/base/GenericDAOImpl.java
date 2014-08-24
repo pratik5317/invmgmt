@@ -7,7 +7,6 @@ package com.techshark.hibernate.base;
 //import com.techshark.hibernate.util.HibernateUtil;
 import com.techshark.hibernate.ibase.GenericDAO;
 import com.techshark.hibernate.util.HibernateUtil;
-import com.tss.sg.jqgrid.JqGridData;
 //import com.tss.sg.jqgrid.JqGridData;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
