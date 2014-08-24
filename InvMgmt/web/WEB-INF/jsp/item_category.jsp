@@ -1,4 +1,5 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
@@ -11,13 +12,13 @@
 
         <jsp:include page="headermenu.jsp"></jsp:include>
 
-        <div class="container">
-            <div class="row container">
-                <div class="dashboard_main">
-                    <div class="desh-icon-bg">
-                        <img src="img/i-mgmt.png">
-                    </div>
-                    <div class="page-title-text">Item Category</div>
+            <div class="container">
+                <div class="row container">
+                    <div class="dashboard_main">
+                        <div class="desh-icon-bg">
+                            <img src="img/i-mgmt.png">
+                        </div>
+                        <div class="page-title-text"><spring:message code="itemCategory.ItemCategory" text="Label value is missing !!!"/></div>
                 </div>
             </div>	
             <div class="row">
@@ -29,15 +30,15 @@
                         <div id='cssmenu'>
                             <ul>
 
-                                <li class='has-sub active'><a href='#'><span>ITEMS</span></a>
+                                <li class='has-sub active'><a href='#'><span><spring:message code="menu.ITEMS" text="Label value is missing !!!"/></span></a>
                                     <ul style='display: block;'>
-                                        <li><a href='item.html'><span>Items</span></a></li>
-                                        <li class="active"><a href='item_category.html'><span>Item Category</span></a></li>
-                                        <li class='last'><a href='item_unit.html'><span>Item Units</span></a></li>
+                                        <li><a href='item.html'><span><spring:message code="menu.Items" text="Label value is missing !!!"/></span></a></li>
+                                        <li class="active"><a href='item_category.html'><span><spring:message code="menu.ItemCategory" text="Label value is missing !!!"/></span></a></li>
+                                        <li class='last'><a href='item_unit.html'><span><spring:message code="menu.ItemUnits" text="Label value is missing !!!"/></span></a></li>
                                     </ul>
                                 </li>
-                                <li class=''><a href='purchase_order.html'><span>Purchase Order</span></a></li>
-                                <li class='last'><a href='purchase_requisition.html'><span>Purchase Requisition</span></a></li>
+                                <li class=''><a href='purchase_order.html'><span><spring:message code="menu.PurchaseOrder" text="Label value is missing !!!"/></span></a></li>
+                                <li class='last'><a href='purchase_requisition.html'><span><spring:message code="menu.PurchaseRequisition" text="Label value is missing !!!"/></span></a></li>
                             </ul>
                         </div>
                         <!-- END MUNU -->    
@@ -46,17 +47,17 @@
                 </div>
                 <div class="col-md-9">
                     <div class="catagory-main-box top-radius">
-                        <div class="cat-box-title cat-title-font top-radius">Item Category List</div>
+                        <div class="cat-box-title cat-title-font top-radius"><spring:message code="itemCategory.ItemCategoryList" text="Label value is missing !!!"/></div>
 
                         <div class="tab-content">
                             <div class="tab-pane active" id="demo">
                                 <div class="row tb-margin">
                                     <div class="col-sm-4">
-                                        <a href="add-item_category.html" class="btn btn-info add-row addrow-btn-left">Add Category</a>
+                                        <a href="add-item_category.html" class="btn btn-info add-row addrow-btn-left"><spring:message code="itemCategory.AddCategory" text="Label value is missing !!!"/></a>
                                     </div>
                                     <div class="col-sm-8">
                                         <div class="form-group visible-sm visible-md visible-lg">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text">Search:</label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="itemCategory.Search" text="Label value is missing !!!"/>:</label>
                                             <div class="col-sm-8 col-xs-12">
                                                 <input id="filter" class="form-control" type="text"/>
                                             </div>
@@ -73,42 +74,29 @@
                                     <thead class="orange-bg border-t">
                                         <tr>
                                             <th data-toggle="true">
-                                                Name 
+                                                <spring:message code="itemCategory.Name" text="Label value is missing !!!"/> 
                                             </th>
                                             <th data-hide="phone">
-                                                Description 
+                                                <spring:message code="itemCategory.Description" text="Label value is missing !!!"/>
                                             </th>
                                             <th data-hide="phone">
-                                                Action
+                                                <spring:message code="itemCategory.Action" text="Label value is missing !!!"/>
                                             </th>
                                             <th data-sort-ignore="true" data-hide="phone" data-name="Delete"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><a href="#">Isidra</a></td>
-                                            <td>Boudreaux</td>
-                                            <td data-value="78025368997" style="text-align:center;">
-                                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button>
-                                            </td>
-                                            <td><a class="row-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Shona</a></td>
-                                            <td>Woldt</td>
-                                            <td data-value="370961043292" style="text-align:center;">
-                                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button>
-                                            </td>
-                                            <td><a class="row-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Lauri</a></td>
-                                            <td>Hyland</td>
-                                            <td data-value="500874333932" style="text-align:center;">
-                                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button>
-                                            </td>
-                                            <td><a class="row-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
-                                        </tr>
+                                     <c:forEach var="listVar" items="${itemTypeList}">
+                                       <tr>
+                                        <input type="hidden" id="deleteInvTypeId" name="deleteInvTypeId" value="<c:out value="${listVar.id}"/>" />
+                                        <td><a href="#"><c:out value="${listVar.name}"/></a></td>
+                                        <td><c:out value="${listVar.description}"/></td>
+                                        <td data-value="78025368997" style="text-align:center;">
+                                            <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                                        </td>
+                                        <td><a class="row-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
+                                      </tr>
+                                    </c:forEach>
                                     </tbody>
                                     <tfoot class="hide-if-no-paging">
                                         <tr>
@@ -176,7 +164,7 @@ $(&#39;.add-row&#39;).click(function(e) {
 
         <!--Responsive Table-->
         <script type="text/javascript">
-            $(function () {
+            $(function() {
                 $('table').footable().on('click', '.row-delete', function(e) {
                     e.preventDefault();
                     //get the footable object

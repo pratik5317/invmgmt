@@ -4,11 +4,15 @@
  */
 package com.tss.ocean.controller;
 
+import com.tss.ocean.idao.IItemtypeDAO;
 import com.tss.ocean.pojo.Employees;
-import com.tss.ocean.pojo.Users;
+import com.tss.ocean.pojo.Itemtype;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class ViewController {
+    
+    @Autowired
+    IItemtypeDAO itemTypeDAO;
     
     private static final Logger logger = Logger.getLogger(ViewController.class.getName());
 
@@ -38,6 +45,12 @@ public class ViewController {
     @RequestMapping(value="/item_category.html",method= RequestMethod.GET)
     public String item_category(Model model,HttpServletRequest request) throws Exception {
         logger.log(Level.OFF,"item_category called.");
+        logger.log(Level.OFF,"List details are loaded by the system.");
+        logger.log(Level.OFF,itemTypeDAO.getList().toString());
+        List<Itemtype> itemTypeList = itemTypeDAO.getList();
+        
+        model.addAttribute("itemTypeList", itemTypeList);
+        
         return "item_category";
     }
     
@@ -66,8 +79,10 @@ public class ViewController {
     }
 
     @RequestMapping(value="/add-item_category.html",method= RequestMethod.GET)
-    public String add_item_category(Model model,HttpServletRequest request) throws Exception {
+    public String add_item_category(Map<String, Object> model,HttpServletRequest request) throws Exception {
         logger.log(Level.OFF,"add-item_category called.");
+        Itemtype itemtype = new Itemtype();
+        model.put("itemTypeForm", itemtype);
         return "add-item_category";
     }
     @RequestMapping(value="/add-item_unit.html",method= RequestMethod.GET)
