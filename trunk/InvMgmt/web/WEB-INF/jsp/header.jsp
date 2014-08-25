@@ -15,7 +15,9 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-
+    
+    <!-- Jquery UI -->
+    <link rel="stylesheet" href="css/jquery-ui.css"/>
     <!--DATA TABLE-->
     <link rel="stylesheet" href="css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="css/datatables.responsive.css"/>

@@ -65,13 +65,7 @@ public class ViewController {
         logger.log(Level.OFF,"purchase_order called.");
         return "purchase_order";
     }
-    
-    @RequestMapping(value="/purchase_requisition.html",method= RequestMethod.GET)
-    public String purchase_requisition(Model model,HttpServletRequest request) throws Exception {
-        logger.log(Level.OFF,"purchase_requisition called.");
-        return "purchase_requisition";
-    }
-    
+        
     @RequestMapping(value="/add-item.html",method= RequestMethod.GET)
     public String add_item(Model model,HttpServletRequest request) throws Exception {
         logger.log(Level.OFF,"add-item called.");
@@ -90,13 +84,6 @@ public class ViewController {
         logger.log(Level.OFF,"add-item_unit called.");
         return "add-item_unit";
     }
-
-    @RequestMapping(value="/add-purchase_requisition.html",method= RequestMethod.GET)
-    public String add_purchase_requisition(Model model,HttpServletRequest request) throws Exception {
-        logger.log(Level.OFF,"add-purchase_requisition called.");
-        return "add-purchase_requisition";
-    }
-    
     
     ///View for HR Modules...
     @RequestMapping(value="/hr_management.html",method= RequestMethod.GET)
