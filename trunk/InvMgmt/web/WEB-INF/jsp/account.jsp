@@ -49,7 +49,7 @@
                     <div class="catagory-main-box top-radius">
                         <div class="cat-box-title cat-title-font top-radius"><spring:message code="account.accountlist" text="Label value is missing !!!"/></div>
 
-                        <spring:message code="account.search.placeholder" var="search"/>
+                        <spring:message text="Default Text" code="account.search.placeholder" var="search"/>
                         <div class="tab-content">
                             <div class="tab-pane active" id="demo">
                                 <div class="row tb-margin">
@@ -71,7 +71,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table table-bordered table-striped" data-filter="#filter" data-page-size="5">
+                                <table id="dttable" class="table table-bordered table-striped" data-filter="#filter" data-page-size="5">
                                     <thead class="orange-bg border-t">
                                         <tr>
                                             <th data-toggle="true">
@@ -161,8 +161,7 @@ $(&#39;.add-row&#39;).click(function(e) {
 
 
 
-
-
+        
         <!--Responsive Table-->
         <script type="text/javascript">
             $(document).ready(function() {
@@ -186,5 +185,9 @@ $(&#39;.add-row&#39;).click(function(e) {
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.dataTables.min.js"></script>
+        <script src="js/dataTables.responsive.min.js"></script>
+        <script src="js/ajax-bootstrap3.js"></script>
+        <script src="js/docs.min.js"></script>        
     </body>
 </html>

@@ -42,10 +42,11 @@
                 <div class="col-md-9">
                     <div class="catagory-main-box top-radius">
                         <div class="cat-box-title cat-title-font top-radius"><spring:message code="purrequisition.list" text="Label value is missing !!!"/></div>
-                        <spring:message code="purrequisition.search.placeholder" var="search"/>
+                        <spring:message text="Default Text" code="purrequisition.search.placeholder" var="search"/>
                         <div class="tab-content">
                             <div class="tab-pane active" id="demo">
                                 <div class="row tb-margin">
+                                   
                                     <div class="col-sm-4">
                                         <a href="add-purchase_requisition.html" class="btn btn-info add-row addrow-btn-left"><spring:message code="purrequisition.add" text="Label value is missing !!!"/></a>
                                     </div>
@@ -63,7 +64,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table table-bordered table-striped" data-filter="#filter" data-page-size="5">
+                                <table id="dttable" class="table table-bordered table-striped" data-filter="#filter" data-page-size="5">
                                     <thead class="orange-bg border-t">
                                         <tr>
                                             <th data-toggle="true">
@@ -125,7 +126,10 @@
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/docs.min.js"></script>
+        <script src="js/jquery.dataTables.min.js"></script>
+        <script src="js/dataTables.responsive.min.js"></script>
+        <script src="js/ajax-bootstrap3.js"></script>
+        <script src="js/docs.min.js"></script>        
         <script type="text/javascript">
             $(document).ready(function() {
                 $('.row-delete').click(function(eve) {

@@ -60,12 +60,6 @@ public class ViewController {
         return "item_unit";
     }
     
-    @RequestMapping(value="/purchase_order.html",method= RequestMethod.GET)
-    public String purchase_order(Model model,HttpServletRequest request) throws Exception {
-        logger.log(Level.OFF,"purchase_order called.");
-        return "purchase_order";
-    }
-        
     @RequestMapping(value="/add-item.html",method= RequestMethod.GET)
     public String add_item(Model model,HttpServletRequest request) throws Exception {
         logger.log(Level.OFF,"add-item called.");
