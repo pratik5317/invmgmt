@@ -38,8 +38,7 @@ public abstract class GenericDAOImpl<DomainObject extends Serializable, KeyType 
     private Class<DomainObject> persistentClass;
     private Session session;
     private SessionFactory sessionFactory;
-    private boolean sessionStatus = true;
-    private static String MODULE = "GENERICDAOIMPL";
+    private static String MODULE = "[GENERICDAOIMPL] ";
     //private IMSLogger.appLog IMSLogger.appLog = IMSLogger.appLog.getIMSLogger.appLog(this.getClass());
 
     /**
@@ -718,5 +717,26 @@ public abstract class GenericDAOImpl<DomainObject extends Serializable, KeyType 
 
     public void clear() {
         getSession().clear();
+    }
+    
+    public void insertOrUpdate(DomainObject object) {
+        Session session = getSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.saveOrUpdate(object);
+            tx.commit();
+        } catch (RuntimeException e) {
+            LOG.error(MODULE + "Exception in insert Method:" + e, e);
+            if (tx != null) {
+                tx.rollback();
+            }
+            throw e;
+        } finally {
+            if (session.isOpen()) {
+                session.close();
+            }
+        }
+        return;
     }
 }

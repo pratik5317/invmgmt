@@ -17,7 +17,7 @@ public class Itemtype implements java.io.Serializable {
     @Size(min = 10, max = 45, message = "Item name must between 1 and 45 characters")
     private String name;
 
-    @Size(min = 0, max = 45, message = "Item description must between 0 and 65535 characters")
+    @Size(min = 0, max = 65535, message = "Item description must between 0 and 65535 characters")
     private String description;
 
     public Itemtype() {

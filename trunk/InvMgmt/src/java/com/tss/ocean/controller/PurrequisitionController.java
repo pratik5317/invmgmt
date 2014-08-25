@@ -190,7 +190,7 @@ public class PurrequisitionController {
     }
     
     private Map<Integer,String> getStatusList(Locale local) {
-        Map<Integer,String> statusList = new HashMap<>();        
+        Map<Integer,String> statusList = new HashMap();        
         statusList.put(Constants.CREATED, Utilities.getSpringMessage(messageSource,"label.purrequisition.status.created", local));
         statusList.put(Constants.SUSPENDED, Utilities.getSpringMessage(messageSource,"label.purrequisition.status.suspended", local));
         statusList.put(Constants.PLACED, Utilities.getSpringMessage(messageSource,"label.purrequisition.status.placed", local));
