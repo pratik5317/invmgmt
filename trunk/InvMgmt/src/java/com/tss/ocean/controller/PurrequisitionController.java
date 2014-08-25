@@ -102,13 +102,13 @@ public class PurrequisitionController {
         ModelAndView mav;
         Purrequisition purrequisition = purrequisitionDAO.getRecordByPrimaryKey(id);
         if(purrequisition != null ) {
-            mav = new ModelAndView("edit-purrequisition");
+            mav = new ModelAndView("edit-purchase_requisition");
             mav.getModelMap().put("purrequisition", purrequisition);
             mav.getModelMap().put("supplierList",getSupplierList());
             mav.getModelMap().put("statusList",getStatusList(locale));
         }
         else {
-            mav = new ModelAndView("redirect:purrequisition");
+            mav = new ModelAndView("redirect:purchase_requisition.html");
         }
         if(success != null) {
             mav.getModelMap().put("success", success);
@@ -119,11 +119,10 @@ public class PurrequisitionController {
         return mav;
     }
     
-    @RequestMapping(value="/edit-purrequisition.html",method= RequestMethod.POST)
+    @RequestMapping(value="/edit-purchase_requisition.html",method= RequestMethod.POST)
     public ModelAndView edit_purrequisition_post(@ModelAttribute("purrequisition") @Valid Purrequisition purrequisition,
                                         BindingResult result,
-                                        ModelMap model,
-                                        @RequestParam(value="imageUpload",required = false) MultipartFile upload, 
+                                        ModelMap model,                                        
                                         Locale locale) throws Exception {
         logger.log(Level.FINE,"edit-purchase_requisition-post called.");
         if (!result.hasErrors()) {            
@@ -151,17 +150,24 @@ public class PurrequisitionController {
     
     @RequestMapping(value="/purchase_requisition.html",method= RequestMethod.GET)
     public ModelAndView purrequisition(@RequestParam(value = "success",required = false)String success,
-                                    @RequestParam(value = "error",required = false)String error) throws Exception {
+                                    @RequestParam(value = "error",required = false)String error,
+                                    Locale locale) throws Exception {
         logger.log(Level.FINE,"add-purchase_requisition called.");
         ModelAndView mav = new ModelAndView("purchase_requisition");
-        List<Purrequisition> purrequisitionList = purrequisitionDAO.getList();
+        List<Accounts> accountsList = accountsDAO.getList();
+        HashMap<Integer,String> accountMap = new HashMap<>(accountsList.size());
+        for (Accounts account : accountsList) {
+            accountMap.put(account.getId(), account.getName());            
+        }
+        mav.getModelMap().put("purrequisitionList", purrequisitionDAO.getList());
+        mav.getModelMap().put("accountMap", accountMap);
+        mav.getModelMap().put("statusList",getStatusList(locale));
         if(success != null) {
             mav.getModelMap().put("success", success);
         }
         if(error != null) {
             mav.getModelMap().put("error", error);
         }
-	mav.getModelMap().put("purrequisitionList", purrequisitionList);
         return mav;
     }
     

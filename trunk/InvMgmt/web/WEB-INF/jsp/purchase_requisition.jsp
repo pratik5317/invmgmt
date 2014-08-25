@@ -1,23 +1,20 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
-    <head>
-        <%--<%@include file="header.jsp" %>--%>
-        <jsp:include page="header.jsp"></jsp:include>
-        </head>
-
-        <body role="document">
-
-        <jsp:include page="headermenu.jsp"></jsp:include>
-
+    <head>        
+        <jsp:include page="header.jsp" />
+    </head>
+    <body role="document">
+        <jsp:include page="headermenu.jsp" />
         <div class="container">
             <div class="row container">
                 <div class="dashboard_main">
                     <div class="desh-icon-bg">
                         <img src="img/i-mgmt.png">
                     </div>
-                    <div class="page-title-text">Item</div>
+                    <div class="page-title-text"><spring:message code="purrequisition.list" text="Label value is missing !!!"/></div>
                 </div>
             </div>	
             <div class="row">
@@ -40,7 +37,6 @@
                             </ul>
                         </div>
                         <!-- END MUNU -->    
-
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -60,7 +56,6 @@
                                                 <input id="filter" class="form-control" type="text"/>
                                             </div>
                                         </div>
-
                                         <div class="form-group visible-xs">
                                             <div class="col-xs-12">
                                                 <input id="filter" placeholder="${search}" class="form-control" type="text"/>
@@ -85,122 +80,26 @@
                                             </th>
                                             <th data-hide="phone">
                                                 <spring:message code="label.purrequisition.createdat" text="Label value is missing !!!"/> 
-                                            </th>
-
-                                            <th data-hide="phone">
-                                                <spring:message code="label.purrequisition.createby" text="Label value is missing !!!"/> 
-                                            </th>
-                                            <th data-sort-ignore="true" data-hide="phone">
-                                                <spring:message code="label.purrequisition.approvedby" text="Label value is missing !!!"/> 
-                                            </th>
+                                            </th>                                            
                                             <th data-hide="phone" data-name="Delete">
                                                 <spring:message code="label.purrequisition.action" text="Label value is missing !!!"/> 
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach var="purrequisition" items="${purrequisitionList}">
-                                        <tr>
-                                            <td>${purrequisition.prno}</td>
-                                            <td>Boudreaux</td>
-                                            <td>$100.00</td>
-                                            <td>$100.00</td>
-                                            <td>Isidra</td>
-                                            <td>Active</td>
-                                            <td>Boudreaux</td>
-                                            <td><button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</button> <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button></td>
-                                        </tr>                                        
-                                    </c:forEach>
-                                        <tr>
-                                            <td><a href="#">Shona</a></td>
-                                            <td>Woldt</td>
-                                            <td>$100.00</td>
-                                            <td>$100.00</td>
-                                            <td>Isidra</td>
-                                            <td>Active</td>
-                                            <td>Boudreaux</td>
-                                            <td><button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</button> <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Granville</a></td>
-                                            <td>Leonardo</td>
-                                            <td>$100.00</td>
-                                            <td>$100.00</td>
-                                            <td data-value="1"><span class="status-metro status-suspended" title="Suspended">Suspended</span></td>
-                                            <td>Active</td>
-                                            <td>Boudreaux</td>
-                                            <td><button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</button> <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Easer</a></td>
-                                            <td>Dragoo</td>
-                                            <td>$100.00</td>
-                                            <td>$100.00</td>
-                                            <td>Isidra</td>
-                                            <td>Active</td>
-                                            <td>Boudreaux</td>
-                                            <td><button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</button> <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Maple</a></td>
-                                            <td>Halladay</td>
-                                            <td>$100.00</td>
-                                            <td>$100.00</td>
-                                            <td data-value="1"><span class="status-metro status-suspended" title="Suspended">Suspended</span></td>
-                                            <td>Active</td>
-                                            <td>Boudreaux</td>
-                                            <td><button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</button> <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Maxine</a></td>
-                                            <td>Woldt</td>
-                                            <td>$100.00</td>
-                                            <td>$100.00</td>
-                                            <td>Isidra</td>
-                                            <td>Active</td>
-                                            <td>Boudreaux</td>
-                                            <td><button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</button> <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Lorraine</a></td>
-                                            <td>Mcgaughy</td>
-                                            <td>$100.00</td>
-                                            <td>$100.00</td>
-                                            <td>Isidra</td>
-                                            <td>Active</td>
-                                            <td>Boudreaux</td>
-                                            <td><button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</button> <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Lizzee</a></td>
-                                            <td>Goodlow</td>
-                                            <td>$100.00</td>
-                                            <td>$100.00</td>
-                                            <td data-value="1"><span class="status-metro status-suspended" title="Suspended">Suspended</span></td>
-                                            <td>Active</td>
-                                            <td>Boudreaux</td>
-                                            <td><button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</button> <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Judi</a></td>
-                                            <td>Badgett</td>
-                                            <td>$100.00</td>
-                                            <td>$100.00</td>
-                                            <td>Isidra</td>
-                                            <td>Active</td>
-                                            <td>Boudreaux</td>
-                                            <td><button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</button> <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Lauri</a></td>
-                                            <td>Hyland</td>
-                                            <td>$100.00</td>
-                                            <td>$100.00</td>
-                                            <td data-value="1"><span class="status-metro status-suspended" title="Suspended">Suspended</span></td>
-                                            <td>Active</td>
-                                            <td>Boudr<a class="row-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
-                                            <td><button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</button> <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button></td>
-                                        </tr>
+                                        <c:forEach var="purrequisition" items="${purrequisitionList}">
+                                            <tr>
+                                                <td>${purrequisition.prno}</td>
+                                                <td>${accountMap[purrequisition.suplierid]}</td>                                                
+                                                <td>${statusList[purrequisition.status]}</td>
+                                                <td>${purrequisition.price}</td>
+                                                <td>${purrequisition.createdat}</td>
+                                                <td>
+                                                    <a href="edit-purchase_requisition.html?id=${purrequisition.id}" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</a>
+                                                    <a href="delete-purchase_requisition.html?id=${purrequisition.id}" class="btn btn-default btn-sm row-delete" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                                                </td>
+                                            </tr>                                        
+                                        </c:forEach>                                        
                                     </tbody>
                                     <tfoot class="hide-if-no-paging">
                                         <tr>
@@ -212,32 +111,37 @@
                                 </table>
                             </div>                            
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
             <div class=""></div>
             <div class=""></div>
-
-
         </div>
         <!-- /container -->
-
-
-
-
-
-
         <!--Responsive Table-->
         <script type="text/javascript">
         </script>
-
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="js/bootstrap.min.js"></script>
         <script src="js/docs.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.row-delete').click(function(eve) {
+                    var row = this;
+                    eve.preventDefault();
+                    $.ajax({
+                        url: $(row).attr('href')
+                        , success: function(response) {
+                            if (response === true) {
+                                $(row).closest('tr').remove();
+                            }
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script>
     </body>
 </html>
