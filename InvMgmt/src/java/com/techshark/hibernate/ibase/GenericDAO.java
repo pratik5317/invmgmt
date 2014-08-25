@@ -181,4 +181,9 @@ public interface GenericDAO<DomainObject extends Serializable, KeyType extends S
 	
         public String getJson(final int pageno, final int offset,
             final String sortColumn, final String sortOrder,List<DomainObject> list);
+        
+        /**
+         * 
+         */
+        public void insertOrUpdate(DomainObject object);
 }
