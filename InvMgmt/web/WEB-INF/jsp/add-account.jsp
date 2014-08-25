@@ -66,22 +66,23 @@
 
                     </div>
                 </div>
-                <spring:message code="label.account.name.placeholder" var="accountnameplaceholder" />
-                <spring:message code="label.account.address.placeholder" var="accountaddressplaceholder" />
-                <spring:message code="label.account.address2.placeholder" var="accountaddressplaceholder2" />
-                <spring:message code="label.account.postal.placeholder" var="accountpostalplaceholder" />
-                <spring:message code="label.account.city.placeholder" var="accountcityplaceholder" />
-                <spring:message code="label.account.state.placeholder" var="accountstateplaceholder" />
-                <spring:message code="label.account.country.placeholder" var="accountcountryplaceholder" />
-                <spring:message code="label.account.firstname.placeholder" var="accountfirstnameplaceholder" />
-                <spring:message code="label.account.email.placeholder" var="accountemailplaceholder" />
-                <spring:message code="label.account.phone.placeholder" var="accountphoneplaceholder" />
-                <spring:message code="label.account.phone2.placeholder" var="accountphoneplaceholder2" />
-                <spring:message code="label.account.fax.placeholder" var="accountfaxplaceholder" />
-                <spring:message code="label.account.notes.placeholder" var="accountnotesplaceholder" />
-                <spring:message code="label.account.maxdebt.placeholder" var="accountmaxdebtplaceholder" />
-                <spring:message code="label.account.curdebt.placeholder" var="accountcurdebtplaceholder" />
-                <spring:message code="label.account.image.placeholder" var="accountimageplaceholder" />
+                <spring:message text="Default Text" code="label.account.name.placeholder" var="accountnameplaceholder" />
+                <spring:message text="Default Text" code="label.account.address.placeholder" var="accountaddressplaceholder" />
+                <spring:message text="Default Text" code="label.account.address2.placeholder" var="accountaddressplaceholder2" />
+                <spring:message text="Default Text" code="label.account.postal.placeholder" var="accountpostalplaceholder" />
+                <spring:message text="Default Text" code="label.account.city.placeholder" var="accountcityplaceholder" />
+                <spring:message text="Default Text" code="label.account.state.placeholder" var="accountstateplaceholder" />
+                <spring:message text="Default Text" code="label.account.country.placeholder" var="accountcountryplaceholder" />
+                <spring:message text="Default Text" code="label.account.firstname.placeholder" var="accountfirstnameplaceholder" />
+                <spring:message text="Default Text" code="label.account.lastname.placeholder" var="accountlastnameplaceholder" />
+                <spring:message text="Default Text" code="label.account.email.placeholder" var="accountemailplaceholder" />
+                <spring:message text="Default Text" code="label.account.phone.placeholder" var="accountphoneplaceholder" />
+                <spring:message text="Default Text" code="label.account.phone2.placeholder" var="accountphoneplaceholder2" />
+                <spring:message text="Default Text" code="label.account.fax.placeholder" var="accountfaxplaceholder" />
+                <spring:message text="Default Text" code="label.account.notes.placeholder" var="accountnotesplaceholder" />
+                <spring:message text="Default Text" code="label.account.maxdebt.placeholder" var="accountmaxdebtplaceholder" />
+                <spring:message text="Default Text" code="label.account.curdebt.placeholder" var="accountcurdebtplaceholder" />
+                <spring:message text="Default Text" code="label.account.image.placeholder" var="accountimageplaceholder" />
 
                 <div class="col-md-9">
                     <div class="catagory-main-box top-radius">

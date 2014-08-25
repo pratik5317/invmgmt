@@ -89,15 +89,15 @@
                                     <tbody>
                                         <c:forEach var="account" items="${accountList}">
                                             <tr>
-                                        <input type="hidden" id="deleteInvTypeId" name="deleteInvTypeId" value="<c:out value="${account.id}"/>" />
-                                        <td><a href="edit-account.html?id=${account.id}"><c:out value="${account.name}"/></a></td>
-                                        <td><c:out value="${account.city}"/></td>
-                                        <td><c:out value="${account.curdebt}" /></td>
-                                        <td>
-                                            <a class="row-delete" href="delete-account.html?id=${account.id}"><span class="glyphicon glyphicon-remove"></span></a>
-                                        </td>
-                                        </tr>
-                                    </c:forEach>
+                                                <input type="hidden" id="deleteInvTypeId" name="deleteInvTypeId" value="<c:out value="${account.id}"/>" />
+                                                <td><a href="edit-account.html?id=${account.id}"><c:out value="${account.name}"/></a></td>
+                                                <td><c:out value="${account.city}"/></td>
+                                                <td><c:out value="${account.curdebt}" /></td>
+                                                <td>
+                                                    <a class="row-delete" href="delete-account.html?id=${account.id}"><span class="glyphicon glyphicon-remove"></span></a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                     </tbody>
                                     <tfoot class="hide-if-no-paging">
                                         <tr>
@@ -166,13 +166,13 @@ $(&#39;.add-row&#39;).click(function(e) {
         <!--Responsive Table-->
         <script type="text/javascript">
             $(document).ready(function() {
-                 $('.row-delete').click( function(eve){
+                $('.row-delete').click(function(eve) {
                     var row = this;
                     eve.preventDefault();
                     $.ajax({
                         url: $(row).attr('href')
-                        ,success: function(response) {
-                            if(response === true) {
+                        , success: function(response) {
+                            if (response === true) {
                                 $(row).closest('tr').remove();
                             }
                         }

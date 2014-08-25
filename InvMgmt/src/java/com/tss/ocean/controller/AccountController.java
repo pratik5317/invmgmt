@@ -2,6 +2,7 @@ package com.tss.ocean.controller;
 
 import com.tss.ocean.idao.IAccountsDAO;
 import com.tss.ocean.pojo.Accounts;
+import com.tss.ocean.util.Utilities;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -67,12 +68,12 @@ public class AccountController {
             if(insertResult > 0) {
                 logger.log(Level.INFO, "Account Added Successfully with id={0}", insertResult);
                 return new ModelAndView("redirect:add-account.html")
-                    .addObject("success",messageSource.getMessage("account.add.success",null, locale));
+                    .addObject("success",Utilities.getSpringMessage(messageSource,"account.add.success", locale));
             }
             else {
                 logger.log(Level.WARNING, "Error occurred inserting account:{0}", account.toString());
                 return new ModelAndView("add-account",model)                
-                    .addObject("error",messageSource.getMessage("account.add.error",null, locale));
+                    .addObject("error",Utilities.getSpringMessage(messageSource,"account.add.error", locale));
             }
         }
         else {
@@ -85,7 +86,7 @@ public class AccountController {
     public ModelAndView edit_account_get(@RequestParam(value = "id")int id,
                                     @RequestParam(value = "success",required = false)String success,
                                     @RequestParam(value = "error",required = false)String error) throws Exception {
-        logger.log(Level.FINE,"add-account called.");
+        logger.log(Level.FINE,"edit-account called.");
         ModelAndView mav;
         Accounts account = accountsDAO.getRecordByPrimaryKey(id);
         if(account != null ) {
@@ -123,12 +124,12 @@ public class AccountController {
             if(updateResult > 0) {
                 logger.log(Level.INFO, "Account updated Successfully with id={0}", updateResult);
                 return new ModelAndView("redirect:account.html")
-                    .addObject("success",messageSource.getMessage("account.update.success",null, locale));
+                    .addObject("success",Utilities.getSpringMessage(messageSource,"account.update.success", locale));
             }
             else {
                 logger.log(Level.WARNING, "Error occurred updating account:{0}", account.toString());
                 return new ModelAndView("edit-account",model)                
-                    .addObject("error",messageSource.getMessage("account.update.error",null, locale));
+                    .addObject("error",Utilities.getSpringMessage(messageSource,"account.update.error", locale));
             }
         }
         else {
@@ -155,7 +156,7 @@ public class AccountController {
     
     @RequestMapping(value="/delete-account.html")
     @ResponseBody
-    public boolean edit_account_get(@RequestParam(value = "id")int id) throws Exception {
+    public boolean delete_account(@RequestParam(value = "id")int id) throws Exception {
         logger.log(Level.FINE,"delete-account called.");        
         Accounts account = accountsDAO.getRecordByPrimaryKey(id);
         if(account != null ) {

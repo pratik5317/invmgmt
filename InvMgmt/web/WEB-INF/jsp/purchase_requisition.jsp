@@ -28,16 +28,15 @@
                         <!-- MUNU -->    
                         <div id='cssmenu'>
                             <ul>
-
-                                <li class='has-sub'><a href='#'><span>ITEMS</span></a>
+                                <li class='has-sub active'><a href='#'><span><spring:message code="menu.ITEMS" text="Label value is missing !!!"/></span></a>
                                     <ul style='display: block;'>
-                                        <li><a href='item.html'><span>Items</span></a></li>
-                                        <li><a href='item_category.html'><span>Item Category</span></a></li>
-                                        <li class='last'><a href='item_unit.html'><span>Item Units</span></a></li>
+                                        <li><a href='item.html'><span><spring:message code="menu.Items" text="Label value is missing !!!"/></span></a></li>
+                                        <li class="active"><a href='item_category.html'><span><spring:message code="menu.ItemCategory" text="Label value is missing !!!"/></span></a></li>
+                                        <li class='last'><a href='item_unit.html'><span><spring:message code="menu.ItemUnits" text="Label value is missing !!!"/></span></a></li>
                                     </ul>
                                 </li>
-                                <li class=''><a href='purchase_order.html'><span>Purchase Order</span></a></li>
-                                <li class='last active'><a href='purchase_requisition.html'><span>Purchase Requisition</span></a></li>
+                                <li class=''><a href='purchase_order.html'><span><spring:message code="menu.PurchaseOrder" text="Label value is missing !!!"/></span></a></li>
+                                <li class='last'><a href='purchase_requisition.html'><span><spring:message code="menu.PurchaseRequisition" text="Label value is missing !!!"/></span></a></li>
                             </ul>
                         </div>
                         <!-- END MUNU -->    
@@ -46,17 +45,17 @@
                 </div>
                 <div class="col-md-9">
                     <div class="catagory-main-box top-radius">
-                        <div class="cat-box-title cat-title-font top-radius">Purchase Order List</div>
-
+                        <div class="cat-box-title cat-title-font top-radius"><spring:message code="purrequisition.list" text="Label value is missing !!!"/></div>
+                        <spring:message code="purrequisition.search.placeholder" var="search"/>
                         <div class="tab-content">
                             <div class="tab-pane active" id="demo">
                                 <div class="row tb-margin">
                                     <div class="col-sm-4">
-                                        <a href="add-purchase_requisition.html" class="btn btn-info add-row addrow-btn-left">Add New Purchase Requisition</a>
+                                        <a href="add-purchase_requisition.html" class="btn btn-info add-row addrow-btn-left"><spring:message code="purrequisition.add" text="Label value is missing !!!"/></a>
                                     </div>
                                     <div class="col-sm-8">
                                         <div class="form-group visible-sm visible-md visible-lg">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text">Search:</label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="purrequisition.search" text="Label value is missing !!!"/></label>
                                             <div class="col-sm-8 col-xs-12">
                                                 <input id="filter" class="form-control" type="text"/>
                                             </div>
@@ -64,7 +63,7 @@
 
                                         <div class="form-group visible-xs">
                                             <div class="col-xs-12">
-                                                <input id="filter" placeholder="Search" class="form-control" type="text"/>
+                                                <input id="filter" placeholder="${search}" class="form-control" type="text"/>
                                             </div>
                                         </div>
                                     </div>
@@ -73,33 +72,36 @@
                                     <thead class="orange-bg border-t">
                                         <tr>
                                             <th data-toggle="true">
-                                                Number
+                                                <spring:message code="label.purrequisition.prno" text="Label value is missing !!!"/>
                                             </th>
                                             <th data-hide="phone">
-                                                Supplier 
+                                                <spring:message code="label.purrequisition.supplier" text="Label value is missing !!!"/> 
                                             </th>
                                             <th data-hide="phone">
-                                                Status
+                                                <spring:message code="label.purrequisition.status" text="Label value is missing !!!"/> 
                                             </th>
                                             <th data-hide="phone">
-                                                Price 
+                                                <spring:message code="label.purrequisition.price" text="Label value is missing !!!"/> 
                                             </th>
                                             <th data-hide="phone">
-                                                Created at
+                                                <spring:message code="label.purrequisition.createdat" text="Label value is missing !!!"/> 
                                             </th>
 
                                             <th data-hide="phone">
-                                                Created by
+                                                <spring:message code="label.purrequisition.createby" text="Label value is missing !!!"/> 
                                             </th>
-                                            <th data-sort-ignore="true" data-hide="phone" data-name="Delete">Approved by</th>
-                                            <th data-hide="phone">
-                                                Action
+                                            <th data-sort-ignore="true" data-hide="phone">
+                                                <spring:message code="label.purrequisition.approvedby" text="Label value is missing !!!"/> 
+                                            </th>
+                                            <th data-hide="phone" data-name="Delete">
+                                                <spring:message code="label.purrequisition.action" text="Label value is missing !!!"/> 
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach var="purrequisition" items="${purrequisitionList}">
                                         <tr>
-                                            <td><a href="#">Isidra</a></td>
+                                            <td>${purrequisition.prno}</td>
                                             <td>Boudreaux</td>
                                             <td>$100.00</td>
                                             <td>$100.00</td>
@@ -107,7 +109,8 @@
                                             <td>Active</td>
                                             <td>Boudreaux</td>
                                             <td><button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</button> <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button></td>
-                                        </tr>
+                                        </tr>                                        
+                                    </c:forEach>
                                         <tr>
                                             <td><a href="#">Shona</a></td>
                                             <td>Woldt</td>
@@ -207,43 +210,7 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-                            </div>
-                            <div class="tab-pane" id="docs">
-                                <h3>Removing A Row</h3>
-                                <p>It is recommended to use the built-in <code>removeRow</code> function when deleting rows from a FooTable. The reasons are:</p>
-                                <ul>
-                                    <li>A detail row, that may or may not be generated when a breakpoint is fired, is also deleted</li>
-                                    <li>The correct FooTable events are fired which triggers a redraw. This also forces the sorting, filtering and pagination add-ons to play nicely.</li>
-                                </ul>
-                                <p>Simply pass the row object into the <code>removeRow</code> function. (The row object can be a jQuery object or not)</p>
-                                <pre>
-$(&#39;table&#39;).footable().on(&#39;click&#39;, &#39;.row-delete&#39;, function(e) {
-    e.preventDefault();
-    //get the footable object
-    var footable = $(&#39;table&#39;).data(&#39;footable&#39;);
-
-    //get the row we are wanting to delete
-    var row = $(this).parents(&#39;tr:first&#39;);
-
-    //delete the row
-    footable.removeRow(row);
-});</pre>
-                                <h3>Adding A Row</h3>
-                                <p>For similar reasons as above, it is recommended to use the built-in <code>appendRow</code> function for adding rows to the FooTable:</p>
-                                <pre>
-$(&#39;.add-row&#39;).click(function(e) {
-    e.preventDefault();
-
-    //get the footable object
-    var footable = $(&#39;table&#39;).data(&#39;footable&#39;);
-
-    //build up the row we are wanting to add
-    var newRow = &#39;&lt;tr&gt;&lt;td&gt;Isidra&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;#&quot;&gt;Boudreaux&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Traffic Court Referee&lt;/td&gt;&lt;td data-value=&quot;78025368997&quot;&gt;22 Jun 1972&lt;/td&gt;&lt;td data-value=&quot;1&quot;&gt;&lt;span class=&quot;status-metro status-active&quot; title=&quot;Active&quot;&gt;Active&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;a class=&quot;row-delete&quot; href=&quot;#&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-remove&quot;&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&#39;;
-
-    //add it
-    footable.appendRow(newRow);
-});</pre>
-                            </div>
+                            </div>                            
                         </div>
 
                     </div>
@@ -265,32 +232,6 @@ $(&#39;.add-row&#39;).click(function(e) {
 
         <!--Responsive Table-->
         <script type="text/javascript">
-            $(function () {
-                $('table').footable().on('click', '.row-delete', function(e) {
-                    e.preventDefault();
-                    //get the footable object
-                    var footable = $('table').data('footable');
-
-                    //get the row we are wanting to delete
-                    var row = $(this).parents('tr:first');
-
-                    //delete the row
-                    footable.removeRow(row);
-                });
-
-                $('.add-row').click(function(e) {
-                    e.preventDefault();
-
-                    //get the footable object
-                    var footable = $('table').data('footable');
-
-                    //build up the row we are wanting to add
-                    var newRow = '<tr><td>Isidra</td><td><a href="#">Boudreaux</a></td><td>$100.00</td><td>$100.00</td><td>Isidra</td><td>Active</td><td>On<a class="row-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td><td><button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</button> <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button></td></tr>';
-
-                    //add it
-                    footable.appendRow(newRow);
-                });
-            });
         </script>
 
         <!-- Bootstrap core JavaScript
