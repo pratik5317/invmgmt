@@ -99,12 +99,12 @@ public class ViewController {
         model.addAttribute("employee",new Employees());
         return "hr/hr_add_employee";
     }
-    @RequestMapping(value="/employee_categogy.html",method= RequestMethod.GET)
-    public String hr_addemployeeCategory(Model model,HttpServletRequest request) throws Exception {
-        logger.log(Level.OFF,"hr_addemployee called.");
-        model.addAttribute("employeecategory",new EmployeeCategory());
-        return "hr/hr_add_employee_category";
-    }
+//    @RequestMapping(value="/employee_categogy.html",method= RequestMethod.GET)
+//    public String hr_addemployeeCategory(Model model,HttpServletRequest request) throws Exception {
+//        logger.log(Level.OFF,"hr_addemployee called.");
+//        model.addAttribute("employeecategory",new EmployeeCategory());
+//        return "hr/hr_add_employee_category";
+//    }
     
     @RequestMapping(value="/payslips.html",method= RequestMethod.GET)
     public String hr_payslip(Model model,HttpServletRequest request) throws Exception {

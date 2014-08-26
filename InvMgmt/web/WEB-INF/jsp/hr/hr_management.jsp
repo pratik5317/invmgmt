@@ -40,7 +40,7 @@
                                 </li>
                                 <li class='has-sub '><a href='#'><span>Settings</span></a>
                                     <ul style='display: block;'>
-                                        <li><a href='employee_categogy.html'><span>Employee Category</span></a></li>
+                                        <li><a href='employee_category.html'><span>Employee Category</span></a></li>
                                         <li><a href='employee_department.html'><span>Employee Department</span></a></li>
                                         <li class='last'><a href='payroll_category.html'><span>Payroll Category</span></a></li>
                                     </ul>
