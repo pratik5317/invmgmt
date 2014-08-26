@@ -5,13 +5,13 @@
 package com.techshark.hibernate.base;
 
 import com.techshark.hibernate.ibase.DAOFactory;
+import com.tss.ocean.dao.EmployeeCategoryDAO;
+import com.tss.ocean.dao.EmployeePositionDAO;
 import com.tss.ocean.dao.EmployeesDAO;
+import com.tss.ocean.idao.IEmployeeCategoryDAO;
+import com.tss.ocean.idao.IEmployeePositionDAO;
 import com.tss.ocean.idao.IEmployeesDAO;
 
-/**
- *
- * @author TSUser
- */
 public class HibernateDAOFactory extends DAOFactory {
 
 //	
@@ -56,6 +56,14 @@ public class HibernateDAOFactory extends DAOFactory {
         return (IEmployeesDAO) instantiateDAO(EmployeesDAO.class);
     }
 
+    @Override
+    public IEmployeeCategoryDAO getEmployeeCategoryDAO() {
+        return (IEmployeeCategoryDAO) instantiateDAO(EmployeeCategoryDAO.class);
+    }
 
-    
+    @Override
+    public IEmployeePositionDAO getEmployeePositionDAO() {
+        return (IEmployeePositionDAO) instantiateDAO(EmployeePositionDAO.class);
+    }
+
 }
