@@ -4,8 +4,9 @@
  */
 package com.techshark.hibernate.ibase;
 
+import com.tss.ocean.idao.IEmployeeCategoryDAO;
+import com.tss.ocean.idao.IEmployeePositionDAO;
 import com.tss.ocean.idao.IEmployeesDAO;
-
 
 /**
  *
@@ -30,7 +31,13 @@ public abstract class DAOFactory {
             throw new RuntimeException("Couldn't create DAOFactory: " + factory + ":" + ex);
         }
     }
+
     //public abstract  IStudentDAO getStudentDAO();
-    public abstract  IEmployeesDAO getEmployeesDAO();
+
+    public abstract IEmployeesDAO getEmployeesDAO();
+
+    public abstract IEmployeeCategoryDAO getEmployeeCategoryDAO();
+
+    public abstract IEmployeePositionDAO getEmployeePositionDAO();
 
 }
