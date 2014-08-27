@@ -41,7 +41,7 @@
                         <div class="desh-icon-bg">
                             <img src="img/i-mgmt.png">
                         </div>
-                        <div class="page-title-text"><spring:message code="label.add.employeecategory" text="Default Text"/></div>
+                        <div class="page-title-text"><spring:message code="employeedepartment.add" text="Default Text"/></div>
                     </div>
                 </div>	
                 <div class="row">
@@ -75,13 +75,13 @@
                         <!-- END MUNU -->    
                     </div>
                 </div>
-                <spring:message code="label.empcategory.category.placeholder" var="categoryplaceholder" text="Default Text" />
-                <spring:message code="label.empcategory.prefix.placeholder" var="prefixplaceholder" text="Default Text" />                
+                <spring:message code="label.empdepartment.department.placeholder" var="departmentplaceholder" text="Default Text" />
+                <spring:message code="label.empdepartment.code.placeholder" var="codeplaceholder" text="Default Text" />                
                 <div class="col-md-9">
                     <div class="catagory-main-box top-radius">
-                        <div class="cat-box-title cat-title-font top-radius"><spring:message code="label.employeecategory" text="Default Text"/></div>
+                        <div class="cat-box-title cat-title-font top-radius"><spring:message code="label.employeedepartment" text="Default Text"/></div>
                         <div class="row text-pad-top visible-lg visible-md visible-sm">
-                            <form:form action="add_employee_category.html" method="POST" modelAttribute="employeecategory">                                
+                            <form:form action="add_employee_department.html" method="POST" modelAttribute="employeedepartment">                                
                                 <div class="row tb-margin">
                                     <div class="col-sm-2"></div>
                                     <div class="col-sm-8">
@@ -93,21 +93,21 @@
                                         </c:if>
                                         
                                         <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.empcategory.category" text="Default Text"/></label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.empdepartment.department" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">                                            
-                                                <form:input type="text" class="form-control" path="category" placeholder="${categoryplaceholder}" />
-                                                <form:errors path="category" cssClass="error" />
+                                                <form:input type="text" class="form-control" path="department" placeholder="${departmentplaceholder}" />
+                                                <form:errors path="department" cssClass="error" />
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.empcategory.prefix" text="Default Text"/></label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.empdepartment.code" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">                                            
-                                                <form:input type="text" class="form-control" path="prefix" placeholder="${prefixplaceholder}" />
-                                                <form:errors path="prefix" cssClass="error" />
+                                                <form:input type="text" class="form-control" path="code" placeholder="${codeplaceholder}" />
+                                                <form:errors path="code" cssClass="error" />
                                             </div>
                                         </div>
                                              <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.empcategory.isactive" text="Default Text"/></label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.empdepartment.isactive" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">
                                                 <div class="form-control">
                                                     <form:radiobutton path="isActive" value="1" checked="checked"/><spring:message code="label.empcategory.status.active" text="Default Text"/>
