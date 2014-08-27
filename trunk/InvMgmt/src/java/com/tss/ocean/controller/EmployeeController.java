@@ -9,7 +9,6 @@ import com.tss.ocean.idao.IEmployeeCategoryDAO;
 import com.tss.ocean.idao.IEmployeesDAO;
 import com.tss.ocean.pojo.Accounts;
 import com.tss.ocean.pojo.EmployeeCategory;
-import com.tss.ocean.pojo.EmployeePostion;
 import com.tss.ocean.pojo.Employees;
 import com.tss.ocean.pojo.Purorder;
 import com.tss.ocean.pojo.Purrequisition;
@@ -51,6 +50,7 @@ public class EmployeeController {
         employeesDAO = new HibernateDAOFactory().getEmployeesDAO();
         employeeCategoryDAO = new HibernateDAOFactory().getEmployeeCategoryDAO();
     }
+    
 
     @RequestMapping(value = "/addemployee.html", method = RequestMethod.POST)
     public ModelAndView addEmployee(@ModelAttribute Employees employee, Model model) {
