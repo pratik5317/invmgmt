@@ -33,5 +33,6 @@
     <mapping resource="com/tss/ocean/pojo/Users.hbm.xml"/>
     <mapping resource="com/tss/ocean/pojo/Purrequisitiondt.hbm.xml"/>
     <mapping resource="com/tss/ocean/pojo/MonthlyPayslips.hbm.xml"/>
+    <mapping resource="com/tss/ocean/pojo/EmployeeCategory.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
