@@ -1,9 +1,3 @@
-<%-- 
-    Document   : add_employee_category
-    Created on : Aug 26, 2014, 11:43:53 PM
-    Author     : sweta
---%>
-
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -32,25 +26,30 @@
                     margin: 16px;
                 }
             </style>
+
         </head>
+
         <body role="document">
+
         <jsp:include page="headermenu.jsp"></jsp:include>
+
             <div class="container">
                 <div class="row container">
                     <div class="dashboard_main">
                         <div class="desh-icon-bg">
                             <img src="img/i-mgmt.png">
                         </div>
-                        <div class="page-title-text"><spring:message code="label.add.employeecategory" text="Default Text"/></div>
-                    </div>
-                </div>	
-                <div class="row">
+                        <div class="page-title-text"><spring:message code="label.updateempcategory" text="Default Text"/></div>
+                </div>
+            </div>	
+            <div class="row">
                 <div class="col-md-3">
                     <div class="catagory-main-box top-radius">
+
                         <!--<div class="cat-table-title"></div>-->
                         <!-- MUNU -->    
                         <div id='cssmenu'>
-                             <ul>
+                           <ul>
                                         <li class='has-sub active'><a href='employees.html'><span><spring:message code="menu.employeemanagement" text="Label value is missing !!!"/></span></a>
                                         <li class=''><a href='payslips.html'><span><spring:message code="menu.payslips" text="Label value is missing !!!"/></span></a></li>
                                         <li class='last'><a href='#'><span><spring:message code="menu.employeeleavemanagement" text="Label value is missing !!!"/></span></a>
@@ -70,28 +69,34 @@
                                             </ul>
                                         </li>
 
+
                                     </ul>
                         </div>
                         <!-- END MUNU -->    
+
                     </div>
                 </div>
                 <spring:message code="label.empcategory.category.placeholder" var="categoryplaceholder" text="Default Text" />
-                <spring:message code="label.empcategory.prefix.placeholder" var="prefixplaceholder" text="Default Text" />                
+                <spring:message code="label.empcategory.prefix.placeholder" var="prefixplaceholder" text="Default Text" />
+                <spring:message code="label.empcategory.isactive.placeholder" var="isactiveplaceholder" text="Default Text" />                
+
                 <div class="col-md-9">
                     <div class="catagory-main-box top-radius">
-                        <div class="cat-box-title cat-title-font top-radius"><spring:message code="label.purorder" text="Default Text"/></div>
+                        <div class="cat-box-title cat-title-font top-radius"><spring:message code="label.updateempcategory" text="Default Text"/></div>
                         <div class="row text-pad-top visible-lg visible-md visible-sm">
-                            <form:form action="add_employee_category.html" method="POST" modelAttribute="employeecategory">                                
+                            <form:form action="edit_employee_category.html" method="POST" modelAttribute="employeecategory">
+                                <form:hidden path="id" />
                                 <div class="row tb-margin">
                                     <div class="col-sm-2"></div>
                                     <div class="col-sm-8">
+
                                         <c:if test="${not empty error}">  
                                             <div class="row text-pad-top visible-lg visible-md visible-sm"><div class="errorblock">${error}</div></div>
-                                        </c:if>
-                                        <c:if test="${not empty success}">  
+                                            </c:if>
+                                            <c:if test="${not empty success}">  
                                             <div class="row text-pad-top visible-lg visible-md visible-sm"><div class="successblock">${success}</div></div>
-                                        </c:if>
-                                        
+                                            </c:if>
+
                                         <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.empcategory.category" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">                                            
@@ -106,49 +111,50 @@
                                                 <form:errors path="prefix" cssClass="error" />
                                             </div>
                                         </div>
-                                             <div class="form-group">
+                                        
+                                        <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.empcategory.isactive" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">
                                                 <div class="form-control">
-                                                    <form:radiobutton path="isActive" value="1" checked="checked"/><spring:message code="label.empcategory.status.active" text="Default Text"/>
+                                                    <form:radiobutton path="isActive" value="1" /><spring:message code="label.empcategory.status.active" text="Default Text"/>
                                                     <form:radiobutton path="isActive" value="0" /><spring:message code="label.empcategory.status.inactive" text="Default Text"/>
                                                 </div>
                                                 <form:errors path="isActive" cssClass="error" />
                                             </div>
                                         </div>
 
+                                      
+
                                         <div class="col-sm-2"></div>
                                     </div>
+
                                     <div class="div-center">
-                                        <button type="submit" class="btn btn-orange" onclick="return submitDetailsForm();"><spring:message code="label.save" text="Default Text"/></button>
+                                        <button type="submit" class="btn btn-orange" onclick="return submitDetailsForm();"><spring:message code="label.update" text="Default Text"/></button>
                                         <button type="button" class="btn btn-orange" onclick="javascript:history.back();"><spring:message code="label.cancel" text="Default Text"/></button>
                                     </div>
                                 </form:form>
                             </div>
                         </div>
-<!--                        <div class="row text-pad-top visible-xs">
-                           
-                        </div>-->
+                            
                     </div>
                 </div>
 
                 <div class=""></div>
                 <div class=""></div>
 
-
             </div>
             </div>
             <!-- /container -->
 
 
-                <!-- Bootstrap core JavaScript
-                ================================================== -->
-                <!-- Placed at the end of the document so the pages load faster -->
-                <script src="js/bootstrap.min.js"></script>
-                <!-- Jquery UI Javascript -->
-                <script src="js/jquery-ui.js"></script>
-                <script type="text/javascript">
-                    $('input[type=date]').datepicker({dateFormat: 'dd/mm/yy'});
-                </script>
+            <!-- Bootstrap core JavaScript
+            ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script src="js/bootstrap.min.js"></script>
+            <!-- Jquery UI Javascript -->
+            <script src="js/jquery-ui.js"></script>
+            <script type="text/javascript">
+                $('input[type=date]').datepicker({dateFormat: 'dd/mm/yy'});
+            </script>
     </body>
 </html>
