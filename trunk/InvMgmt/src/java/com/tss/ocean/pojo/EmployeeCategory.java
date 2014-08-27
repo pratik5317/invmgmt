@@ -6,15 +6,18 @@
 package com.tss.ocean.pojo;
 
 import java.io.Serializable;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
  * @author sweta
  */
-public class EmployeeCategory implements Serializable{
+public class EmployeeCategory implements Serializable {
 
     private Integer id;
+    @NotEmpty
     private String category;
+    @NotEmpty
     private String prefix;
     private Integer isActive;
 
