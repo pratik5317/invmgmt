@@ -20,7 +20,7 @@
                     <div class="desh-icon-bg">
                         <img src="img/i-mgmt.png">
                     </div>
-                    <div class="page-title-text"><spring:message code="employeecategory.list" text="Label value is missing !!!"/></div>
+                    <div class="page-title-text"><spring:message code="employeedepartment.list" text="Label value is missing !!!"/></div>
                 </div>
             </div>	
                     <div class="row">
@@ -58,13 +58,13 @@
                         </div>
                 <div class="col-md-9">
                     <div class="catagory-main-box top-radius">
-                        <div class="cat-box-title cat-title-font top-radius"><spring:message code="employeecategory.list" text="Label value is missing !!!"/></div>
+                        <div class="cat-box-title cat-title-font top-radius"><spring:message code="employeedepartment.list" text="Label value is missing !!!"/></div>
                         <spring:message text="Default Text" code="employeecategory.search.placeholder" var="search"/>
                         <div class="tab-content">
                             <div class="tab-pane active" id="demo">
                                 <div class="row tb-margin">
                                      <div class="col-sm-4">
-                                        <a href="add_employee_category.html" class="btn btn-info add-row addrow-btn-left"><spring:message code="employeecategory.add" text="Label value is missing !!!"/></a>
+                                        <a href="add_employee_department.html" class="btn btn-info add-row addrow-btn-left"><spring:message code="employeedepartment.add" text="Label value is missing !!!"/></a>
                                     </div>
                                     <div class="col-sm-8">
                                         <div class="form-group visible-sm visible-md visible-lg">
@@ -84,29 +84,25 @@
                                     <thead class="orange-bg border-t">
                                         <tr>
                                             <th data-toggle="true">
-                                                <spring:message code="label.employeecategory" text="Label value is missing !!!"/>
+                                                <spring:message code="label.employeedepartment.department" text="Label value is missing !!!"/>
                                             </th>
-<!--                                            <th data-hide="phone">
-                                                <spring:message code="label.purorder.supplier" text="Label value is missing !!!"/> 
+                                              <th data-toggle="true">
+                                                <spring:message code="label.employeedepartment.code" text="Label value is missing !!!"/>
                                             </th>
-                                            <th data-hide="phone">
-                                                <spring:message code="label.purorder.price" text="Label value is missing !!!"/> 
-                                            </th>
-                                            <th data-hide="phone">
-                                                <spring:message code="label.purorder.createdat" text="Label value is missing !!!"/> 
-                                            </th>                                            -->
+<!--                                                                            -->
                                             <th data-hide="phone" data-name="Delete">
-                                                <spring:message code="label.purorder.action" text="Label value is missing !!!"/> 
+                                                <spring:message code="label.action" text="Label value is missing !!!"/> 
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="employeeCategory" items="${employeeCategoryList}">
+                                        <c:forEach var="employeeDepartment" items="${employeeDepartmentList}">
                                             <tr>
-                                                <td>${employeeCategory.category}</td>
+                                                <td>${employeeDepartment.department}</td>
+                                                <td>${employeeDepartment.code}</td>
                                                 <td>
-                                                    <a href="edit_employee_category.html?id=${employeeCategory.id}" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</a>
-                                                    <a href="delete_employee_category.html?id=${employeeCategory.id}" class="btn btn-default btn-sm row-delete" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                                                    <a href="edit_employee_department.html?id=${employeeDepartment.id}" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</a>
+                                                    <a href="delete_employee_department.html?id=${employeeDepartment.id}" class="btn btn-default btn-sm row-delete" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                                                 </td>
                                             </tr>                                        
                                         </c:forEach>
