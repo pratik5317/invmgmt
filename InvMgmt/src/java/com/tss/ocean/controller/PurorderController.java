@@ -197,7 +197,7 @@ public class PurorderController {
                 return false;
             }
         }
-        logger.log(Level.INFO,"Purorder with id {0} is already deleted",purorder.getId());
+        logger.log(Level.INFO,"Purorder with id {0} is already deleted",id);
         return true;
     }
     
