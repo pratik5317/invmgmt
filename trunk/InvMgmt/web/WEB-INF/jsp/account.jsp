@@ -99,13 +99,13 @@
                                             </tr>
                                         </c:forEach>
                                     </tbody>
-                                    <tfoot class="hide-if-no-paging">
+                                    <!--<tfoot class="hide-if-no-paging">
                                         <tr>
                                             <td colspan="4">
                                                 <div class="pagination pagination-centered"></div>
                                             </td>
                                         </tr>
-                                    </tfoot>
+                                    </tfoot>-->
                                 </table>
                             </div>
                             <div class="tab-pane" id="docs">

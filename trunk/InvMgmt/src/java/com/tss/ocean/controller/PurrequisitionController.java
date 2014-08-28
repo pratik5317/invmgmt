@@ -186,7 +186,7 @@ public class PurrequisitionController {
                 return false;
             }
         }
-        logger.log(Level.INFO,"Purrequisition with id {0} is already deleted",purrequisition.getId());
+        logger.log(Level.INFO,"Purrequisition with id {0} is already deleted",id);
         return true;
     }
     

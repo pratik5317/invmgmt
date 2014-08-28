@@ -171,7 +171,7 @@ public class AccountController {
                 return false;
             }
         }
-        logger.log(Level.INFO,"Account with id {0} is already deleted",account.getId());
+        logger.log(Level.INFO,"Account with id {0} is already deleted",id);
         return true;
     }  
 }
