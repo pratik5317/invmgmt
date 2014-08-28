@@ -50,7 +50,7 @@
                                         <a href="add-purchase_order.html" class="btn btn-info add-row addrow-btn-left"><spring:message code="purorder.add" text="Label value is missing !!!"/></a>
                                     </div>
                                     <div class="col-sm-8">
-                                        <div class="form-group visible-sm visible-md visible-lg">
+                                        <!--<div class="form-group visible-sm visible-md visible-lg">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="purorder.search" text="Label value is missing !!!"/></label>
                                             <div class="col-sm-8 col-xs-12">
                                                 <input id="filter" class="form-control" type="text"/>
@@ -60,7 +60,7 @@
                                             <div class="col-xs-12">
                                                 <input id="filter" placeholder="${search}" class="form-control" type="text"/>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                                 <table id="dttable" class="table table-bordered table-striped" data-filter="#filter" data-page-size="5">
