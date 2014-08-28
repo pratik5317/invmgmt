@@ -6,7 +6,9 @@
 package com.tss.ocean.controller;
 
 import com.tss.ocean.idao.IItemtypeDAO;
+import com.tss.ocean.idao.IItemunitDAO;
 import com.tss.ocean.pojo.Itemtype;
+import com.tss.ocean.pojo.Itemunit;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +34,9 @@ public class InventoryController {
     @Autowired
     IItemtypeDAO itemTypeDAO;
 
+    @Autowired
+    IItemunitDAO itemunitDAO;
+
     @RequestMapping(value = "/AddInventory.html", method = RequestMethod.POST)
     public ModelAndView inventorymgmt(@ModelAttribute("itemTypeForm") @Valid Itemtype itemTypeForm, BindingResult result, Map<String, Object> model) throws Exception {
         logger.log(Level.OFF, "Add Inventory called with inventory details ####### ." + itemTypeForm);
@@ -44,7 +49,23 @@ public class InventoryController {
             return modelAndView;
         } else {
             logger.log(Level.OFF, "Insert result ####### ." + itemTypeDAO.insert(itemTypeForm));
-            return new ModelAndView("redirect://item_category.html");        }
+            return new ModelAndView("redirect:/item_category.html");
+        }
     }
 
+    @RequestMapping(value = "/AddItemUnits.html", method = RequestMethod.POST)
+    public ModelAndView addItemUnits(@ModelAttribute("itemUnit") @Valid Itemunit itemUnit, BindingResult result, Map<String, Object> model) throws Exception {
+        logger.log(Level.OFF, "Add Item Units with detail ####### ." + itemUnit);
+
+        if (result.hasErrors()) {
+            logger.log(Level.OFF, "Error occured while inserting the reconrd for the item unit." + result.getAllErrors());
+            ModelAndView modelAndView = new ModelAndView("add-item_unit");
+            //modelAndView.addObject("itemTypeForm", new Itemtype());
+            modelAndView.addAllObjects(model);
+            return modelAndView;
+        } else {
+            logger.log(Level.OFF, "Insert result ####### ." + itemunitDAO.insert(itemUnit));
+            return new ModelAndView("redirect:/item_unit.html");
+        }
+    }
 }

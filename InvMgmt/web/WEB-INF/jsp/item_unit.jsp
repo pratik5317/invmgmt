@@ -1,4 +1,5 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
@@ -71,30 +72,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                      <c:forEach var="listVar" items="${itemUnit}">
                                         <tr>
-                                            <td>Isidra</td>
-                                            <td><a href="#">Boudreaux</a></td>
+                                            <input type="hidden" id="deleteInvTypeId" name="deleteInvTypeId" value="<c:out value="${listVar.id}"/>" />
+                                            <td><c:out value="${listVar.name}"/></td>
+                                            <td><a href="#"><c:out value="${listVar.description}"/></a></td>
                                             <td data-value="78025368997" style="text-align:center;">
                                                 <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button>
                                             </td>
                                             <td><a class="row-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
                                         </tr>
-                                        <tr>
-                                            <td>Shona</td>
-                                            <td>Woldt</td>
-                                            <td data-value="370961043292" style="text-align:center;">
-                                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button>
-                                            </td>
-                                            <td><a class="row-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lauri</td>
-                                            <td>Hyland</td>
-                                            <td data-value="500874333932" style="text-align:center;">
-                                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button>
-                                            </td>
-                                            <td><a class="row-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
-                                        </tr>
+                                       </c:forEach>
                                     </tbody>
                                     <tfoot class="hide-if-no-paging">
                                         <tr>

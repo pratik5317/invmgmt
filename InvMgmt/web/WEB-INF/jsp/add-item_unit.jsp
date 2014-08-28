@@ -1,10 +1,32 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
     <head>
         <%--<%@include file="header.jsp" %>--%>
         <jsp:include page="header.jsp"></jsp:include>
+            <script type="text/javascript">
+                function submitDetailsForm() {
+                    $("#itemUnit").submit();
+                }
+            </script>
+
+            <style>
+                .error {
+                    color: #ff0000;
+                }
+
+                .errorblock {
+                    color: #000;
+                    background-color: #ffEEEE;
+                    border: 3px solid #ff0000;
+                    padding: 8px;
+                    margin: 16px;
+                }
+            </style>
+
+
         </head>
 
         <body role="document">
@@ -67,38 +89,39 @@
                                 </div>
 
                             </div>
-
+<form:form action="AddItemUnits.html" method="POST" commandName="itemUnit">
                             <div class="col-sm-8 visible-xs">
 
                                 <div class="form-group">
                                     <div class="col-sm-8 col-xs-12">
-                                        <input id="filter" class="form-control" type="text" placeholder="Name:"/>
+                                            <form:input  type="text" class="form-control" path="name" placeholder="Name"/>
+                                            <form:errors path="name" cssClass="error" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-sm-8 col-xs-12">
-                                        <input id="filter" class="form-control" type="text" placeholder="Description:"/>
+                                            <form:input  type="text" class="form-control" path="description" placeholder="Description"/>
+                                            <form:errors path="description" cssClass="error" />
                                     </div>
                                 </div>
 
                             </div>
-
-
                             <div class="col-sm-2"></div>
                         </div>
                         <div class="row text-pad-top visible-lg visible-md visible-sm">
                             <div class="div-center">
-                                <button type="button" class="btn btn-orange">Save</button>
+                                <button type="button" class="btn btn-orange" onclick="submitDetailsForm();">Save</button>
                                 <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
                             </div>
                         </div>
                         <div class="row text-pad-top visible-xs ">
                             <div class="div-center-xs">
-                                <button type="button" class="btn btn-orange">Save</button>
+                                <button type="button" class="btn btn-orange" onclick="submitDetailsForm();">Save</button>
                                 <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
                             </div>
                         </div>
+</form:form>
 
 
                     </div>

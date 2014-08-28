@@ -26,11 +26,13 @@
         <property name="taxid" type="int">
             <column name="taxid" not-null="true" />
         </property>
-        <property name="unitid" type="int">
-            <column name="unitid" not-null="true" />
-        </property>
         <property name="currstock" type="int">
             <column name="currstock" not-null="true" />
         </property>
+        
+         <many-to-one name="id" class="com.tss.ocean.pojo.Itemunit" fetch="select">
+            <column name="unitid" not-null="true" />
+        </many-to-one>
+        
     </class>
 </hibernate-mapping>
