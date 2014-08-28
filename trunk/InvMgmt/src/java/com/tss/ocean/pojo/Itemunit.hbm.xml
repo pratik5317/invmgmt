@@ -14,5 +14,15 @@
         <property name="description" type="string">
             <column name="description" length="65535" not-null="true" />
         </property>
+        
+        
+         <set name="itemList" table="item"
+                inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id" not-null="true" />
+            </key>
+            <one-to-many class="com.tss.ocean.pojo.Item" />
+        </set>
+        
     </class>
 </hibernate-mapping>

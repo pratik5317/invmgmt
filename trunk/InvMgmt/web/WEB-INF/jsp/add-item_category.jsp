@@ -65,7 +65,7 @@
 
                         </div>
                     </div>
-                <form:form action="AddInventory.html" method="POST" commandName="itemTypeForm"> 
+                <form:form action="AddItemUnits.html" method="POST" commandName="itemTypeForm"> 
                     <form:errors path="*" cssClass="errorblock" element="div" />
                     <div class="col-md-9">
                         <div class="catagory-main-box top-radius">
