@@ -88,11 +88,11 @@
                                     <div class="form-group">
                                         <label class="col-sm-4 col-xs-12 control-label search-text"> Category:</label>
                                         <div class="col-sm-8 col-xs-12">
-                                            <select class="form-control" name="typeid">
-                                                <c:forEach items="${itemTypeList}" var="typeid">
-                                                    <option value="${typeid.id}"><c:out value="${typeid.name}" /></option>
+                                            <form:select class="form-control" path="typeid">
+                                                <c:forEach items="${itemTypeList}" var="itemtypeid">
+                                                    <option value="${itemtypeid.id}"><c:out value="${itemtypeid.name}" /></option>
                                                 </c:forEach>
-                                            </select>                                       
+                                            </form:select>                                       
                                         </div>
                                     </div>
 
@@ -108,7 +108,9 @@
                                         <label class="col-sm-4 col-xs-12 control-label search-text">Unit:</label>
                                         <div class="col-sm-8 col-xs-12">
                                             <form:select class="form-control"  path="unitid">
-                                                <form:options items="${itemUnitList}"  itemLabel="name" itemId="id" />
+                                                <c:forEach items="${itemUnitList}" var="itemunitid">
+                                                    <option value="${itemunitid.id}"><c:out value="${itemunitid.name}" /></option>
+                                                </c:forEach>
                                             </form:select>
                                         </div>
                                     </div>
@@ -137,11 +139,11 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-8 col-xs-12">
-                                            <select class="form-control" name="typeid">
-                                                <c:forEach items="${itemTypeList}" var="typeid">
-                                                    <option value="${typeid.id}"><c:out value="${typeid.name}" /></option>
+                                            <form:select class="form-control" path="typeid">
+                                                <c:forEach items="${itemTypeList}" var="itemtypeid">
+                                                    <option value="${itemtypeid.id}"><c:out value="${itemtypeid.name}" /></option>
                                                 </c:forEach>
-                                            </select>                                       
+                                            </form:select>                                       
                                         </div>
                                     </div>
 
@@ -154,8 +156,10 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-8 col-xs-12">
-                                            <form:select class="form-control"  path="unitid">
-                                                <form:options items="${itemUnitList}"  itemLabel="name" itemId="id" />
+                                            <form:select class="form-control" path="unitid">
+                                                <c:forEach items="${itemUnitList}" var="itemunitid">
+                                                    <option value="${itemunitid.id}"><c:out value="${itemunitid.name}" /></option>
+                                                </c:forEach>
                                             </form:select>
                                         </div>
                                     </div>
