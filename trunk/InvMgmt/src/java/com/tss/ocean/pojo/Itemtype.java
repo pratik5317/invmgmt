@@ -65,7 +65,7 @@ public class Itemtype implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "Itemtype";
+        return "Itemtype{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
     }
 
 }

@@ -73,7 +73,6 @@
                                 <div class="col-sm-2"></div>
                             <form:form action="AddInventory.html" method="POST" commandName="itemTypeForm"> 
                                 <form:errors path="*" cssClass="errorblock" element="div" />
-
                                 <div class="col-sm-8 visible-lg visible-md visible-sm">
 
                                     <div class="form-group">
