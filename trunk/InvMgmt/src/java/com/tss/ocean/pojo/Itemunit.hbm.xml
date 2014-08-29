@@ -16,8 +16,8 @@
         </property>
         
         
-         <set name="itemList" table="item"
-                inverse="true" lazy="true" fetch="select">
+        <set name="itemList" table="item" cascade="all"
+             inverse="false" lazy="true" fetch="select">
             <key>
                 <column name="id" not-null="true" />
             </key>

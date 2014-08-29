@@ -65,14 +65,15 @@
 
                         </div>
                     </div>
-                <form:form action="AddItemUnits.html" method="POST" commandName="itemTypeForm"> 
-                    <form:errors path="*" cssClass="errorblock" element="div" />
                     <div class="col-md-9">
                         <div class="catagory-main-box top-radius">
                             <div class="cat-box-title cat-title-font top-radius">Item Category </div>
 
                             <div class="row tb-margin">
                                 <div class="col-sm-2"></div>
+                            <form:form action="AddInventory.html" method="POST" commandName="itemTypeForm"> 
+                                <form:errors path="*" cssClass="errorblock" element="div" />
+
                                 <div class="col-sm-8 visible-lg visible-md visible-sm">
 
                                     <div class="form-group">
@@ -92,6 +93,9 @@
                                     </div>
 
                                 </div>
+                            </form:form>
+                            <form:form action="AddInventory.html" method="POST" commandName="itemTypeForm"> 
+                                <!-- <form:errors path="*" cssClass="errorblock" element="div" /> -->
 
                                 <div class="col-sm-8 visible-xs">
 
@@ -109,27 +113,27 @@
                                     </div>
 
                                 </div>
+                            </form:form>
 
-
-                                <div class="col-sm-2"></div>
-                            </div>
-                            <div class="row text-pad-top visible-lg visible-md visible-sm">
-                                <div class="div-center">
-                                    <button type="button" class="btn btn-orange" onclick="submitDetailsForm();">Save</button>
-                                    <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
-                                </div>
-                            </div>
-                            <div class="row text-pad-top visible-xs ">
-                                <div class="div-center-xs">
-                                    <button type="button" class="btn btn-orange" onclick="submitDetailsForm();">Save</button>
-                                    <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
-                                </div>
-                            </div>
-
-
+                            <div class="col-sm-2"></div>
                         </div>
+                        <div class="row text-pad-top visible-lg visible-md visible-sm">
+                            <div class="div-center">
+                                <button type="button" class="btn btn-orange" onclick="submitDetailsForm();">Save</button>
+                                <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
+                            </div>
+                        </div>
+                        <div class="row text-pad-top visible-xs ">
+                            <div class="div-center-xs">
+                                <button type="button" class="btn btn-orange" onclick="submitDetailsForm();">Save</button>
+                                <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
+                            </div>
+                        </div>
+
+
                     </div>
-                </form:form>
+                </div>
+
             </div>
 
             <div class=""></div>

@@ -4,9 +4,11 @@
  */
 package com.tss.ocean.controller;
 
+import com.tss.ocean.idao.IItemDAO;
 import com.tss.ocean.idao.IItemtypeDAO;
 import com.tss.ocean.idao.IItemunitDAO;
 import com.tss.ocean.pojo.Employees;
+import com.tss.ocean.pojo.Item;
 import com.tss.ocean.pojo.Itemtype;
 import com.tss.ocean.pojo.Itemunit;
 import java.util.List;
@@ -33,17 +35,23 @@ public class ViewController {
     @Autowired
     IItemunitDAO itemunitDAO;
 
+    @Autowired
+    IItemDAO itemDAO;
+
     private static final Logger logger = Logger.getLogger(ViewController.class.getName());
 
     @RequestMapping(value = "/inventory_management.html", method = RequestMethod.GET)
     public String inventorymgmt(Model model, HttpServletRequest request) throws Exception {
         logger.log(Level.OFF, "inventory_management called.");
+
         return "item";
     }
 
     @RequestMapping(value = "/item.html", method = RequestMethod.GET)
     public String itemmgmt(Model model, HttpServletRequest request) throws Exception {
         logger.log(Level.OFF, "item called.");
+        logger.log(Level.OFF, "item called size ### " + itemDAO.getList().size());
+        model.addAttribute("itemList", itemDAO.getList());
         return "item";
     }
 
@@ -64,8 +72,11 @@ public class ViewController {
     }
 
     @RequestMapping(value = "/add-item.html", method = RequestMethod.GET)
-    public String add_item(Model model, HttpServletRequest request) throws Exception {
+    public String add_item(Map<String, Object> model, HttpServletRequest request) throws Exception {
         logger.log(Level.OFF, "add-item called.");
+        model.put("itemForm", new Item());
+        model.put("itemUnitList", itemunitDAO.getList());
+        model.put("itemTypeList", itemTypeDAO.getList());
         return "add-item";
     }
 

@@ -17,9 +17,6 @@
         <property name="categoryid" type="int">
             <column name="categoryid" not-null="true" />
         </property>
-        <property name="typeid" type="int">
-            <column name="typeid" not-null="true" />
-        </property>
         <property name="price" type="big_decimal">
             <column name="price" precision="15" not-null="true" />
         </property>
@@ -30,8 +27,11 @@
             <column name="currstock" not-null="true" />
         </property>
         
-         <many-to-one name="id" class="com.tss.ocean.pojo.Itemunit" fetch="select">
+        <many-to-one name="unitid" class="com.tss.ocean.pojo.Itemunit" fetch="select">
             <column name="unitid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="typeid" class="com.tss.ocean.pojo.Itemtype" fetch="select">
+            <column name="typeid" not-null="true" />
         </many-to-one>
         
     </class>
