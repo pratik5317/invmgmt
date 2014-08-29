@@ -48,7 +48,7 @@ public class PurrequisitionController {
                                                 @RequestParam(value = "error",required = false)String error,
                                                 Locale locale) throws Exception {
         logger.log(Level.FINE,"add-purchase_requisition called.");
-        ModelAndView mav = new ModelAndView("add-purchase_requisition");
+        ModelAndView mav = new ModelAndView("purchase_requisition");
         Purrequisition purrequisition = new Purrequisition();
         if(success != null) {
             mav.getModelMap().put("success", success);
@@ -80,7 +80,7 @@ public class PurrequisitionController {
                 logger.log(Level.WARNING, "Error occurred inserting purrequisition:{0}", purrequisition.toString());
                 model.put("supplierList",getSupplierList());
                 model.put("statusList",getStatusList(locale));
-                return new ModelAndView("add-purchase_requisition",model)
+                return new ModelAndView("purchase_requisition",model)
                     .addObject("error",Utilities.getSpringMessage(messageSource,"purrequisition.add.error", locale));
             }
         }
@@ -88,7 +88,7 @@ public class PurrequisitionController {
             logger.log(Level.WARNING, "Purchase_requisition values are not valid:", purrequisition.toString());
             model.put("supplierList",getSupplierList());
             model.put("statusList",getStatusList(locale));
-            return new ModelAndView("add-purchase_requisition",model);
+            return new ModelAndView("purchase_requisition",model);
         }
     }
     
@@ -101,7 +101,7 @@ public class PurrequisitionController {
         ModelAndView mav;
         Purrequisition purrequisition = purrequisitionDAO.getRecordByPrimaryKey(id);
         if(purrequisition != null ) {
-            mav = new ModelAndView("edit-purchase_requisition");
+            mav = new ModelAndView("purchase_requisition");
             mav.getModelMap().put("purrequisition", purrequisition);
             mav.getModelMap().put("supplierList",getSupplierList());
             mav.getModelMap().put("statusList",getStatusList(locale));
@@ -135,7 +135,7 @@ public class PurrequisitionController {
                 logger.log(Level.WARNING, "Error occurred updating purchase_requisition:{0}", purrequisition.toString());
                 model.put("supplierList",getSupplierList());
                 model.put("statusList",getStatusList(locale));
-                return new ModelAndView("edit-purchase_requisition",model)
+                return new ModelAndView("purchase_requisition",model)
                     .addObject("error",Utilities.getSpringMessage(messageSource,"purrequisition.update.error", locale));
             }
         }
@@ -143,7 +143,7 @@ public class PurrequisitionController {
             logger.log(Level.WARNING, "Purchase_requisition values are not valid:", purrequisition.toString());
             model.put("supplierList",getSupplierList());
             model.put("statusList",getStatusList(locale));
-            return new ModelAndView("edit-purchase_requisition",model);
+            return new ModelAndView("purchase_requisition",model);
         }
     }
     
@@ -152,7 +152,7 @@ public class PurrequisitionController {
                                     @RequestParam(value = "error",required = false)String error,
                                     Locale locale) throws Exception {
         logger.log(Level.FINE,"add-purchase_requisition called.");
-        ModelAndView mav = new ModelAndView("purchase_requisition");
+        ModelAndView mav = new ModelAndView("purchase_requisition-list");
         List<Accounts> accountsList = accountsDAO.getList();
         HashMap<Integer,String> accountMap = new HashMap<>(accountsList.size());
         for (Accounts account : accountsList) {

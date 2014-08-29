@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
-    <head>
-        <%--<%@include file="header.jsp" %>--%>
+    <head>        
         <jsp:include page="header.jsp" />
     </head>
     <body role="document">
@@ -15,17 +14,17 @@
                     <div class="desh-icon-bg">
                         <img src="img/i-mgmt.png">
                     </div>
-                    <div class="page-title-text"><spring:message code="account.accountlist" text="Label value is missing !!!"/></div>
+                    <div class="page-title-text"><spring:message code="purrequisition.list" text="Label value is missing !!!"/></div>
                 </div>
             </div>	
             <div class="row">
                 <div class="col-md-3">
                     <div class="catagory-main-box top-radius">
+
                         <!--<div class="cat-table-title"></div>-->
                         <!-- MUNU -->    
                         <div id='cssmenu'>
                             <ul>
-
                                 <li class='has-sub active'><a href='#'><span><spring:message code="menu.ITEMS" text="Label value is missing !!!"/></span></a>
                                     <ul style='display: block;'>
                                         <li><a href='item.html'><span><spring:message code="menu.Items" text="Label value is missing !!!"/></span></a></li>
@@ -38,81 +37,98 @@
                             </ul>
                         </div>
                         <!-- END MUNU -->    
-
                     </div>
                 </div>
                 <div class="col-md-9">
                     <div class="catagory-main-box top-radius">
-                        <div class="cat-box-title cat-title-font top-radius">
-                            <spring:message code="account.accountlist" text="Label value is missing !!!"/>
-                        </div>
-                        <spring:message text="Default Text" code="account.search.placeholder" var="search"/>
+                        <div class="cat-box-title cat-title-font top-radius"><spring:message code="purrequisition.list" text="Label value is missing !!!"/></div>
+                        <spring:message text="Default Text" code="purrequisition.search.placeholder" var="search"/>
                         <div class="tab-content">
                             <div class="tab-pane active" id="demo">
                                 <div class="row tb-margin">
+                                   
                                     <div class="col-sm-4">
-                                        <a href="add-account.html" class="btn btn-info add-row addrow-btn-left"><spring:message code="account.addaccount" text="Label value is missing !!!"/></a>
+                                        <a href="add-purchase_requisition.html" class="btn btn-info add-row addrow-btn-left"><spring:message code="purrequisition.add" text="Label value is missing !!!"/></a>
                                     </div>
                                     <div class="col-sm-8">
                                         <!--<div class="form-group visible-sm visible-md visible-lg">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="account.search" text="Label value is missing !!!"/></label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="purrequisition.search" text="Label value is missing !!!"/></label>
                                             <div class="col-sm-8 col-xs-12">
-                                                <input id="filter" class="form-control" type="text" placeholder="${search}" />
-                                            </div>
+                                                <input id="filter" class="form-control" type="text"/>
+                                            </div>                                            
                                         </div>
-
                                         <div class="form-group visible-xs">
                                             <div class="col-xs-12">
                                                 <input id="filter" placeholder="${search}" class="form-control" type="text"/>
                                             </div>
-                                        </div> -->                                        
+                                        </div>-->
                                     </div>
                                 </div>
                                 <table id="dttable" class="table table-bordered table-striped" data-filter="#filter" data-page-size="5">
                                     <thead class="orange-bg border-t">
                                         <tr>
                                             <th data-toggle="true">
-                                                <spring:message code="label.account.name" text="Label value is missing !!!"/> 
+                                                <spring:message code="label.purrequisition.prno" text="Label value is missing !!!"/>
                                             </th>
                                             <th data-hide="phone">
-                                                <spring:message code="label.account.city" text="Label value is missing !!!"/>
+                                                <spring:message code="label.purrequisition.supplier" text="Label value is missing !!!"/> 
                                             </th>
                                             <th data-hide="phone">
-                                                <spring:message code="label.account.curdebt" text="Label value is missing !!!"/>
+                                                <spring:message code="label.purrequisition.status" text="Label value is missing !!!"/> 
                                             </th>
-                                            <th data-sort-ignore="true" data-hide="phone" data-name="Delete"></th>
+                                            <th data-hide="phone">
+                                                <spring:message code="label.purrequisition.price" text="Label value is missing !!!"/> 
+                                            </th>
+                                            <th data-hide="phone">
+                                                <spring:message code="label.purrequisition.createdat" text="Label value is missing !!!"/> 
+                                            </th>                                            
+                                            <th data-hide="phone" data-name="Delete">
+                                                <spring:message code="label.purrequisition.action" text="Label value is missing !!!"/> 
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="account" items="${accountList}">
+                                        <c:forEach var="purrequisition" items="${purrequisitionList}">
                                             <tr>
-                                                <td><a href="edit-account.html?id=${account.id}"><c:out value="${account.name}"/></a></td>
-                                                <td><c:out value="${account.city}"/></td>
-                                                <td><c:out value="${account.curdebt}" /></td>
+                                                <td>${purrequisition.prno}</td>
+                                                <td>${accountMap[purrequisition.suplierid]}</td>                                                
+                                                <td>${statusList[purrequisition.status]}</td>
+                                                <td>${purrequisition.price}</td>
+                                                <td>${purrequisition.createdat}</td>
                                                 <td>
-                                                    <a class="row-delete" href="delete-account.html?id=${account.id}"><span class="glyphicon glyphicon-remove"></span></a>
+                                                    <a href="edit-purchase_requisition.html?id=${purrequisition.id}" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</a>
+                                                    <a href="delete-purchase_requisition.html?id=${purrequisition.id}" class="btn btn-default btn-sm row-delete" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                                                 </td>
-                                            </tr>
-                                        </c:forEach>
+                                            </tr>                                        
+                                        </c:forEach>                                        
                                     </tbody>
                                     <!--<tfoot class="hide-if-no-paging">
                                         <tr>
-                                            <td colspan="4">
+                                            <td colspan="8">
                                                 <div class="pagination pagination-centered"></div>
                                             </td>
                                         </tr>
                                     </tfoot>-->
                                 </table>
-                            </div>
+                            </div>                            
                         </div>
-                        <div class=""></div>
-                        <div class=""></div>
                     </div>
                 </div>
             </div>
+            <div class=""></div>
+            <div class=""></div>
         </div>
         <!-- /container -->
         <!--Responsive Table-->
+        <script type="text/javascript">
+        </script>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.dataTables.min.js"></script>
+        <script src="js/dataTables.responsive.min.js"></script>
+        <script src="js/ajax-bootstrap3.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 var table = $('#dttable').DataTable();
@@ -131,12 +147,5 @@
                 });
             });
         </script>
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.dataTables.min.js"></script>
-        <script src="js/dataTables.responsive.min.js"></script>        
-        <script src="js/docs.min.js"></script>        
     </body>
 </html>
