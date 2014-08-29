@@ -1,4 +1,5 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -6,21 +7,47 @@
     <head>
         <%--<%@include file="header.jsp" %>--%>
         <jsp:include page="header.jsp" />
+        <script type="text/javascript">
+            function submitDetailsForm() {
+                return true;
+            }
+        </script>
+        <style>
+            .error {
+                color: #ff0000;
+            }
+            .errorblock {
+                color: #000;
+                background-color: #ffEEEE;
+                border: 3px solid #ff0000;
+                padding: 8px;
+                margin: 16px;
+            }
+        </style>
     </head>
-
     <body role="document">
-
+        <c:if test="${account.id == null}">
+            <c:set var="formaction" value="add-account.html" />
+            <spring:message code="label.account" text="Default Text" var="pagetitletext" />
+            <spring:message code="label.add.account" text="Default Text" var="catboxtitle" />
+            <spring:message code="label.account.save" text="Default Text" var="savebutton" />
+        </c:if>
+        <c:if test="${account.id != null}">
+            <c:set var="formaction" value="edit-account.html?id=${account.id}" />
+            <spring:message code="label.account" text="Default Text" var="pagetitletext" />
+            <spring:message code="label.updateaccount" text="Default Text" var="catboxtitle" />
+            <spring:message code="label.account.update" text="Default Text" var="savebutton" />
+        </c:if>
         <jsp:include page="headermenu.jsp" />
-
         <div class="container">
             <div class="row container">
                 <div class="dashboard_main">
                     <div class="desh-icon-bg">
                         <img src="img/i-mgmt.png">
                     </div>
-                    <div class="page-title-text"><spring:message code="account.accountlist" text="Label value is missing !!!"/></div>
+                    <div class="page-title-text">${pagetitletext}</div>
                 </div>
-            </div>	
+            </div>
             <div class="row">
                 <div class="col-md-3">
                     <div class="catagory-main-box top-radius">
@@ -45,149 +72,185 @@
 
                     </div>
                 </div>
+                <spring:message text="Default Text" code="label.account.name.placeholder" var="accountnameplaceholder" />
+                <spring:message text="Default Text" code="label.account.address.placeholder" var="accountaddressplaceholder" />
+                <spring:message text="Default Text" code="label.account.address2.placeholder" var="accountaddressplaceholder2" />
+                <spring:message text="Default Text" code="label.account.postal.placeholder" var="accountpostalplaceholder" />
+                <spring:message text="Default Text" code="label.account.city.placeholder" var="accountcityplaceholder" />
+                <spring:message text="Default Text" code="label.account.state.placeholder" var="accountstateplaceholder" />
+                <spring:message text="Default Text" code="label.account.country.placeholder" var="accountcountryplaceholder" />
+                <spring:message text="Default Text" code="label.account.firstname.placeholder" var="accountfirstnameplaceholder" />
+                <spring:message text="Default Text" code="label.account.lastname.placeholder" var="accountlastnameplaceholder" />
+                <spring:message text="Default Text" code="label.account.email.placeholder" var="accountemailplaceholder" />
+                <spring:message text="Default Text" code="label.account.phone.placeholder" var="accountphoneplaceholder" />
+                <spring:message text="Default Text" code="label.account.phone2.placeholder" var="accountphoneplaceholder2" />
+                <spring:message text="Default Text" code="label.account.fax.placeholder" var="accountfaxplaceholder" />
+                <spring:message text="Default Text" code="label.account.notes.placeholder" var="accountnotesplaceholder" />
+                <spring:message text="Default Text" code="label.account.maxdebt.placeholder" var="accountmaxdebtplaceholder" />
+                <spring:message text="Default Text" code="label.account.curdebt.placeholder" var="accountcurdebtplaceholder" />
+                <spring:message text="Default Text" code="label.account.image.placeholder" var="accountimageplaceholder" />
                 <div class="col-md-9">
                     <div class="catagory-main-box top-radius">
-                        <div class="cat-box-title cat-title-font top-radius"><spring:message code="account.accountlist" text="Label value is missing !!!"/></div>
-
-                        <spring:message text="Default Text" code="account.search.placeholder" var="search"/>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="demo">
-                                <div class="row tb-margin">
-                                    <div class="col-sm-4">
-                                        <a href="add-account.html" class="btn btn-info add-row addrow-btn-left"><spring:message code="account.addaccount" text="Label value is missing !!!"/></a>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <!--<div class="form-group visible-sm visible-md visible-lg">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="account.search" text="Label value is missing !!!"/></label>
-                                            <div class="col-sm-8 col-xs-12">
-                                                <input id="filter" class="form-control" type="text" placeholder="${search}" />
-                                            </div>
+                        <div class="cat-box-title cat-title-font top-radius">${catboxtitle}</div>                            
+                        <form:form action="${formaction}" method="post" modelAttribute="account" enctype="multipart/form-data">
+                            <form:hidden path="id" />                                
+                            <form:hidden path="visible" />
+                            <div class="row tb-margin">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-8">
+                                    <c:if test="${not empty error}">  
+                                        <div class="row text-pad-top visible-lg visible-md visible-sm"><div class="errorblock">${error}</div></div>
+                                    </c:if>
+                                    <c:if test="${not empty success}">  
+                                        <div class="row text-pad-top visible-lg visible-md visible-sm"><div class="successblock">${success}</div></div>
+                                    </c:if>
+                                    <div class="form-group">                                    
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.name" text="Default Text"/></label>                                    
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="name" placeholder="${accountnameplaceholder}" />
+                                            <form:errors path="name" cssClass="error" />
                                         </div>
-
-                                        <div class="form-group visible-xs">
-                                            <div class="col-xs-12">
-                                                <input id="filter" placeholder="${search}" class="form-control" type="text"/>
-                                            </div>
-                                        </div> -->                                        
+                                    </div>
+                                    <div class="form-group">                                    
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.type" text="Default Text"/></label>                                    
+                                        <div class="col-sm-8 col-xs-12">
+                                            <form:select class="form-control" path="type">
+                                                <form:option value=""><spring:message code="label.account.type.placeholder" text="Default Text"/></form:option>
+                                                <form:option value="1">Supplier</form:option>
+                                            </form:select>
+                                            <form:errors path="type" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.address" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="address" placeholder="${accountaddressplaceholder}" />
+                                            <form:errors path="address" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.address2" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">
+                                            <form:input type="text" class="form-control" path="address2" placeholder="${accountaddressplaceholder2}" />
+                                            <form:errors path="address2" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.postal" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="postal" placeholder="${accountpostalplaceholder}" />
+                                            <form:errors path="postal" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.city" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="city" placeholder="${accountcityplaceholder}" />
+                                            <form:errors path="city" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.state" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="state" placeholder="${accountstateplaceholder}" />
+                                            <form:errors path="state" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.country" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="country" placeholder="${accountcountryplaceholder}" />
+                                            <form:errors path="country" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.firstname" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="firstname" placeholder="${accountfirstnameplaceholder}" />
+                                            <form:errors path="firstname" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.lastname" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="lastname" placeholder="${accountlastnameplaceholder}" />
+                                            <form:errors path="lastname" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.email" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="email" placeholder="${accountemailplaceholder}" />
+                                            <form:errors path="email" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.phone" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="phone" placeholder="${accountphoneplaceholder}" />
+                                            <form:errors path="phone" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.phone2" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="phone2" placeholder="${accountphoneplaceholder2}" />
+                                            <form:errors path="phone2" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.fax" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="fax" placeholder="${accountfaxplaceholder}" />
+                                            <form:errors path="fax" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.notes" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="notes" placeholder="${accountnotesplaceholder}" />
+                                            <form:errors path="notes" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.maxdebt" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="maxdebt" placeholder="${accountmaxdebtplaceholder}" />
+                                            <form:errors path="maxdebt" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.curdebt" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:input type="text" class="form-control" path="curdebt" placeholder="${accountcurdebtplaceholder}" />
+                                            <form:errors path="curdebt" cssClass="error" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.image" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <input type="file" name="imageUpload" placeholder="${accountimageplaceholder}" />
+                                            <form:errors path="image" cssClass="error" />
+                                        </div>
                                     </div>
                                 </div>
-                                <table id="dttable" class="table table-bordered table-striped" data-filter="#filter" data-page-size="5">
-                                    <thead class="orange-bg border-t">
-                                        <tr>
-                                            <th data-toggle="true">
-                                                <spring:message code="label.account.name" text="Label value is missing !!!"/> 
-                                            </th>
-                                            <th data-hide="phone">
-                                                <spring:message code="label.account.city" text="Label value is missing !!!"/>
-                                            </th>
-                                            <th data-hide="phone">
-                                                <spring:message code="label.account.curdebt" text="Label value is missing !!!"/>
-                                            </th>
-                                            <th data-sort-ignore="true" data-hide="phone" data-name="Delete"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="account" items="${accountList}">
-                                            <tr>
-                                                <input type="hidden" id="deleteInvTypeId" name="deleteInvTypeId" value="<c:out value="${account.id}"/>" />
-                                                <td><a href="edit-account.html?id=${account.id}"><c:out value="${account.name}"/></a></td>
-                                                <td><c:out value="${account.city}"/></td>
-                                                <td><c:out value="${account.curdebt}" /></td>
-                                                <td>
-                                                    <a class="row-delete" href="delete-account.html?id=${account.id}"><span class="glyphicon glyphicon-remove"></span></a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                    <!--<tfoot class="hide-if-no-paging">
-                                        <tr>
-                                            <td colspan="4">
-                                                <div class="pagination pagination-centered"></div>
-                                            </td>
-                                        </tr>
-                                    </tfoot>-->
-                                </table>
+                                <div class="col-sm-2"></div>
                             </div>
-                            <div class="tab-pane" id="docs">
-                                <h3>Removing A Row</h3>
-                                <p>It is recommended to use the built-in <code>removeRow</code> function when deleting rows from a FooTable. The reasons are:</p>
-                                <ul>
-                                    <li>A detail row, that may or may not be generated when a breakpoint is fired, is also deleted</li>
-                                    <li>The correct FooTable events are fired which triggers a redraw. This also forces the sorting, filtering and pagination add-ons to play nicely.</li>
-                                </ul>
-                                <p>Simply pass the row object into the <code>removeRow</code> function. (The row object can be a jQuery object or not)</p>
-                                <pre>
-$(&#39;table&#39;).footable().on(&#39;click&#39;, &#39;.row-delete&#39;, function(e) {
-    e.preventDefault();
-    //get the footable object
-    var footable = $(&#39;table&#39;).data(&#39;footable&#39;);
-
-    //get the row we are wanting to delete
-    var row = $(this).parents(&#39;tr:first&#39;);
-
-    //delete the row
-    footable.removeRow(row);
-});</pre>
-                                <h3>Adding A Row</h3>
-                                <p>For similar reasons as above, it is recommended to use the built-in <code>appendRow</code> function for adding rows to the FooTable:</p>
-                                <pre>
-$(&#39;.add-row&#39;).click(function(e) {
-    e.preventDefault();
-
-    //get the footable object
-    var footable = $(&#39;table&#39;).data(&#39;footable&#39;);
-
-    //build up the row we are wanting to add
-    var newRow = &#39;&lt;tr&gt;&lt;td&gt;Isidra&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;#&quot;&gt;Boudreaux&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Traffic Court Referee&lt;/td&gt;&lt;td data-value=&quot;78025368997&quot;&gt;22 Jun 1972&lt;/td&gt;&lt;td data-value=&quot;1&quot;&gt;&lt;span class=&quot;status-metro status-active&quot; title=&quot;Active&quot;&gt;Active&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;a class=&quot;row-delete&quot; href=&quot;#&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-remove&quot;&gt;&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&#39;;
-
-    //add it
-    footable.appendRow(newRow);
-});</pre>
+                            <div class="div-center">
+                                <input type="submit" class="btn btn-orange" onclick="return submitDetailsForm();" value="${savebutton}" />
+                                <button type="button" class="btn btn-orange" onclick="javascript:history.back();"><spring:message code="label.account.cancel" text="Default Text"/></button>
                             </div>
-                        </div>
-
+                        </form:form>
                     </div>
-                </div>
-
+                </div>                
             </div>
-
             <div class=""></div>
             <div class=""></div>
-
-
-        </div>
+        </div>        
         <!-- /container -->
-
-
-
-
-        
-        <!--Responsive Table-->
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('.row-delete').click(function(eve) {
-                    var row = this;
-                    eve.preventDefault();
-                    $.ajax({
-                        url: $(row).attr('href')
-                        , success: function(response) {
-                            if (response === true) {
-                                $(row).closest('tr').remove();
-                            }
-                        }
-                    });
-                    return false;
-                });
-            });
-        </script>
-
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.dataTables.min.js"></script>
-        <script src="js/dataTables.responsive.min.js"></script>
-        <script src="js/ajax-bootstrap3.js"></script>
-        <script src="js/docs.min.js"></script>        
     </body>
 </html>
