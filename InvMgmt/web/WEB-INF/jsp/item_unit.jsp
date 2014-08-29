@@ -9,14 +9,17 @@
         </head>
             <script type="text/javascript">
                 function submitDelete(value) {
-                    alert("Delete " + value);
+                    $('#deleteId').val(value);
+                    $('#deleteForm').submit();
                 }
             </script>
 
         <body role="document">
 
         <jsp:include page="headermenu.jsp"></jsp:include>
-
+            <form action="DeleteItemUnits.html" method="POST" id="deleteForm" name="deleteForm">
+                <input type="hidden" id="deleteId" name="deleteId">
+            </form>
         <div class="container">
             <div class="row container">
                 <div class="dashboard_main">
@@ -79,13 +82,11 @@
                                     <tbody>
                                       <c:forEach var="listVar" items="${itemUnit}">
                                         <tr>
-                                            <input type="hidden" id="deleteInvTypeId" name="deleteInvTypeId" value="<c:out value="${listVar.id}"/>" />
-                                            <td><c:out value="${listVar.name}"/></td>
-                                            <td><a href="#"><c:out value="${listVar.description}"/></a></td>
+                                            <td><a href="${pageContext.request.contextPath}/UpdateItemUnits.html?updateItemId=<c:out value="${listVar.id}"/>"><c:out value="${listVar.name}"/></a></td>
+                                            <td><c:out value="${listVar.description}"/></td>
                                             <td data-value="78025368997" style="text-align:center;">
                                                 <button onclick="submitDelete(<c:out value="${listVar.id}"/>);" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button>
                                             </td>
-                                            <td><a class="row-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
                                         </tr>
                                        </c:forEach>
                                     </tbody>

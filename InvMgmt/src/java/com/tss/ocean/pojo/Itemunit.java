@@ -58,7 +58,7 @@ public class Itemunit implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "Itemunit";
+        return "Itemunit{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
     }
 
 }

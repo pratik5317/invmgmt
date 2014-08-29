@@ -74,6 +74,7 @@
                                 <div class="col-sm-2"></div>
                             <form:form action="AddItemUnits.html" method="POST" commandName="itemUnit">
                                 <form:errors path="*" cssClass="errorblock" element="div" />
+                                <form:hidden path="id" />
                                 <div class="col-sm-8 visible-lg visible-md visible-sm">
 
                                     <div class="form-group">
@@ -95,6 +96,7 @@
                                 </div>
                             </form:form>
                             <form:form action="AddItemUnits.html" method="POST" commandName="itemUnit">
+                                <form:hidden path="id" />
                                 <div class="col-sm-8 visible-xs">
 
                                     <div class="form-group">

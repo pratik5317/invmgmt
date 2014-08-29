@@ -8,7 +8,7 @@
         <jsp:include page="header.jsp"></jsp:include>
             <script type="text/javascript">
                 function submitDetailsForm() {
-                    $("#itemUnit").submit();
+                    $("#itemTypeForm").submit();
                 }
             </script>
 
@@ -26,7 +26,6 @@
                 }
             </style>
 
-
         </head>
 
         <body role="document">
@@ -39,7 +38,7 @@
                         <div class="desh-icon-bg">
                             <img src="img/i-mgmt.png">
                         </div>
-                        <div class="page-title-text">Add Item Unit</div>
+                        <div class="page-title-text">Add Item Category</div>
                     </div>
                 </div>	
                 <div class="row">
@@ -68,17 +67,18 @@
                     </div>
                     <div class="col-md-9">
                         <div class="catagory-main-box top-radius">
-                            <div class="cat-box-title cat-title-font top-radius">Item Unit </div>
+                            <div class="cat-box-title cat-title-font top-radius">Item Category </div>
 
                             <div class="row tb-margin">
                                 <div class="col-sm-2"></div>
-                            <form:form action="AddItemUnits.html" method="POST" commandName="itemUnit">
+                            <form:form action="UpdateItemCategory.html" method="POST" commandName="itemTypeForm"> 
                                 <form:errors path="*" cssClass="errorblock" element="div" />
-                                <div class="col-sm-8 visible-lg visible-md visible-sm">
+                                <form:hidden path="id" ></form:hidden>
+                                    <div class="col-sm-8 visible-lg visible-md visible-sm">
 
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-xs-12 control-label search-text">Name:</label>
-                                        <div class="col-sm-8 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text">Name:</label>
+                                            <div class="col-sm-8 col-xs-12">
                                             <form:input  type="text" class="form-control" path="name" placeholder="Name"/>
                                             <form:errors path="name" cssClass="error" />
                                         </div>
@@ -94,11 +94,13 @@
 
                                 </div>
                             </form:form>
-                            <form:form action="AddItemUnits.html" method="POST" commandName="itemUnit">
-                                <div class="col-sm-8 visible-xs">
+                            <form:form action="UpdateItemCategory.html" method="POST" commandName="itemTypeForm"> 
+                                <!-- <form:errors path="*" cssClass="errorblock" element="div" /> -->
+                                <form:hidden path="id" ></form:hidden>
+                                    <div class="col-sm-8 visible-xs">
 
-                                    <div class="form-group">
-                                        <div class="col-sm-8 col-xs-12">
+                                        <div class="form-group">
+                                            <div class="col-sm-8 col-xs-12">
                                             <form:input  type="text" class="form-control" path="name" placeholder="Name"/>
                                             <form:errors path="name" cssClass="error" />
                                         </div>
@@ -107,12 +109,12 @@
                                     <div class="form-group">
                                         <div class="col-sm-8 col-xs-12">
                                             <form:input  type="text" class="form-control" path="description" placeholder="Description"/>
-                                            <form:errors path="description" cssClass="error" />
                                         </div>
                                     </div>
 
                                 </div>
                             </form:form>
+
                             <div class="col-sm-2"></div>
                         </div>
                         <div class="row text-pad-top visible-lg visible-md visible-sm">
@@ -127,7 +129,6 @@
                                 <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
                             </div>
                         </div>
-
 
 
                     </div>

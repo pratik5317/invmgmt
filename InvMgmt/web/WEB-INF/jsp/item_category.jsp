@@ -6,12 +6,20 @@
     <head>
         <%--<%@include file="header.jsp" %>--%>
         <jsp:include page="header.jsp"></jsp:include>
+            <script type="text/javascript">
+                function submitDelete(value) {
+                    $('#deleteId').val(value);
+                    $('#deleteForm').submit();
+                }
+            </script>
         </head>
 
         <body role="document">
 
         <jsp:include page="headermenu.jsp"></jsp:include>
-
+            <form action="DeleteItemCategory.html" method="POST" id="deleteForm" name="deleteForm">
+                <input type="hidden" id="deleteId" name="deleteId">
+            </form>
             <div class="container">
                 <div class="row container">
                     <div class="dashboard_main">
@@ -86,16 +94,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                     <c:forEach var="listVar" items="${itemTypeList}">
-                                       <tr>
+                                        <c:forEach var="listVar" items="${itemTypeList}">
+                                            <tr>
                                         <input type="hidden" id="deleteInvTypeId" name="deleteInvTypeId" value="<c:out value="${listVar.id}"/>" />
-                                        <td><a href="#"><c:out value="${listVar.name}"/></a></td>
+                                        <td><a href="${pageContext.request.contextPath}/UpdateItemCategory.html?updateItemId=<c:out value="${listVar.id}"/>"><c:out value="${listVar.name}"/></a></td>
                                         <td><c:out value="${listVar.description}"/></td>
                                         <td data-value="78025368997" style="text-align:center;">
-                                            <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                                            <button onclick="submitDelete(<c:out value="${listVar.id}"/>);" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button>
                                         </td>
                                         <td><a class="row-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
-                                      </tr>
+                                        </tr>
                                     </c:forEach>
                                     </tbody>
                                     <tfoot class="hide-if-no-paging">
