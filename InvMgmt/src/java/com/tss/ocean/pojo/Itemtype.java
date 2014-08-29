@@ -1,6 +1,7 @@
 package com.tss.ocean.pojo;
 // Generated 4 Aug, 2014 6:30:10 PM by Hibernate Tools 3.2.1.GA
 
+import java.util.Set;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -14,11 +15,13 @@ public class Itemtype implements java.io.Serializable {
     private Integer id;
 
     @NotEmpty(message = "Please enter item name.")
-    @Size(min = 10, max = 45, message = "Item name must between 1 and 45 characters")
+    @Size(min = 1, max = 45, message = "Item name must between 1 and 45 characters")
     private String name;
 
     @Size(min = 0, max = 65535, message = "Item description must between 0 and 65535 characters")
     private String description;
+
+    private Set<Item> itemList;
 
     public Itemtype() {
     }
@@ -52,9 +55,17 @@ public class Itemtype implements java.io.Serializable {
         this.description = description;
     }
 
+    public Set<Item> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(Set<Item> itemList) {
+        this.itemList = itemList;
+    }
+
     @Override
     public String toString() {
-        return "Itemtype{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
+        return "Itemtype";
     }
 
 }

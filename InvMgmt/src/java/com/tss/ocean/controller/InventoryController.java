@@ -5,8 +5,10 @@
  */
 package com.tss.ocean.controller;
 
+import com.tss.ocean.idao.IItemDAO;
 import com.tss.ocean.idao.IItemtypeDAO;
 import com.tss.ocean.idao.IItemunitDAO;
+import com.tss.ocean.pojo.Item;
 import com.tss.ocean.pojo.Itemtype;
 import com.tss.ocean.pojo.Itemunit;
 import java.util.Map;
@@ -37,6 +39,9 @@ public class InventoryController {
     @Autowired
     IItemunitDAO itemunitDAO;
 
+    @Autowired
+    IItemDAO itemDAO;
+
     @RequestMapping(value = "/AddInventory.html", method = RequestMethod.POST)
     public ModelAndView inventorymgmt(@ModelAttribute("itemTypeForm") @Valid Itemtype itemTypeForm, BindingResult result, Map<String, Object> model) throws Exception {
         logger.log(Level.OFF, "Add Inventory called with inventory details ####### ." + itemTypeForm);
@@ -65,6 +70,24 @@ public class InventoryController {
             return modelAndView;
         } else {
             logger.log(Level.OFF, "Insert result ####### ." + itemunitDAO.insert(itemUnit));
+            return new ModelAndView("redirect:/item_unit.html");
+        }
+    }
+
+    @RequestMapping(value = "/AddItem.html", method = RequestMethod.POST)
+    public ModelAndView addItem(@ModelAttribute("itemForm") @Valid Item item, BindingResult result, Map<String, Object> model) throws Exception {
+        logger.log(Level.OFF, "Add Item with detail ####### ." + item);
+
+        if (result.hasErrors()) {
+            logger.log(Level.OFF, "Error occured while inserting the reconrd for the item." + result.getAllErrors());
+            ModelAndView modelAndView = new ModelAndView("add-item");
+            //modelAndView.addObject("itemTypeForm", new Itemtype());
+            model.put("itemUnitList", itemunitDAO.getList());
+            model.put("itemTypeList", itemTypeDAO.getList());
+            modelAndView.addAllObjects(model);
+            return modelAndView;
+        } else {
+            logger.log(Level.OFF, "Insert result ####### ." + itemDAO.insert(item));
             return new ModelAndView("redirect:/item_unit.html");
         }
     }

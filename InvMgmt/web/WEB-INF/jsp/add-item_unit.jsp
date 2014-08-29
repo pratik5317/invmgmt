@@ -72,24 +72,30 @@
 
                         <div class="row tb-margin">
                             <div class="col-sm-2"></div>
+<form:form action="AddItemUnits.html" method="POST" commandName="itemUnit">
+<form:errors path="*" cssClass="errorblock" element="div" />
                             <div class="col-sm-8 visible-lg visible-md visible-sm">
 
                                 <div class="form-group">
                                     <label class="col-sm-4 col-xs-12 control-label search-text">Name:</label>
                                     <div class="col-sm-8 col-xs-12">
-                                        <input id="filter" class="form-control" type="text"/>
+                                        <form:input  type="text" class="form-control" path="name" placeholder="Name"/>
+                                        <form:errors path="name" cssClass="error" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-4 col-xs-12 control-label search-text"> Description:</label>
                                     <div class="col-sm-8 col-xs-12">
-                                        <input id="filter" class="form-control" type="text"/>
+                                       <form:input  type="text" class="form-control" path="description" placeholder="Description"/>
+                                       <form:errors path="description" cssClass="error" />
                                     </div>
                                 </div>
 
                             </div>
+</form:form>
 <form:form action="AddItemUnits.html" method="POST" commandName="itemUnit">
+
                             <div class="col-sm-8 visible-xs">
 
                                 <div class="form-group">
@@ -107,6 +113,7 @@
                                 </div>
 
                             </div>
+</form:form>
                             <div class="col-sm-2"></div>
                         </div>
                         <div class="row text-pad-top visible-lg visible-md visible-sm">
@@ -121,7 +128,7 @@
                                 <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
                             </div>
                         </div>
-</form:form>
+
 
 
                     </div>
