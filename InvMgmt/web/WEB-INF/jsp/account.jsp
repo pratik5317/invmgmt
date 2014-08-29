@@ -99,10 +99,10 @@
                                 <div class="col-sm-2"></div>
                                 <div class="col-sm-8">
                                     <c:if test="${not empty error}">  
-                                        <div class="row text-pad-top visible-lg visible-md visible-sm"><div class="errorblock">${error}</div></div>
+                                        <div class="row text-pad-top"><div class="errorblock">${error}</div></div>
                                     </c:if>
                                     <c:if test="${not empty success}">  
-                                        <div class="row text-pad-top visible-lg visible-md visible-sm"><div class="successblock">${success}</div></div>
+                                        <div class="row text-pad-top"><div class="successblock">${success}</div></div>
                                     </c:if>
                                     <div class="form-group">                                    
                                         <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.account.name" text="Default Text"/></label>                                    
