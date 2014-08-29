@@ -40,7 +40,7 @@ public class AccountController {
     public ModelAndView add_account_get(@RequestParam(value = "success",required = false)String success,
                                     @RequestParam(value = "error",required = false)String error) throws Exception {
         logger.log(Level.FINE,"add-account called.");
-        ModelAndView mav = new ModelAndView("add-account");
+        ModelAndView mav = new ModelAndView("account");
         Accounts account = new Accounts();
         if(success != null) {
             mav.getModelMap().put("success", success);
@@ -72,13 +72,13 @@ public class AccountController {
             }
             else {
                 logger.log(Level.WARNING, "Error occurred inserting account:{0}", account.toString());
-                return new ModelAndView("add-account",model)                
+                return new ModelAndView("account",model)                
                     .addObject("error",Utilities.getSpringMessage(messageSource,"account.add.error", locale));
             }
         }
         else {
             logger.log(Level.WARNING, "Account values are not valid:", account.toString());
-            return new ModelAndView("add-account",model);
+            return new ModelAndView("account",model);
         }
     }
     
@@ -90,7 +90,7 @@ public class AccountController {
         ModelAndView mav;
         Accounts account = accountsDAO.getRecordByPrimaryKey(id);
         if(account != null ) {
-            mav = new ModelAndView("edit-account");
+            mav = new ModelAndView("account");
             mav.getModelMap().put("account", account);
         }
         else {
@@ -128,13 +128,13 @@ public class AccountController {
             }
             else {
                 logger.log(Level.WARNING, "Error occurred updating account:{0}", account.toString());
-                return new ModelAndView("edit-account",model)                
+                return new ModelAndView("account",model)                
                     .addObject("error",Utilities.getSpringMessage(messageSource,"account.update.error", locale));
             }
         }
         else {
             logger.log(Level.WARNING, "Account values are not valid:", account.toString());
-            return new ModelAndView("edit-account",model);
+            return new ModelAndView("account",model);
         }
     }
     
@@ -142,7 +142,7 @@ public class AccountController {
     public ModelAndView account(@RequestParam(value = "success",required = false)String success,
                                     @RequestParam(value = "error",required = false)String error) throws Exception {
         logger.log(Level.FINE,"add-account called.");
-        ModelAndView mav = new ModelAndView("account");
+        ModelAndView mav = new ModelAndView("account-list");
         List<Accounts> accountsList = accountsDAO.getListByFromClause(" FROM Accounts a WHERE a.visible=true");
         if(success != null) {
             mav.getModelMap().put("success", success);
