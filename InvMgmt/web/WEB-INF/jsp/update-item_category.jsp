@@ -8,7 +8,7 @@
         <jsp:include page="header.jsp"></jsp:include>
             <script type="text/javascript">
                 function submitDetailsForm() {
-                    $("#itemTypeForm").submit();
+                   return true;
                 }
             </script>
 
@@ -73,61 +73,52 @@
                                 <div class="col-sm-2"></div>
                             <form:form action="UpdateItemCategory.html" method="POST" commandName="itemTypeForm"> 
                                 <form:errors path="*" cssClass="errorblock" element="div" />
-                                <form:hidden path="id" ></form:hidden>
+                                <form:hidden path="id" />
                                     <div class="col-sm-8 visible-lg visible-md visible-sm">
-
                                         <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text">Name:</label>
                                             <div class="col-sm-8 col-xs-12">
-                                            <form:input  type="text" class="form-control" path="name" placeholder="Name"/>
-                                            <form:errors path="name" cssClass="error" />
+                                                <form:input  type="text" class="form-control" path="name" placeholder="Name"/>
+                                                <form:errors path="name" cssClass="error" />
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-xs-12 control-label search-text"> Description:</label>
-                                        <div class="col-sm-8 col-xs-12">
-                                            <form:input  type="text" class="form-control" path="description" placeholder="Description"/>
-                                            <form:errors path="description" cssClass="error" />
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"> Description:</label>
+                                            <div class="col-sm-8 col-xs-12">
+                                                <form:input  type="text" class="form-control" path="description" placeholder="Description"/>
+                                                <form:errors path="description" cssClass="error" />
+                                            </div>
                                         </div>
+                                    </div>                                        
+                                    <div class="div-center">
+                                        <button type="submit" class="btn btn-orange" onclick="return submitDetailsForm();">Save</button>
+                                        <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
                                     </div>
-
                                 </div>
                             </form:form>
                             <form:form action="UpdateItemCategory.html" method="POST" commandName="itemTypeForm"> 
                                 <!-- <form:errors path="*" cssClass="errorblock" element="div" /> -->
-                                <form:hidden path="id" ></form:hidden>
-                                    <div class="col-sm-8 visible-xs">
-
-                                        <div class="form-group">
-                                            <div class="col-sm-8 col-xs-12">
+                                <form:hidden path="id" />
+                                <div class="col-sm-8 visible-xs">
+                                    <div class="form-group">
+                                        <div class="col-sm-8 col-xs-12">
                                             <form:input  type="text" class="form-control" path="name" placeholder="Name"/>
                                             <form:errors path="name" cssClass="error" />
                                         </div>
                                     </div>
-
                                     <div class="form-group">
                                         <div class="col-sm-8 col-xs-12">
                                             <form:input  type="text" class="form-control" path="description" placeholder="Description"/>
                                         </div>
                                     </div>
-
-                                </div>
+                                    <div class="div-center-xs">
+                                        <button type="submit" class="btn btn-orange" onclick="return submitDetailsForm();">Save</button>
+                                        <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
+                                    </div>
+                                </div>   
                             </form:form>
 
                             <div class="col-sm-2"></div>
-                        </div>
-                        <div class="row text-pad-top visible-lg visible-md visible-sm">
-                            <div class="div-center">
-                                <button type="button" class="btn btn-orange" onclick="submitDetailsForm();">Save</button>
-                                <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
-                            </div>
-                        </div>
-                        <div class="row text-pad-top visible-xs ">
-                            <div class="div-center-xs">
-                                <button type="button" class="btn btn-orange" onclick="submitDetailsForm();">Save</button>
-                                <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
-                            </div>
                         </div>
 
 
