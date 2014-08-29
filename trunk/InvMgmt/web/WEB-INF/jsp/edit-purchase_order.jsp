@@ -184,7 +184,7 @@
 
                 <!-- Bootstrap core JavaScript
                 ================================================== -->
-                <!-- Placed at the end of the document so the pages load faster -->
+                <!-- Placed at the end of the document so the pages load fastefi -->
                 <script src="js/bootstrap.min.js"></script>
                 <!-- Jquery UI Javascript -->
                 <script src="js/jquery-ui.js"></script>
