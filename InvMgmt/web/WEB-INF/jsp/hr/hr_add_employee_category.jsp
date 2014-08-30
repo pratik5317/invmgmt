@@ -30,7 +30,7 @@
                         <!-- MUNU -->    
                         <div id='cssmenu'>
                             <ul>
-                                <li class=''><a href='employees.html'><spring:message code="menu.ITEMS" text="Label value is missing !!!"/></span></a></li>
+                                <li class=''><a href='employee.html'><spring:message code="menu.ITEMS" text="Label value is missing !!!"/></span></a></li>
                                 <li class=''><a href='payslips.html'><span>PaySlips</span></a></li>
                                 <li class='has-sub'><a href='#'><span>Employee Leave Management</span></a>
                                     <ul style='display: block;'>
