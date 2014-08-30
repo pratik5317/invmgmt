@@ -133,17 +133,17 @@ public class ViewController {
         return "hr/create_payslip";
     }
 
-    @RequestMapping(value = "/leave_types.html", method = RequestMethod.GET)
-    public String leave_types(Model model, HttpServletRequest request) throws Exception {
-        logger.log(Level.OFF, "leave_types called.");
-        return "hr/leave_types";
-    }
+//    @RequestMapping(value = "/leave_types.html", method = RequestMethod.GET)
+//    public String leave_types(Model model, HttpServletRequest request) throws Exception {
+//        logger.log(Level.OFF, "leave_types called.");
+//        return "hr/leave_types";
+//    }
 
-    @RequestMapping(value = "/add_leave_type.html", method = RequestMethod.GET)
-    public String add_leave_type(Model model, HttpServletRequest request) throws Exception {
-        logger.log(Level.OFF, "add_leave_type called.");
-        return "hr/add_leave_type";
-    }
+//    @RequestMapping(value = "/add_leave_type.html", method = RequestMethod.GET)
+//    public String add_leave_type(Model model, HttpServletRequest request) throws Exception {
+//        logger.log(Level.OFF, "add_leave_type called.");
+//        return "hr/add_leave_type";
+//    }
 
     @RequestMapping(value = "/attendences.html", method = RequestMethod.GET)
     public String attendences(Model model, HttpServletRequest request) throws Exception {
