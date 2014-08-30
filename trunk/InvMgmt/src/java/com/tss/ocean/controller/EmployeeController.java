@@ -12,8 +12,10 @@ import com.tss.ocean.pojo.EmployeeCategory;
 import com.tss.ocean.pojo.EmployeeDepartment;
 import com.tss.ocean.pojo.Employees;
 import com.tss.ocean.util.Utilities;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +48,6 @@ public class EmployeeController {
     private MessageSource messageSource;
     @Autowired
     private IEmployeeDepartmentDAO employeeDepartmentDAO;
-    
 
     public EmployeeController() {
         employeesDAO = new HibernateDAOFactory().getEmployeesDAO();
@@ -200,8 +201,8 @@ public class EmployeeController {
         return mav
                 .addObject("success", Utilities.getSpringMessage(messageSource, "empcategory.delete.success", locale));
     }
-    
-     @RequestMapping(value = "/employee_department.html", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/employee_department.html", method = RequestMethod.GET)
     public ModelAndView employeeDepartment(@RequestParam(value = "success", required = false) String success,
             @RequestParam(value = "error", required = false) String error,
             Locale locale) throws Exception {
@@ -218,7 +219,8 @@ public class EmployeeController {
         }
         return mav;
     }
-     @RequestMapping(value = "/add_employee_department.html", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/add_employee_department.html", method = RequestMethod.GET)
     public ModelAndView addEmployeeDeptGet(@RequestParam(value = "success", required = false) String success,
             @RequestParam(value = "error", required = false) String error,
             Locale locale) throws Exception {
@@ -257,7 +259,7 @@ public class EmployeeController {
         }
 
     }
-    
+
     @RequestMapping(value = "/edit_employee_department.html", method = RequestMethod.GET)
     public ModelAndView editEmployeeDepartmentGet(@RequestParam(value = "id") int id,
             Locale locale,
@@ -334,5 +336,131 @@ public class EmployeeController {
         logger.info("Employee Department with id {0} is already deleted", employeeDepartment.getId());
         return mav
                 .addObject("success", Utilities.getSpringMessage(messageSource, "empdepartment.delete.error", locale));
+    }
+
+    @RequestMapping(value = "/employee.html", method = RequestMethod.GET)
+    public ModelAndView getEmployyes(@RequestParam(value = "success", required = false) String success,
+            @RequestParam(value = "error", required = false) String error,
+            Locale locale) throws Exception {
+        logger.info("employee called.");
+        ModelAndView mav = new ModelAndView("employee");
+        List<Employees> employeeList = employeesDAO.getList();
+        Map<Integer, String> departmentMap = new HashMap<>();
+        Map<Integer, String> categoryMap = new HashMap<>();
+        mav.getModelMap().put("employeeList", employeeList);
+        List<EmployeeDepartment> departmentList = employeeDepartmentDAO.getList();
+        for (EmployeeDepartment employeeDepartment : departmentList) {
+            departmentMap.put(employeeDepartment.getId(), employeeDepartment.getDepartment());
+        }
+        mav.getModelMap().put("departmentmap", departmentMap);
+
+        List<EmployeeCategory> categoryList = employeeCategoryDAO.getList();
+        for (EmployeeCategory employeeCategory : categoryList) {
+            departmentMap.put(employeeCategory.getId(), employeeCategory.getCategory());
+        }
+        mav.getModelMap().put("categorymap", categoryMap);
+        if (success != null) {
+            mav.getModelMap().put("success", success);
+        }
+        if (error != null) {
+            mav.getModelMap().put("error", error);
+        }
+        return mav;
+    }
+
+    @RequestMapping(value = "/add_employee", method = RequestMethod.GET)
+    public ModelAndView addEmployeeGet(@RequestParam(value = "success", required = false) String success,
+            @RequestParam(value = "error", required = false) String error,
+            Locale locale) throws Exception {
+        logger.info("add_employee called.");
+        ModelAndView mav = new ModelAndView("add_employee");
+        Employees employee = new Employees();
+        if (success != null) {
+            mav.getModelMap().put("success", success);
+        }
+        if (error != null) {
+            mav.getModelMap().put("error", error);
+        }
+        List<EmployeeDepartment> departmentList = employeeDepartmentDAO.getList();
+        List<EmployeeCategory> categoryList = employeeCategoryDAO.getList();
+        mav.getModelMap().put("employee", employee);
+        mav.getModelMap().put("employeeDepartmentList", departmentList);
+        mav.getModelMap().put("employeeCategoryList", categoryList);
+        return mav;
+    }
+
+    @RequestMapping(value = "/add_employee.html", method = RequestMethod.POST)
+    public ModelAndView addEmployeePost(@ModelAttribute("employee") @Valid Employees employees,
+            BindingResult result,
+            ModelMap model,
+            Locale locale) throws Exception {
+        logger.info("add_employee_category-post called.");
+        if (!result.hasErrors()) {
+            int insertResult = employeesDAO.insert(employees);
+            if (insertResult > 0) {
+                logger.info("Employee category Added Successfully with id " + insertResult);
+                return new ModelAndView("redirect:add_employee.html")
+                        .addObject("success", Utilities.getSpringMessage(messageSource, "employee.add.success", locale));
+            } else {
+                logger.info("Error while inserting " + employees);
+                return new ModelAndView("add_employee", model)
+                        .addObject("error", Utilities.getSpringMessage(messageSource, "employee.add.error", locale));
+            }
+        } else {
+            return new ModelAndView("add_employee", model);
+        }
+
+    }
+
+    @RequestMapping(value = "/edit_employee.html", method = RequestMethod.GET)
+    public ModelAndView editEmployeeGet(@RequestParam(value = "id") int id,
+            Locale locale,
+            @RequestParam(value = "success", required = false) String success,
+            @RequestParam(value = "error", required = false) String error) throws Exception {
+        logger.info("edit_employee_category called.");
+        ModelAndView mav;
+        EmployeeCategory employeeCategory = employeeCategoryDAO.getRecordByPrimaryKey(id);
+        if (employeeCategory != null) {
+            mav = new ModelAndView("edit_employee_category");
+            mav.getModelMap().put("employeecategory", employeeCategory);
+        } else {
+
+            mav = new ModelAndView("redirect:employee_category.html");
+            List<EmployeeCategory> employeeCategoryList = employeeCategoryDAO.getList();
+            mav.getModelMap().put("employeeCategoryList", employeeCategoryList);
+        }
+        if (success != null) {
+            mav.getModelMap().put("success", success);
+        }
+        if (error != null) {
+            mav.getModelMap().put("error", error);
+        }
+        return mav;
+    }
+
+    @RequestMapping(value = "/edit_employee.html", method = RequestMethod.POST)
+    public ModelAndView editEmployeePost(@ModelAttribute("employeecategory") @Valid EmployeeCategory employeeCategory,
+            BindingResult result,
+            ModelMap model,
+            Locale locale) throws Exception {
+        logger.info("edit_employee_category-post called.");
+        if (!result.hasErrors()) {
+            int updateResult = employeeCategoryDAO.update(employeeCategory);
+            if (updateResult > 0) {
+                logger.info("employee_category updated Successfully with id={0}", updateResult);
+                ModelAndView mav = new ModelAndView("redirect:employee_category.html");
+                List<EmployeeCategory> employeeCategoryList = employeeCategoryDAO.getList();
+                mav.getModelMap().put("employeeCategoryList", employeeCategoryList);
+                return mav
+                        .addObject("success", Utilities.getSpringMessage(messageSource, "empcategory.update.success", locale));
+            } else {
+                logger.warn("Error occurred updating employee categry:{0}", employeeCategory);
+                return new ModelAndView("edit_employee_category", model)
+                        .addObject("error", Utilities.getSpringMessage(messageSource, "empcategory.update.error", locale));
+            }
+        } else {
+            logger.warn("Employee category values are not valid:", employeeCategory);
+            return new ModelAndView("edit_employee_category", model);
+        }
     }
 }
