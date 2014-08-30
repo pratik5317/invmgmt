@@ -1,6 +1,9 @@
 package com.tss.ocean.pojo;
 // Generated 4 Aug, 2014 6:30:10 PM by Hibernate Tools 3.2.1.GA
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+
 
 
 /**
@@ -10,7 +13,9 @@ public class EmployeeLeaveTypes  implements java.io.Serializable {
 
 
      private Integer id;
+     @NotEmpty
      private String name;
+     @NotEmpty
      private String code;
      private Boolean status;
      private String maxLeaveCount;
