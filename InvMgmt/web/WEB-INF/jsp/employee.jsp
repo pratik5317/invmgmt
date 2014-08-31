@@ -112,8 +112,8 @@
                                                 <td>${departmentmap[employee.employeeDepartmentId]}</td>
                                                 <td>${categorymap[employee.employeeCategoryId]}</td>
                                                 <td>
-                                                    <a href="edit_employee_category.html?id=${employeeCategory.id}" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</a>
-                                                    <a href="delete_employee_category.html?id=${employeeCategory.id}" class="btn btn-default btn-sm row-delete" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                                                    <a href="edit_employee.html?id=${employee.id}" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</a>
+                                                    <a href="delete_employee.html?id=${employee.id}" class="btn btn-default btn-sm row-delete" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                                                 </td>
                                             </tr>                                        
                                         </c:forEach>
