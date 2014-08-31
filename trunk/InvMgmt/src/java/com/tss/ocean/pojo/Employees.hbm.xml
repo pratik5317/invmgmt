@@ -146,7 +146,7 @@
         <property name="photoContentType" type="string">
             <column name="photo_content_type" />
         </property>
-        <property name="photoData" type="binary">
+        <property name="photoData" type="java.sql.Blob">
             <column name="photo_data" />
         </property>
         <property name="createdAt" type="timestamp">
