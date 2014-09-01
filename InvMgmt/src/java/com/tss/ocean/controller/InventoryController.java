@@ -11,7 +11,6 @@ import com.tss.ocean.idao.IItemunitDAO;
 import com.tss.ocean.pojo.Item;
 import com.tss.ocean.pojo.Itemtype;
 import com.tss.ocean.pojo.Itemunit;
-import java.beans.PropertyEditorSupport;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,8 +19,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,31 +44,6 @@ public class InventoryController {
     @Autowired
     IItemDAO itemDAO;
     
-    @InitBinder
-    protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
-        binder.registerCustomEditor(Itemunit.class, "unitid", new PropertyEditorSupport() {
-            @Override
-            public void setAsText(String text) {
-                try {
-                    Itemunit itemunit = itemunitDAO.getRecordByPrimaryKey(Integer.parseInt(text));
-                    setValue(itemunit);
-                }catch(NumberFormatException ex) {
-                    setValue(null);
-                }
-            }        
-        });
-        binder.registerCustomEditor(Itemtype.class, "typeid", new PropertyEditorSupport() {
-            @Override
-            public void setAsText(String text) {
-                try {
-                    Itemtype itemtype = itemTypeDAO.getRecordByPrimaryKey(Integer.parseInt(text));
-                    setValue(itemtype);
-                }catch(NumberFormatException ex) {
-                    setValue(null);
-                }
-            }
-        });
-    } 
 
     @RequestMapping(value = "/AddInventory.html", method = RequestMethod.POST)
     public ModelAndView inventorymgmt(@ModelAttribute("itemTypeForm") @Valid Itemtype itemTypeForm, BindingResult result, Map<String, Object> model) throws Exception {
@@ -126,7 +98,10 @@ public class InventoryController {
             if (itemUnit.getId() == null){
                 status = itemunitDAO.insert(itemUnit);
             }else{
-                status = itemunitDAO.update(itemUnit);
+                Itemunit oldItemUnit = itemunitDAO.getRecordByPrimaryKey(itemUnit.getId());
+                oldItemUnit.setName(itemUnit.getName());
+                oldItemUnit.setDescription(itemUnit.getDescription());
+                status = itemunitDAO.update(oldItemUnit);
             }
             logger.log(Level.OFF, "Insert result ####### success." + status);
             return new ModelAndView("redirect:/item_unit.html");
@@ -135,10 +110,49 @@ public class InventoryController {
 
     @RequestMapping(value = "/AddItem.html", method = RequestMethod.POST)
     public ModelAndView addItem(@ModelAttribute("itemForm") @Valid Item item, BindingResult result, Map<String, Object> model) throws Exception {
-        logger.log(Level.OFF, "Add Item with detail ####### ." + item);
-
+        if(item.getId() == null) {
+            logger.log(Level.OFF, "Add Item with detail ####### ." + item);
+            if (result.hasErrors()) {
+                logger.log(Level.OFF, "Error occured while inserting the reconrd for the item." + result.getAllErrors());
+                ModelAndView modelAndView = new ModelAndView("add-item");
+                //modelAndView.addObject("itemTypeForm", new Itemtype());
+                model.put("itemUnitList", itemunitDAO.getList());
+                model.put("itemTypeList", itemTypeDAO.getList());
+                modelAndView.addAllObjects(model);
+                return modelAndView;
+            } else {
+                item.setAlias("123");
+                logger.log(Level.OFF, "Insert result ####### ." + itemDAO.insert(item));
+                return new ModelAndView("redirect:/item.html");
+            }
+        }
+        else {
+            logger.log(Level.OFF, "Edit Item with detail ####### ." + item);
+            if (result.hasErrors()) {
+                logger.log(Level.OFF, "Error occured while editing the reconrd for the item." + result.getAllErrors());
+                ModelAndView modelAndView = new ModelAndView("add-item");
+                //modelAndView.addObject("itemTypeForm", new Itemtype());
+                model.put("itemUnitList", itemunitDAO.getList());
+                model.put("itemTypeList", itemTypeDAO.getList());
+                modelAndView.addAllObjects(model);
+                return modelAndView;
+            } else {
+                Item oldItem = itemDAO.getRecordByPrimaryKey(item.getId());
+                oldItem.setName(item.getName());
+                oldItem.setPrice(item.getPrice());
+                oldItem.setTaxid(item.getTaxid());
+                oldItem.setCategoryid(item.getCategoryid());
+                oldItem.setCurrstock(item.getCurrstock());            
+                logger.log(Level.OFF, "Update result ####### ." + itemDAO.update(oldItem));
+                return new ModelAndView("redirect:/item.html");
+            }   
+        }
+    }
+    @RequestMapping(value = "/EditItem.html", method = RequestMethod.POST)
+    public ModelAndView editItem(@ModelAttribute("itemForm") @Valid Item item, BindingResult result, Map<String, Object> model) throws Exception {
+        logger.log(Level.OFF, "Edit Item with detail ####### ." + item);
         if (result.hasErrors()) {
-            logger.log(Level.OFF, "Error occured while inserting the reconrd for the item." + result.getAllErrors());
+            logger.log(Level.OFF, "Error occured while editing the reconrd for the item." + result.getAllErrors());
             ModelAndView modelAndView = new ModelAndView("add-item");
             //modelAndView.addObject("itemTypeForm", new Itemtype());
             model.put("itemUnitList", itemunitDAO.getList());
@@ -146,12 +160,16 @@ public class InventoryController {
             modelAndView.addAllObjects(model);
             return modelAndView;
         } else {
-            item.setAlias("123");
-            logger.log(Level.OFF, "Insert result ####### ." + itemDAO.insert(item));
+            Item oldItem = itemDAO.getRecordByPrimaryKey(item.getId());
+            oldItem.setName(item.getName());
+            oldItem.setPrice(item.getPrice());
+            oldItem.setTaxid(item.getTaxid());
+            oldItem.setCategoryid(item.getCategoryid());
+            oldItem.setCurrstock(item.getCurrstock());            
+            logger.log(Level.OFF, "Update result ####### ." + itemDAO.update(oldItem));
             return new ModelAndView("redirect:/item_unit.html");
         }
     }
-
     @RequestMapping(value = "/DeleteItemCategory.html", method = RequestMethod.POST)
     public ModelAndView deleteItemCategory(@RequestParam("deleteId") int deleteId, Map<String, Object> model) throws Exception {
         logger.log(Level.FINE, "Delete item category called.");
@@ -197,5 +215,13 @@ public class InventoryController {
         model.put("itemTypeForm", itemTypeDAO.getRecordByPrimaryKey(updateItemId));
         return "update-item_category";
     }
-
+    @RequestMapping(value = "/UpdateItem.html", method = RequestMethod.GET)
+    public String edit_item(@RequestParam("updateItemId") int updateItemId,Map<String, Object> model, HttpServletRequest request) throws Exception {
+        logger.log(Level.OFF, "add-item called.");
+        model.put("itemForm", itemDAO.getRecordByPrimaryKey(updateItemId));
+        model.put("itemUnitList", itemunitDAO.getList());
+        model.put("itemTypeList", itemTypeDAO.getList());
+        return "add-item";
+    }
+    
 }

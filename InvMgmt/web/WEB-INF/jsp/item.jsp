@@ -82,7 +82,7 @@
                                     <tbody>
                                         <c:forEach var="listVar" items="${itemList}">
                                             <tr>
-                                                <td><a href="#"><c:out value="${listVar.name}"/></a></td>
+                                                <td><a href="UpdateItem.html?updateItemId=${listVar.id}"><c:out value="${listVar.name}"/></a></td>
                                                 <td><c:out value="${listVar.typeid.name}"/></td>
                                                 <td><c:out value="${listVar.currstock}"/></td>
                                                 <td data-value="78025368997"><c:out value="${listVar.unitid.name}"/></td>
