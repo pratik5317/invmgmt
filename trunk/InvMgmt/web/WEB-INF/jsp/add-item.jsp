@@ -9,7 +9,7 @@
         <jsp:include page="header.jsp"></jsp:include>
             <script type="text/javascript">
                 function submitDetailsForm() {
-                    $("#itemForm").submit();
+                    return true;
                 }
             </script>
 
@@ -73,6 +73,7 @@
                             <div class="row tb-margin">
                                 <div class="col-sm-2"></div>
                             <form:form action="AddItem.html" method="POST" commandName="itemForm">
+                                <form:hidden path="id" />
                                 <form:errors path="*" cssClass="errorblock" element="div" />
 
                                 <div class="col-sm-8 visible-lg visible-md visible-sm">
@@ -88,7 +89,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-4 col-xs-12 control-label search-text"> Category:</label>
                                         <div class="col-sm-8 col-xs-12">
-                                            <form:select class="form-control" path="typeid">
+                                            <form:select class="form-control" path="typeid.id">
                                                 <c:forEach items="${itemTypeList}" var="itemtypeid">
                                                     <option value="${itemtypeid.id}"><c:out value="${itemtypeid.name}" /></option>
                                                 </c:forEach>
@@ -107,7 +108,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-4 col-xs-12 control-label search-text">Unit:</label>
                                         <div class="col-sm-8 col-xs-12">
-                                            <form:select class="form-control"  path="unitid">
+                                            <form:select class="form-control"  path="unitid.id">
                                                 <c:forEach items="${itemUnitList}" var="itemunitid">
                                                     <option value="${itemunitid.id}"><c:out value="${itemunitid.name}" /></option>
                                                 </c:forEach>
@@ -122,12 +123,17 @@
                                             <form:errors path="price" cssClass="error" />
                                         </div>
                                     </div>
-
+                                    <div class="row text-pad-top visible-lg visible-md visible-sm">
+                                        <div class="div-center">
+                                            <input type="submit" class="btn btn-orange"  onclick="return submitDetailsForm();" value="Save" />
+                                            <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
+                                        </div>
+                                    </div>                                   
                                 </div>
                             </form:form>
-                            <form:form action="AddItemUnits.html" method="POST" commandName="itemForm">
+                            <form:form action="AddItem.html" method="POST" commandName="itemForm">
                                 <!--                                <form:errors path="*" cssClass="errorblock" element="div" /> -->
-
+                                <form:hidden path="id" />
                                 <div class="col-sm-8 visible-xs">
 
                                     <div class="form-group">
@@ -139,7 +145,7 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-8 col-xs-12">
-                                            <form:select class="form-control" path="typeid">
+                                            <form:select class="form-control" path="typeid.id">
                                                 <c:forEach items="${itemTypeList}" var="itemtypeid">
                                                     <option value="${itemtypeid.id}"><c:out value="${itemtypeid.name}" /></option>
                                                 </c:forEach>
@@ -156,7 +162,7 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-8 col-xs-12">
-                                            <form:select class="form-control" path="unitid">
+                                            <form:select class="form-control" path="unitid.id">
                                                 <c:forEach items="${itemUnitList}" var="itemunitid">
                                                     <option value="${itemunitid.id}"><c:out value="${itemunitid.name}" /></option>
                                                 </c:forEach>
@@ -169,24 +175,17 @@
                                             <form:errors path="price" cssClass="error" />
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="row text-pad-top visible-xs ">
+                                        <div class="div-center-xs">
+                                            <input type="submit" class="btn btn-orange"  onclick="return submitDetailsForm();" value="Save" />
+                                            <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>                                        
+                               
                             </form:form>
                             <div class="col-sm-2"></div>
-                        </div>
-                        <div class="row text-pad-top visible-lg visible-md visible-sm">
-                            <div class="div-center">
-                                <button type="button" class="btn btn-orange"  onclick="submitDetailsForm();">Save</button>
-                                <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
-                            </div>
-                        </div>
-                        <div class="row text-pad-top visible-xs ">
-                            <div class="div-center-xs">
-                                <button type="button" class="btn btn-orange"  onclick="submitDetailsForm();">Save</button>
-                                <button type="button" class="btn btn-orange" onclick="javascript:history.back();">Cancel</button>
-                            </div>
-                        </div>
-
-
+                        </div>                        
                     </div>
                 </div>
 
