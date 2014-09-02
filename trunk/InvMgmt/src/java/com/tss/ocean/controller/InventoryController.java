@@ -186,6 +186,22 @@ public class InventoryController {
         return new ModelAndView("redirect:/item_category.html");
     }
 
+    @RequestMapping(value = "/DeleteItem.html", method = RequestMethod.POST)
+    public ModelAndView deleteItem(@RequestParam("deleteId") int deleteId, Map<String, Object> model) throws Exception {
+        logger.log(Level.FINE, "Delete item called.");
+        Item itemBean = itemDAO.getRecordByPrimaryKey(deleteId);
+        if (itemBean != null) {
+            int updateResult = itemDAO.delete(itemBean);
+            if (updateResult > 0) {
+                logger.log(Level.INFO, "Item id {0} deleted successfully", itemBean.getId());
+            } else {
+                logger.log(Level.WARNING, "Error occurred while deleting item with id {0}", itemBean.getId());
+            }
+        }
+        logger.log(Level.INFO, "Item with id {0} is already deleted", deleteId);
+        return new ModelAndView("redirect:/item.html");
+    }
+
     @RequestMapping(value = "/DeleteItemUnits.html", method = RequestMethod.POST)
     public ModelAndView deleteItemUnits(@RequestParam("deleteId") int deleteId, Map<String, Object> model) throws Exception {
         logger.log(Level.FINE, "Delete item category units called.");
