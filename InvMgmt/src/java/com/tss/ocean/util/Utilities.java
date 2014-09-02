@@ -6,6 +6,8 @@
 
 package com.tss.ocean.util;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Locale;
 import org.springframework.context.MessageSource;
 
@@ -14,9 +16,13 @@ import org.springframework.context.MessageSource;
  * @author Jenil
  */
 public class Utilities {
-    
+    private static final SecureRandom random = new SecureRandom();
+
     public static String getSpringMessage(MessageSource messageSource,String key,Locale locale) {
         return messageSource.getMessage(key,null, Constants.DEFAULT_MESSSAGE ,locale);
     }
     
+    public static String getRandomString(int length) {
+        return new BigInteger(130, random).toString(length);
+    }
 }
