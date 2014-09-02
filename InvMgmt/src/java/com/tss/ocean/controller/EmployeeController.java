@@ -5,9 +5,11 @@
 package com.tss.ocean.controller;
 
 import com.techshark.hibernate.base.HibernateDAOFactory;
+import com.tss.ocean.idao.IBankDAO;
 import com.tss.ocean.idao.IEmployeeCategoryDAO;
 import com.tss.ocean.idao.IEmployeeDepartmentDAO;
 import com.tss.ocean.idao.IEmployeesDAO;
+import com.tss.ocean.pojo.Bank;
 import com.tss.ocean.pojo.EmployeeCategory;
 import com.tss.ocean.pojo.EmployeeDepartment;
 import com.tss.ocean.pojo.Employees;
@@ -50,6 +52,8 @@ public class EmployeeController {
     private MessageSource messageSource;
     @Autowired
     private IEmployeeDepartmentDAO employeeDepartmentDAO;
+    @Autowired
+    private IBankDAO bankDAO;
 
     public EmployeeController() {
         employeesDAO = new HibernateDAOFactory().getEmployeesDAO();
@@ -386,10 +390,12 @@ public class EmployeeController {
         List<Employees> employeeList = employeesDAO.getList();
         List<EmployeeDepartment> departmentList = employeeDepartmentDAO.getList();
         List<EmployeeCategory> categoryList = employeeCategoryDAO.getList();
+        List<Bank> bankList = bankDAO.getList();
         mav.getModelMap().put("employee", employee);
         mav.getModelMap().put("employeeDepartmentList", departmentList);
         mav.getModelMap().put("employeeCategoryList", categoryList);
         mav.getModelMap().put("employeeList", employeeList);
+        mav.getModelMap().put("bankList", bankList);
         return mav;
     }
 
@@ -399,6 +405,7 @@ public class EmployeeController {
             ModelMap model,
             Locale locale) throws Exception {
         logger.info("add_employee_category-post called.");
+        ModelAndView mav = new ModelAndView("redirect:add_employee.html");
         if (!result.hasErrors()) {
             if (employees.getFileData() != null) {
                 employees.setPhotoData(Hibernate.createBlob(employees.getFileData().getInputStream()));
@@ -407,9 +414,18 @@ public class EmployeeController {
                 employees.setPhotoFileSize(new Long(employees.getFileData().getSize()).intValue());
             }
             int insertResult = employeesDAO.insert(employees);
+            List<Employees> employeeList = employeesDAO.getList();
+            List<EmployeeDepartment> departmentList = employeeDepartmentDAO.getList();
+            List<EmployeeCategory> categoryList = employeeCategoryDAO.getList();
+            List<Bank> bankList = bankDAO.getList();
+            mav.getModelMap().put("employee", employees);
+            mav.getModelMap().put("employeeDepartmentList", departmentList);
+            mav.getModelMap().put("employeeCategoryList", categoryList);
+            mav.getModelMap().put("employeeList", employeeList);
+            mav.getModelMap().put("bankList", bankList);
             if (insertResult > 0) {
                 logger.info("Employee category Added Successfully with id " + insertResult);
-                return new ModelAndView("redirect:add_employee.html")
+                return new ModelAndView("")
                         .addObject("success", Utilities.getSpringMessage(messageSource, "employee.add.success", locale));
             } else {
                 logger.info("Error while inserting " + employees);
@@ -448,7 +464,7 @@ public class EmployeeController {
 
             List<EmployeeCategory> categoryList = employeeCategoryDAO.getList();
             for (EmployeeCategory employeeCategory : categoryList) {
-                departmentMap.put(employeeCategory.getId(), employeeCategory.getCategory());
+                categoryMap.put(employeeCategory.getId(), employeeCategory.getCategory());
             }
             mav.getModelMap().put("categorymap", categoryMap);
         }
@@ -488,7 +504,7 @@ public class EmployeeController {
 
             List<EmployeeCategory> categoryList = employeeCategoryDAO.getList();
             for (EmployeeCategory employeeCategory : categoryList) {
-                departmentMap.put(employeeCategory.getId(), employeeCategory.getCategory());
+                categoryMap.put(employeeCategory.getId(), employeeCategory.getCategory());
             }
             mav.getModelMap().put("categorymap", categoryMap);
             if (updateResult > 0) {
@@ -546,7 +562,7 @@ public class EmployeeController {
 
         List<EmployeeCategory> categoryList = employeeCategoryDAO.getList();
         for (EmployeeCategory employeeCategory : categoryList) {
-            departmentMap.put(employeeCategory.getId(), employeeCategory.getCategory());
+            categoryMap.put(employeeCategory.getId(), employeeCategory.getCategory());
         }
         mav.getModelMap().put("categorymap", categoryMap);
         if (employees != null) {

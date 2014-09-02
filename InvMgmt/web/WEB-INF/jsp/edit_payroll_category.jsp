@@ -65,7 +65,7 @@
                                         <li><a href='employee_category.html'><span><spring:message code="menu.employeecategory" text="Label value is missing !!!"/></span></a></li>
                                         <li class="active"><a href='employee_department.html'><span><spring:message code="menu.employeedepartment" text="Label value is missing !!!"/></span></a></li>
                                         <li class='last'><a href='payroll_category.html'><span><spring:message code="menu.payrollcategory" text="Label value is missing !!!"/></span></a></li>
-
+                                        <li class='last'><a href='bank.html'><span><spring:message code="menu.bank" text="Label value is missing !!!"/></span></a></li>
                                     </ul>
                                 </li>
 
@@ -110,39 +110,39 @@
                                                 <form:errors path="percentage" cssClass="error" />
                                             </div>
                                         </div>
-                                
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.payrollcategory.percentageof" text="Default Text"/></label>
-                                        <div class="col-sm-8 col-xs-12">
-                                            <form:select class="form-control" path="payrollCategoryId">
-                                                <form:option value=""><spring:message code="label.payrollcategory.payrollCategoryId.placeholder" text="Default Text"/></form:option>
-                                                <form:options items="${payrollCategoryList}" itemLabel="name" itemValue="id"/>
-                                            </form:select>
-                                            <form:errors path="payrollCategoryId" cssClass="error" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.payrollcategory.isactive" text="Default Text"/></label>
-                                        <div class="col-sm-8 col-xs-12">
-                                            <div class="form-control">
-                                                <form:radiobutton path="status" value="true" checked="checked"/><spring:message code="label.empcategory.status.active" text="Default Text"/>
-                                                <form:radiobutton path="status" value="false" /><spring:message code="label.empcategory.status.inactive" text="Default Text"/>
-                                            </div>
-                                            <form:errors path="status" cssClass="error" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="" text=""/></label>
-                                        <div class="col-sm-8 col-xs-12">
-                                            <div class="form-control">
-                                                <form:checkbox path="isDeduction"/><spring:message code="label.payrollcategory.isdeduction" text="Default Text"/>
 
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.payrollcategory.percentageof" text="Default Text"/></label>
+                                            <div class="col-sm-8 col-xs-12">
+                                                <form:select class="form-control" path="payrollCategoryId">
+                                                    <form:option value=""><spring:message code="label.payrollcategory.payrollCategoryId.placeholder" text="Default Text"/></form:option>
+                                                    <form:options items="${payrollCategoryList}" itemLabel="name" itemValue="id"/>
+                                                </form:select>
+                                                <form:errors path="payrollCategoryId" cssClass="error" />
                                             </div>
-                                            <form:errors path="status" cssClass="error" />
                                         </div>
-                                    </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.payrollcategory.isactive" text="Default Text"/></label>
+                                            <div class="col-sm-8 col-xs-12">
+                                                <div class="form-control">
+                                                    <form:radiobutton path="status" value="true" checked="checked"/><spring:message code="label.empcategory.status.active" text="Default Text"/>
+                                                    <form:radiobutton path="status" value="false" /><spring:message code="label.empcategory.status.inactive" text="Default Text"/>
+                                                </div>
+                                                <form:errors path="status" cssClass="error" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="" text=""/></label>
+                                            <div class="col-sm-8 col-xs-12">
+                                                <div class="form-control">
+                                                    <form:checkbox path="isDeduction"/><spring:message code="label.payrollcategory.isdeduction" text="Default Text"/>
 
-    </div>
+                                                </div>
+                                                <form:errors path="status" cssClass="error" />
+                                            </div>
+                                        </div>
+
+                                    </div>
 
                                     <div class="col-sm-2"></div>
                                 </div>
