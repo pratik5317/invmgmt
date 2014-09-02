@@ -69,7 +69,8 @@ public class PurrequisitionController {
                                         Locale locale) throws Exception {
         logger.log(Level.FINE,"add-purchase_requisition-post called.");
         if (!result.hasErrors()) {
-            purrequisition.setCreatedby(1);            
+            purrequisition.setCreatedby(1);
+            purrequisition.setPrno(Utilities.getRandomString(10));
             int insertResult = purrequisitionDAO.insert(purrequisition);
             if(insertResult > 0) {
                 logger.log(Level.INFO, "Purrequisition Added Successfully with id={0}", insertResult);

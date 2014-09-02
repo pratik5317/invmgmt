@@ -5,7 +5,6 @@ package com.tss.ocean.pojo;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -15,7 +14,6 @@ public class Purrequisition  implements java.io.Serializable {
 
 
      private Integer id;
-     @NotEmpty
      private String prno;
      @NotNull
      private Integer suplierid;
