@@ -3,6 +3,7 @@ package com.tss.ocean.pojo;
 
 import java.sql.Blob;
 import java.util.Date;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -13,11 +14,15 @@ public class Employees implements java.io.Serializable {
 
     private Integer id;
     private Integer employeeCategoryId;
+    @NotEmpty
     private String employeeNumber;
+    @NotEmpty
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date joiningDate;
+    @NotEmpty
     private String firstName;
     private String middleName;
+    @NotEmpty
     private String lastName;
     private Boolean gender;
     private String jobTitle;
@@ -66,6 +71,13 @@ public class Employees implements java.io.Serializable {
     private Integer photoFileSize;
     private Integer userId;
     private CommonsMultipartFile fileData;
+    private String passportNumber;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date passportExpiryDate;
+    private Long salary;
+    private Integer bankId;
+    private String accountNumber;
+    private String codeNumber;
 
     public Employees() {
     }
@@ -546,6 +558,54 @@ public class Employees implements java.io.Serializable {
 
     public void setFileData(CommonsMultipartFile fileData) {
         this.fileData = fileData;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    public Date getPassportExpiryDate() {
+        return passportExpiryDate;
+    }
+
+    public void setPassportExpiryDate(Date passportExpiryDate) {
+        this.passportExpiryDate = passportExpiryDate;
+    }
+
+    public Long getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Long salary) {
+        this.salary = salary;
+    }
+
+    public Integer getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(Integer bankId) {
+        this.bankId = bankId;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public String getCodeNumber() {
+        return codeNumber;
+    }
+
+    public void setCodeNumber(String codeNumber) {
+        this.codeNumber = codeNumber;
     }
 
 }

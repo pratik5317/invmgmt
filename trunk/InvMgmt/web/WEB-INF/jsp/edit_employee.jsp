@@ -49,28 +49,28 @@
                         <!--<div class="cat-table-title"></div>-->
                         <!-- MUNU -->    
                         <div id='cssmenu'>
-                           <ul>
-                                        <li class='has-sub active'><a href='employee.html'><span><spring:message code="menu.employeemanagement" text="Label value is missing !!!"/></span></a>
-                                        <li class=''><a href='payslips.html'><span><spring:message code="menu.payslips" text="Label value is missing !!!"/></span></a></li>
-                                        <li class='last'><a href='#'><span><spring:message code="menu.employeeleavemanagement" text="Label value is missing !!!"/></span></a>
-                                            <ul style='display: block;'>
-                                                <li><a href='leave_types.html'><span><spring:message code="menu.addleavetype" text="Label value is missing !!!"/></span></a></li>
-                                                <li class="active"><a href='hr_attendence.html'><span><spring:message code="menu.attendanceregister" text="Label value is missing !!!"/></span></a></li>
-                                                <li class='last'><a href='hr_attendence_report.html'><span><spring:message code="menu.attendancereport" text="Label value is missing !!!"/></span></a></li>
-                                                <li class='last'><a href='hr_resetleaves.html'><span><spring:message code="menu.resetleave" text="Label value is missing !!!"/></span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li class=''><a href='#'><span><spring:message code="menu.settings" text="Label value is missing !!!"/></span></a>
-                                            <ul style='display: block;'>
-                                                <li><a href='employee_category.html'><span><spring:message code="menu.employeecategory" text="Label value is missing !!!"/></span></a></li>
-                                                <li class="active"><a href='employee_department.html'><span><spring:message code="menu.employeedepartment" text="Label value is missing !!!"/></span></a></li>
-                                                <li class='last'><a href='payroll_category.html'><span><spring:message code="menu.payrollcategory" text="Label value is missing !!!"/></span></a></li>
-
-                                            </ul>
-                                        </li>
-
-
+                            <ul>
+                                <li class='has-sub active'><a href='employee.html'><span><spring:message code="menu.employeemanagement" text="Label value is missing !!!"/></span></a>
+                                <li class=''><a href='payslips.html'><span><spring:message code="menu.payslips" text="Label value is missing !!!"/></span></a></li>
+                                <li class='last'><a href='#'><span><spring:message code="menu.employeeleavemanagement" text="Label value is missing !!!"/></span></a>
+                                    <ul style='display: block;'>
+                                        <li><a href='leave_types.html'><span><spring:message code="menu.addleavetype" text="Label value is missing !!!"/></span></a></li>
+                                        <li class="active"><a href='hr_attendence.html'><span><spring:message code="menu.attendanceregister" text="Label value is missing !!!"/></span></a></li>
+                                        <li class='last'><a href='hr_attendence_report.html'><span><spring:message code="menu.attendancereport" text="Label value is missing !!!"/></span></a></li>
+                                        <li class='last'><a href='hr_resetleaves.html'><span><spring:message code="menu.resetleave" text="Label value is missing !!!"/></span></a></li>
                                     </ul>
+                                </li>
+                                <li class=''><a href='#'><span><spring:message code="menu.settings" text="Label value is missing !!!"/></span></a>
+                                    <ul style='display: block;'>
+                                        <li><a href='employee_category.html'><span><spring:message code="menu.employeecategory" text="Label value is missing !!!"/></span></a></li>
+                                        <li class="active"><a href='employee_department.html'><span><spring:message code="menu.employeedepartment" text="Label value is missing !!!"/></span></a></li>
+                                        <li class='last'><a href='payroll_category.html'><span><spring:message code="menu.payrollcategory" text="Label value is missing !!!"/></span></a></li>
+                                        <li class='last'><a href='bank.html'><span><spring:message code="menu.bank" text="Label value is missing !!!"/></span></a></li>
+                                    </ul>
+                                </li>
+
+
+                            </ul>
                         </div>
                         <!-- END MUNU -->    
 
@@ -113,7 +113,12 @@
                 <spring:message code="label.employee.homephone.placeholder" var="homephoneplaceholder" text="Default Text" />
                 <spring:message code="label.employee.email.placeholder" var="emailplaceholder" text="Default Text" />
                 <spring:message code="label.employee.fax.placeholder" var="faxplaceholder" text="Default Text" />              
-
+                <spring:message code="label.employee.passportno.placeholder" var="passportnoplaceholder" text="Default Text" />
+                <spring:message code="label.employee.passportexpiry.placeholder" var="passportexoirydateplaceholder" text="Default Text" />
+                <spring:message code="label.employee.salary.placeholder" var="salaryplaceholder" text="Default Text" />
+                <spring:message code="label.employee.accountnumber.placeholder" var="accountnumberplaceholder" text="Default Text" />
+                <spring:message code="label.employee.bank.placeholder" var="bankplaceholder" text="Default Text" />
+                <spring:message code="label.employee.codeno.placeholder" var="codenoplaceholder" text="Default Text" />
                 <div class="col-md-9">
                     <div class="catagory-main-box top-radius">
                         <div class="cat-box-title cat-title-font top-radius"><spring:message code="label.updateemployee" text="Default Text"/></div>
@@ -131,7 +136,7 @@
                                             <div class="row text-pad-top visible-lg visible-md visible-sm"><div class="successblock">${success}</div></div>
                                             </c:if>
 
-                                          <div class="form-group">
+                                        <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.number" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">                                            
                                                 <form:input type="text" class="form-control" path="employeeNumber" placeholder="${employeenumberplaceholder}" />
@@ -419,6 +424,52 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.passportno" text="Default Text"/></label>
+                                            <div class="col-sm-8 col-xs-12">                                            
+                                                <form:input type="text" class="form-control" path="passportNumber" placeholder="${passportnoplaceholder}" />
+                                                <form:errors path="passportNumber" cssClass="error" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.employee.passportexpiry" text="Default Text"/></label>
+                                            <div class="col-sm-8 col-xs-12">                                            
+                                                <form:input type="date" class="form-control" path="passportExpiryDate" placeholder="${passportexoirydateplaceholder}" />
+                                                <form:errors path="passportExpiryDate" cssClass="error" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.salary" text="Default Text"/></label>
+                                            <div class="col-sm-8 col-xs-12">                                            
+                                                <form:input type="text" class="form-control" path="salary" placeholder="${salaryplaceholder}" />
+                                                <form:errors path="salary" cssClass="error" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.bank" text="Default Text"/></label>
+                                            <div class="col-sm-8 col-xs-12">
+                                                <form:select class="form-control" path="bankId">
+                                                    <form:option value=""><spring:message code="label.employee.bank.placeholder" text="Default Text"/></form:option>
+                                                    <form:options items="${bankList}" itemLabel="name" itemValue="id"/>
+                                                </form:select>
+                                                <form:errors path="bankId" cssClass="error" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.accountnumber" text="Default Text"/></label>
+                                            <div class="col-sm-8 col-xs-12">                                            
+                                                <form:input type="text" class="form-control" path="accountNumber" placeholder="${accountnumberplaceholder}" />
+                                                <form:errors path="accountNumber" cssClass="error" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.codeno" text="Default Text"/></label>
+                                            <div class="col-sm-8 col-xs-12">                                            
+                                                <form:input type="text" class="form-control" path="codeNumber" placeholder="${codenoplaceholder}" />
+                                                <form:errors path="codeNumber" cssClass="error" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.uploadimage" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">                                            
                                                 <form:input path="fileData" type="file"/>
@@ -437,7 +488,7 @@
                                 </form:form>
                             </div>
                         </div>
-                            
+
                     </div>
                 </div>
 
@@ -445,18 +496,18 @@
                 <div class=""></div>
 
             </div>
-            </div>
-            <!-- /container -->
+        </div>
+        <!-- /container -->
 
 
-            <!-- Bootstrap core JavaScript
-            ================================================== -->
-            <!-- Placed at the end of the document so the pages load faster -->
-            <script src="js/bootstrap.min.js"></script>
-            <!-- Jquery UI Javascript -->
-            <script src="js/jquery-ui.js"></script>
-            <script type="text/javascript">
-                $('input[type=date]').datepicker({dateFormat: 'dd/mm/yy'});
-            </script>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Jquery UI Javascript -->
+        <script src="js/jquery-ui.js"></script>
+        <script type="text/javascript">
+                                            $('input[type=date]').datepicker({dateFormat: 'dd/mm/yy'});
+        </script>
     </body>
 </html>

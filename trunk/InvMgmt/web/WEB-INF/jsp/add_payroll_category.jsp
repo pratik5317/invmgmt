@@ -42,35 +42,35 @@
                             <img src="img/i-mgmt.png">
                         </div>
                         <div class="page-title-text"><spring:message code="label.add.payrollcategory" text="Default Text"/></div>
-                    </div>
-                </div>	
-                <div class="row">
+                </div>
+            </div>	
+            <div class="row">
                 <div class="col-md-3">
                     <div class="catagory-main-box top-radius">
                         <!--<div class="cat-table-title"></div>-->
                         <!-- MUNU -->    
                         <div id='cssmenu'>
-                             <ul>
-                                        <li class='has-sub active'><a href='employee.html'><span><spring:message code="menu.employeemanagement" text="Label value is missing !!!"/></span></a>
-                                        <li class=''><a href='payslips.html'><span><spring:message code="menu.payslips" text="Label value is missing !!!"/></span></a></li>
-                                        <li class='last'><a href='#'><span><spring:message code="menu.employeeleavemanagement" text="Label value is missing !!!"/></span></a>
-                                            <ul style='display: block;'>
-                                                <li><a href='leave_types.html'><span><spring:message code="menu.addleavetype" text="Label value is missing !!!"/></span></a></li>
-                                                <li class="active"><a href='hr_attendence.html'><span><spring:message code="menu.attendanceregister" text="Label value is missing !!!"/></span></a></li>
-                                                <li class='last'><a href='hr_attendence_report.html'><span><spring:message code="menu.attendancereport" text="Label value is missing !!!"/></span></a></li>
-                                                <li class='last'><a href='hr_resetleaves.html'><span><spring:message code="menu.resetleave" text="Label value is missing !!!"/></span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li class=''><a href='#'><span><spring:message code="menu.settings" text="Label value is missing !!!"/></span></a>
-                                            <ul style='display: block;'>
-                                                <li><a href='employee_category.html'><span><spring:message code="menu.employeecategory" text="Label value is missing !!!"/></span></a></li>
-                                                <li class="active"><a href='employee_department.html'><span><spring:message code="menu.employeedepartment" text="Label value is missing !!!"/></span></a></li>
-                                                <li class='last'><a href='payroll_category.html'><span><spring:message code="menu.payrollcategory" text="Label value is missing !!!"/></span></a></li>
-
-                                            </ul>
-                                        </li>
-
+                            <ul>
+                                <li class='has-sub active'><a href='employee.html'><span><spring:message code="menu.employeemanagement" text="Label value is missing !!!"/></span></a>
+                                <li class=''><a href='payslips.html'><span><spring:message code="menu.payslips" text="Label value is missing !!!"/></span></a></li>
+                                <li class='last'><a href='#'><span><spring:message code="menu.employeeleavemanagement" text="Label value is missing !!!"/></span></a>
+                                    <ul style='display: block;'>
+                                        <li><a href='leave_types.html'><span><spring:message code="menu.addleavetype" text="Label value is missing !!!"/></span></a></li>
+                                        <li class="active"><a href='hr_attendence.html'><span><spring:message code="menu.attendanceregister" text="Label value is missing !!!"/></span></a></li>
+                                        <li class='last'><a href='hr_attendence_report.html'><span><spring:message code="menu.attendancereport" text="Label value is missing !!!"/></span></a></li>
+                                        <li class='last'><a href='hr_resetleaves.html'><span><spring:message code="menu.resetleave" text="Label value is missing !!!"/></span></a></li>
                                     </ul>
+                                </li>
+                                <li class=''><a href='#'><span><spring:message code="menu.settings" text="Label value is missing !!!"/></span></a>
+                                    <ul style='display: block;'>
+                                        <li><a href='employee_category.html'><span><spring:message code="menu.employeecategory" text="Label value is missing !!!"/></span></a></li>
+                                        <li class="active"><a href='employee_department.html'><span><spring:message code="menu.employeedepartment" text="Label value is missing !!!"/></span></a></li>
+                                        <li class='last'><a href='payroll_category.html'><span><spring:message code="menu.payrollcategory" text="Label value is missing !!!"/></span></a></li>
+                                        <li class='last'><a href='bank.html'><span><spring:message code="menu.bank" text="Label value is missing !!!"/></span></a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
                         </div>
                         <!-- END MUNU -->    
                     </div>
@@ -87,11 +87,11 @@
                                     <div class="col-sm-8">
                                         <c:if test="${not empty error}">  
                                             <div class="row text-pad-top visible-lg visible-md visible-sm"><div class="errorblock">${error}</div></div>
-                                        </c:if>
-                                        <c:if test="${not empty success}">  
+                                            </c:if>
+                                            <c:if test="${not empty success}">  
                                             <div class="row text-pad-top visible-lg visible-md visible-sm"><div class="successblock">${success}</div></div>
-                                        </c:if>
-                                        
+                                            </c:if>
+
                                         <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.payrollcategory.category" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">                                            
@@ -106,7 +106,7 @@
                                                 <form:errors path="percentage" cssClass="error" />
                                             </div>
                                         </div>
-                                            <div class="form-group">
+                                        <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.payrollcategory.percentageof" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">
                                                 <form:select class="form-control" path="payrollCategoryId">
@@ -116,7 +116,7 @@
                                                 <form:errors path="payrollCategoryId" cssClass="error" />
                                             </div>
                                         </div>
-                                             <div class="form-group">
+                                        <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.payrollcategory.isactive" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">
                                                 <div class="form-control">
@@ -126,16 +126,16 @@
                                                 <form:errors path="status" cssClass="error" />
                                             </div>
                                         </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="" text=""/></label>
-                                                    <div class="col-sm-8 col-xs-12">
-                                                        <div class="form-control">
-                                                            <form:checkbox path="isDeduction"/><spring:message code="label.payrollcategory.isdeduction" text="Default Text"/>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="" text=""/></label>
+                                            <div class="col-sm-8 col-xs-12">
+                                                <div class="form-control">
+                                                    <form:checkbox path="isDeduction"/><spring:message code="label.payrollcategory.isdeduction" text="Default Text"/>
 
-                                                        </div>
-                                                        <form:errors path="status" cssClass="error" />
-                                                    </div>
                                                 </div>
+                                                <form:errors path="status" cssClass="error" />
+                                            </div>
+                                        </div>
 
                                         <div class="col-sm-2"></div>
                                     </div>
@@ -146,9 +146,9 @@
                                 </form:form>
                             </div>
                         </div>
-<!--                        <div class="row text-pad-top visible-xs">
-                           
-                        </div>-->
+                        <!--                        <div class="row text-pad-top visible-xs">
+                                                   
+                                                </div>-->
                     </div>
                 </div>
 
@@ -157,18 +157,18 @@
 
 
             </div>
-            </div>
-            <!-- /container -->
+        </div>
+        <!-- /container -->
 
 
-                <!-- Bootstrap core JavaScript
-                ================================================== -->
-                <!-- Placed at the end of the document so the pages load faster -->
-                <script src="js/bootstrap.min.js"></script>
-                <!-- Jquery UI Javascript -->
-                <script src="js/jquery-ui.js"></script>
-                <script type="text/javascript">
-                    $('input[type=date]').datepicker({dateFormat: 'dd/mm/yy'});
-                </script>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Jquery UI Javascript -->
+        <script src="js/jquery-ui.js"></script>
+        <script type="text/javascript">
+                                    $('input[type=date]').datepicker({dateFormat: 'dd/mm/yy'});
+        </script>
     </body>
 </html>

@@ -161,5 +161,24 @@
         <property name="userId" type="java.lang.Integer">
             <column name="user_id" />
         </property>
+        <property name="passportNumber" type="string">
+            <column name="passport_number" />
+        </property>
+        <property name="passportExpiryDate" type="timestamp">
+            <column name="passport_expiry_date" />
+        </property>
+        <property name="salary" type="java.lang.Long">
+            <column name="salary" />
+        </property>
+        <property name="bankId" type="java.lang.Integer">
+            <column name="bank_id" />
+        </property>
+        <property name="accountNumber" type="string">
+            <column name="account_number" />
+        </property>
+        <property name="codeNumber" type="string">
+            <column name="code_number" />
+        </property>
+
     </class>
 </hibernate-mapping>
