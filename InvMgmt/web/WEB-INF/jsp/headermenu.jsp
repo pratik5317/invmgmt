@@ -39,7 +39,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="inventory_management.html"><spring:message code="menu.invmgmt"/></a></li>
+                <li><a href="item.html"><spring:message code="menu.invmgmt"/></a></li>
                 <li><a href="hr_management.html"><spring:message code="menu.hr"/></a></li>
                 <li><a href="#contact"><spring:message code="menu.reports"/></a></li>
                 <li><a href="#contact"><spring:message code="menu.setting"/></a></li>

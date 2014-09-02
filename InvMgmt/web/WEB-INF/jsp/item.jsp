@@ -6,77 +6,91 @@
     <head>
         <%--<%@include file="header.jsp" %>--%>
         <jsp:include page="header.jsp"></jsp:include>
+
+            <script type="text/javascript">
+                function submitDelete(value) {
+                    $('#deleteId').val(value);
+                    $('#deleteForm').submit();
+                }
+            </script>
+
+
         </head>
 
         <body role="document">
 
         <jsp:include page="headermenu.jsp"></jsp:include>
+            <form action="DeleteItem.html" method="POST" id="deleteForm" name="deleteForm">
+                <input type="hidden" id="deleteId" name="deleteId">
+            </form>
 
 
-        <div class="container">
-            <div class="row container">
-                <div class="dashboard_main">
-                    <div class="desh-icon-bg">
-                        <img src="img/i-mgmt.png">
-                    </div>
-                    <div class="page-title-text">Item</div>
-                </div>
-            </div>	
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="catagory-main-box top-radius">
-
-                        <!--<div class="cat-table-title"></div>-->
-                        <!-- MUNU -->    
-                        <div id='cssmenu'>
-                            <ul>
-
-                                <li class='has-sub active'><a href='#'><span>ITEMS</span></a>
-                                    <ul style='display: block;'>
-                                        <li class="active"><a href='item.html'><span>Items</span></a></li>
-                                        <li><a href='item_category.html'><span>Item Category</span></a></li>
-                                        <li class='last'><a href='item_unit.html'><span>Item Units</span></a></li>
-                                    </ul>
-                                </li>
-                                <li class=''><a href='purchase_order.html'><span>Purchase Order</span></a></li>
-                                <li class='last'><a href='purchase_requisition.html'><span>Purchase Requisition</span></a></li>
-                            </ul>
+            <div class="container">
+                <div class="row container">
+                    <div class="dashboard_main">
+                        <div class="desh-icon-bg">
+                            <img src="img/i-mgmt.png">
                         </div>
-                        <!-- END MUNU -->    
-
+                        <div class="page-title-text">Item</div>
                     </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="catagory-main-box top-radius">
-                        <div class="cat-box-title cat-title-font top-radius">Items List</div>
+                </div>	
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="catagory-main-box top-radius">
 
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="demo">
-                                <div class="row tb-margin">
-                                    <div class="col-sm-4">
-                                        <a href="add-item.html" class="btn btn-info add-row addrow-btn-left">Add Item</a>
+                            <!--<div class="cat-table-title"></div>-->
+                            <!-- MUNU -->    
+                            <div id='cssmenu'>
+                                <ul>
+
+                                    <li class='has-sub active'><a href='#'><span>ITEMS</span></a>
+                                        <ul style='display: block;'>
+                                            <li class="active"><a href='item.html'><span>Items</span></a></li>
+                                            <li><a href='item_category.html'><span>Item Category</span></a></li>
+                                            <li class='last'><a href='item_unit.html'><span>Item Units</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class=''><a href='purchase_order.html'><span>Purchase Order</span></a></li>
+                                    <li class='last'><a href='purchase_requisition.html'><span>Purchase Requisition</span></a></li>
+                                </ul>
+                            </div>
+                            <!-- END MUNU -->    
+
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="catagory-main-box top-radius">
+                            <div class="cat-box-title cat-title-font top-radius">Items List</div>
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="demo">
+                                    <div class="row tb-margin">
+                                        <div class="col-sm-4">
+                                            <a href="add-item.html" class="btn btn-info add-row addrow-btn-left">Add Item</a>
+                                        </div>
+
                                     </div>
-                                    
-                                </div>
-                                <table id="dttable" class="table table-bordered table-striped" data-filter="#filter" data-page-size="5">
-                                    <thead class="orange-bg border-t">
-                                        <tr>
-                                            <th data-toggle="true">
-                                                Name 
+                                    <table id="dttable" class="table table-bordered table-striped" data-filter="#filter" data-page-size="5">
+                                        <thead class="orange-bg border-t">
+                                            <tr>
+                                                <th data-toggle="true">
+                                                    Name 
+                                                </th>
+                                                <th data-hide="phone">
+                                                    Type 
+                                                </th>
+                                                <th data-hide="phone">
+                                                    Currstock
+                                                </th>
+                                                <th data-hide="phone">
+                                                    Unitid 
+                                                </th>
+                                                <th data-hide="phone">
+                                                    Price
+                                                </th>
+                                                <th data-hide="phone">
+                                                <spring:message code="itemCategory.Action" text="Label value is missing !!!"/>
                                             </th>
-                                            <th data-hide="phone">
-                                                Type 
-                                            </th>
-                                            <th data-hide="phone">
-                                                Currstock
-                                            </th>
-                                            <th data-hide="phone">
-                                                Unitid 
-                                            </th>
-                                            <th data-hide="phone">
-                                                Price
-                                            </th>
-                                            <th data-sort-ignore="true" data-hide="phone" data-name="Delete"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -87,7 +101,10 @@
                                                 <td><c:out value="${listVar.currstock}"/></td>
                                                 <td data-value="78025368997"><c:out value="${listVar.unitid.name}"/></td>
                                                 <td data-value="1"><span class="status-metro status-active" title="Active"><c:out value="${listVar.price}"/></span></td>
-                                                <td><a class="row-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
+                                                <td data-value="78025368997" style="text-align:center;">
+                                                    <button onclick="submitDelete(<c:out value="${listVar.id}"/>);" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                                                </td>
+
                                             </tr>
                                         </c:forEach>
                                     </tbody>
