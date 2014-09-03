@@ -2,6 +2,7 @@ package com.tss.ocean.pojo;
 // Generated 4 Aug, 2014 6:30:10 PM by Hibernate Tools 3.2.1.GA
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -26,6 +27,60 @@ public class Item implements java.io.Serializable {
     @Min(value = 0, message = "The minimum stock should be 0")
     private int currstock;
     private Itemunit unitid;
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + Objects.hashCode(this.id);
+        hash = 89 * hash + Objects.hashCode(this.name);
+        hash = 89 * hash + Objects.hashCode(this.alias);
+        hash = 89 * hash + this.categoryid;
+        hash = 89 * hash + Objects.hashCode(this.typeid);
+        hash = 89 * hash + Objects.hashCode(this.price);
+        hash = 89 * hash + this.taxid;
+        hash = 89 * hash + this.currstock;
+        hash = 89 * hash + Objects.hashCode(this.unitid);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Item other = (Item) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.alias, other.alias)) {
+            return false;
+        }
+        if (this.categoryid != other.categoryid) {
+            return false;
+        }
+        if (!Objects.equals(this.typeid, other.typeid)) {
+            return false;
+        }
+        if (!Objects.equals(this.price, other.price)) {
+            return false;
+        }
+        if (this.taxid != other.taxid) {
+            return false;
+        }
+        if (this.currstock != other.currstock) {
+            return false;
+        }
+        if (!Objects.equals(this.unitid, other.unitid)) {
+            return false;
+        }
+        return true;
+    }
 
     public Item() {
     }

@@ -650,6 +650,12 @@ CREATE TABLE `usertype` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='User type of the system';
 
+
+CREATE TABLE purreq_item (
+   purrequisition_id int(10) unsigned NOT NULL,
+   item_id int(10) unsigned NOT NULL,
+   PRIMARY KEY (purrequisition_id,item_id)
+);
 --
 -- Dumping data for table `usertype`
 --

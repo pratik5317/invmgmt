@@ -27,10 +27,10 @@
             <column name="currstock" not-null="true" />
         </property>
         
-        <many-to-one name="unitid" class="com.tss.ocean.pojo.Itemunit" fetch="select">
+        <many-to-one name="unitid" class="com.tss.ocean.pojo.Itemunit" fetch="select" lazy="false">
             <column name="unitid" not-null="true" />
         </many-to-one>
-        <many-to-one name="typeid" class="com.tss.ocean.pojo.Itemtype" fetch="select">
+        <many-to-one name="typeid" class="com.tss.ocean.pojo.Itemtype" fetch="select" lazy="false">
             <column name="typeid" not-null="true" />
         </many-to-one>
         
