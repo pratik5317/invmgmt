@@ -38,5 +38,9 @@
         <property name="updatedby" type="java.lang.Integer">
             <column name="updatedby" />
         </property>
+        <set name="items" cascade="none" table="purreq_item" lazy="false">
+            <key column="purrequisition_id" />
+            <many-to-many column="item_id" class="com.tss.ocean.pojo.Item" lazy="false" />
+        </set>
     </class>
 </hibernate-mapping>

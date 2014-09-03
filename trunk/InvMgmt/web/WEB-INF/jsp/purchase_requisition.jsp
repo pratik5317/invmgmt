@@ -143,6 +143,13 @@
                                             <form:errors path="createdat" cssClass="error" />
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.purrequisition.item" text="Default Text"/></label>
+                                        <div class="col-sm-8 col-xs-12">                                            
+                                            <form:select class="form-control" path="items" multiple="true" items="${itemList}" itemLabel="name" itemValue="id" />
+                                            <form:errors path="items" cssClass="error" />
+                                        </div>
+                                    </div>
                                     <div class="col-sm-2"></div>
                                 </div>
                                 <div class="div-center">
