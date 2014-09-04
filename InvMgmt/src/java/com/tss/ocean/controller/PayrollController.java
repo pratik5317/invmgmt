@@ -5,11 +5,15 @@
  */
 package com.tss.ocean.controller;
 
+import com.tss.ocean.idao.IEmployeesDAO;
+import com.tss.ocean.idao.IMonthlyPayslipsDAO;
 import com.tss.ocean.idao.IPayrollCategoriesDAO;
-import com.tss.ocean.pojo.EmployeeCategory;
-import com.tss.ocean.pojo.EmployeeDepartment;
+import com.tss.ocean.pojo.Employees;
+import com.tss.ocean.pojo.MonthlyPayslips;
 import com.tss.ocean.pojo.PayrollCategories;
+import com.tss.ocean.pojo.PayslipContainer;
 import com.tss.ocean.util.Utilities;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -39,6 +43,10 @@ public class PayrollController {
 
     @Autowired
     IPayrollCategoriesDAO payrollCategoriesDAO;
+    @Autowired
+    IMonthlyPayslipsDAO monthlyPayslipsDAO;
+    @Autowired
+    IEmployeesDAO employeesDAO;
 
     @Autowired
     private MessageSource messageSource;
@@ -78,8 +86,8 @@ public class PayrollController {
         if (error != null) {
             mav.getModelMap().put("error", error);
         }
-         List<PayrollCategories> payrollcategoryList = payrollCategoriesDAO.getList();
-         mav.getModelMap().put("payrollCategoryList", payrollcategoryList);
+        List<PayrollCategories> payrollcategoryList = payrollCategoriesDAO.getList();
+        mav.getModelMap().put("payrollCategoryList", payrollcategoryList);
         mav.getModelMap().put("payrollcategory", payrollCategories);
         return mav;
     }
@@ -177,11 +185,11 @@ public class PayrollController {
         ModelAndView mav = new ModelAndView("redirect:payroll_category.html");
         List<PayrollCategories> payrollcategoryList = payrollCategoriesDAO.getList();
         HashMap<Integer, String> payrollCategorymap = new HashMap<>(payrollcategoryList.size());
-                for (PayrollCategories payrollCategories1 : payrollcategoryList) {
-                    payrollCategorymap.put(payrollCategories1.getId(), payrollCategories1.getName());
-                }
-                mav.getModelMap().put("payrollCategoryList", payrollcategoryList);
-                mav.getModelMap().put("payrollCategorymap", payrollCategorymap);
+        for (PayrollCategories payrollCategories1 : payrollcategoryList) {
+            payrollCategorymap.put(payrollCategories1.getId(), payrollCategories1.getName());
+        }
+        mav.getModelMap().put("payrollCategoryList", payrollcategoryList);
+        mav.getModelMap().put("payrollCategorymap", payrollCategorymap);
         if (payrollCategories != null) {
             int updateResult = payrollCategoriesDAO.delete(payrollCategories);
 
@@ -199,5 +207,78 @@ public class PayrollController {
         LOGGER.info("Payroll Department with id {0} is already deleted", payrollCategories.getId());
         return mav
                 .addObject("success", Utilities.getSpringMessage(messageSource, "payrollcategory.delete.error", locale));
+    }
+
+    @RequestMapping(value = "/payslips.html", method = RequestMethod.GET)
+    public ModelAndView payslip(@RequestParam(value = "success", required = false) String success,
+            @RequestParam(value = "error", required = false) String error,
+            Locale locale) throws Exception {
+        LOGGER.info("payslips called.");
+        PayslipContainer payslipContainer = new PayslipContainer();
+
+        ModelAndView mav = new ModelAndView("payslips");
+        List<MonthlyPayslips> monthlyPayslips = new ArrayList<>();
+        payslipContainer.setMonthlyPayslipList(monthlyPayslips);
+        List<Employees> employeeList = employeesDAO.getList();
+        List<PayrollCategories> payrollCategoryList = payrollCategoriesDAO.getList();
+        mav.getModelMap().put("employeeList", employeeList);
+        mav.getModelMap().put("payslipContainer", payslipContainer);
+        mav.getModelMap().put("payrollcategoryList", payrollCategoryList);
+        if (success != null) {
+            mav.getModelMap().put("success", success);
+        }
+        if (error != null) {
+            mav.getModelMap().put("error", error);
+        }
+        return mav;
+    }
+
+    @RequestMapping(value = "/create_payslip.html", method = RequestMethod.POST)
+    public ModelAndView createPayslip(@ModelAttribute("payslipContainer") @Valid PayslipContainer payslipContainer,
+            BindingResult result,
+            ModelMap model,
+            Locale locale) throws Exception {
+        LOGGER.info("create_payslip post called." + payslipContainer.getMonthlyPayslipList());
+
+        ModelAndView mav = new ModelAndView("payslips");
+        List<MonthlyPayslips> monthlyPayslips = new ArrayList<>();
+        PayslipContainer payslipContainer1 = new PayslipContainer();
+        payslipContainer1.setMonthlyPayslipList(monthlyPayslips);
+        List<Employees> employeeList = employeesDAO.getList();
+        List<PayrollCategories> payrollCategoryList = payrollCategoriesDAO.getList();
+        mav.getModelMap().put("employeeList", employeeList);
+        mav.getModelMap().put("payslipContainer", payslipContainer1);
+        mav.getModelMap().put("payrollcategoryList", payrollCategoryList);
+        if (!result.hasErrors()) {
+            int insertResult = 0;
+            System.out.println("hi...................  ");
+            List<MonthlyPayslips> monthlyPayslipList = payslipContainer.getMonthlyPayslipList();
+            System.out.println("hi...................  " + payslipContainer.getMonthlyPayslipList());
+            if (payslipContainer.getMonthlyPayslipList() != null && !payslipContainer.getMonthlyPayslipList().isEmpty()) {
+                System.out.println("hi...................  ");
+                for (MonthlyPayslips monthlyPayslips1 : payslipContainer.getMonthlyPayslipList()) {
+                    System.out.println("hi...................  " + monthlyPayslips1);
+                    monthlyPayslips1.setEmployeeId(payslipContainer.getEmployeeId());
+                    monthlyPayslips1.setSalaryDate(payslipContainer.getSalaryDate());
+                    monthlyPayslips1.setIsApproved(false);
+                    monthlyPayslips1.setIsRejected(false);
+                    insertResult = monthlyPayslipsDAO.insert(monthlyPayslips1);
+                    System.out.println("vdvjchvhvj   " + insertResult);
+
+                }
+            }
+
+            if (insertResult > 0) {
+                LOGGER.info("Payroll category Added Successfully with id " + insertResult);
+                return mav
+                        .addObject("success", Utilities.getSpringMessage(messageSource, "payslip.add.success", locale));
+            } else {
+                LOGGER.info("Error while inserting ");
+                return mav
+                        .addObject("error", Utilities.getSpringMessage(messageSource, "payslip.add.error", locale));
+            }
+        } else {
+            return new ModelAndView("payslips", model);
+        }
     }
 }

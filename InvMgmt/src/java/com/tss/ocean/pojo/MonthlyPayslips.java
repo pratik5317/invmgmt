@@ -121,6 +121,11 @@ public class MonthlyPayslips  implements java.io.Serializable {
         this.remark = remark;
     }
 
+    @Override
+    public String toString() {
+        return "MonthlyPayslips{" + "id=" + id + ", salaryDate=" + salaryDate + ", employeeId=" + employeeId + ", payrollCategoryId=" + payrollCategoryId + ", amount=" + amount + ", isApproved=" + isApproved + ", approverId=" + approverId + ", isRejected=" + isRejected + ", rejectorId=" + rejectorId + ", reason=" + reason + ", remark=" + remark + '}';
+    }
+
 
 
 
