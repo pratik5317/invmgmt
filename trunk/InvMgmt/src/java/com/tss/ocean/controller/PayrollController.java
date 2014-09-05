@@ -14,6 +14,8 @@ import com.tss.ocean.pojo.PayrollCategories;
 import com.tss.ocean.pojo.PayslipContainer;
 import com.tss.ocean.util.Utilities;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -215,7 +217,6 @@ public class PayrollController {
             Locale locale) throws Exception {
         LOGGER.info("payslips called.");
         PayslipContainer payslipContainer = new PayslipContainer();
-
         ModelAndView mav = new ModelAndView("payslips");
         List<MonthlyPayslips> monthlyPayslips = new ArrayList<>();
         payslipContainer.setMonthlyPayslipList(monthlyPayslips);
@@ -239,46 +240,70 @@ public class PayrollController {
             ModelMap model,
             Locale locale) throws Exception {
         LOGGER.info("create_payslip post called." + payslipContainer.getMonthlyPayslipList());
-
         ModelAndView mav = new ModelAndView("payslips");
+
         List<MonthlyPayslips> monthlyPayslips = new ArrayList<>();
-        PayslipContainer payslipContainer1 = new PayslipContainer();
-        payslipContainer1.setMonthlyPayslipList(monthlyPayslips);
+        PayslipContainer payslipContainerNew = new PayslipContainer();
+        payslipContainerNew.setMonthlyPayslipList(monthlyPayslips);
         List<Employees> employeeList = employeesDAO.getList();
         List<PayrollCategories> payrollCategoryList = payrollCategoriesDAO.getList();
         mav.getModelMap().put("employeeList", employeeList);
-        mav.getModelMap().put("payslipContainer", payslipContainer1);
+        mav.getModelMap().put("payslipContainer", payslipContainerNew);
         mav.getModelMap().put("payrollcategoryList", payrollCategoryList);
         if (!result.hasErrors()) {
-            int insertResult = 0;
-            System.out.println("hi...................  ");
-            List<MonthlyPayslips> monthlyPayslipList = payslipContainer.getMonthlyPayslipList();
-            System.out.println("hi...................  " + payslipContainer.getMonthlyPayslipList());
-            if (payslipContainer.getMonthlyPayslipList() != null && !payslipContainer.getMonthlyPayslipList().isEmpty()) {
-                System.out.println("hi...................  ");
-                for (MonthlyPayslips monthlyPayslips1 : payslipContainer.getMonthlyPayslipList()) {
-                    System.out.println("hi...................  " + monthlyPayslips1);
-                    monthlyPayslips1.setEmployeeId(payslipContainer.getEmployeeId());
-                    monthlyPayslips1.setSalaryDate(payslipContainer.getSalaryDate());
-                    monthlyPayslips1.setIsApproved(false);
-                    monthlyPayslips1.setIsRejected(false);
-                    insertResult = monthlyPayslipsDAO.insert(monthlyPayslips1);
-                    System.out.println("vdvjchvhvj   " + insertResult);
 
+            if (!isPayslipCreated(payslipContainer.getEmployeeId(), payslipContainer.getSalaryDate())) {
+                int insertResult = 0;
+                List<MonthlyPayslips> monthlyPayslipList = payslipContainer.getMonthlyPayslipList();
+                if (monthlyPayslipList != null && !monthlyPayslipList.isEmpty()) {
+                    for (MonthlyPayslips monthlyPayslips1 : payslipContainer.getMonthlyPayslipList()) {
+                        monthlyPayslips1.setEmployeeId(payslipContainer.getEmployeeId());
+                        monthlyPayslips1.setSalaryDate(payslipContainer.getSalaryDate());
+                        monthlyPayslips1.setIsApproved(false);
+                        monthlyPayslips1.setIsRejected(false);
+                        insertResult = monthlyPayslipsDAO.insert(monthlyPayslips1);
+                    }
                 }
+
+                if (insertResult > 0) {
+                    LOGGER.info("Payslips created");
+                    return mav
+                            .addObject("success", Utilities.getSpringMessage(messageSource, "payslip.add.success", locale));
+                } else {
+                    LOGGER.info("Error while inserting ");
+                    return mav
+                            .addObject("error", Utilities.getSpringMessage(messageSource, "payslip.add.error", locale));
+                }
+            } else {
+                LOGGER.info("Payslip created ");
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(payslipContainer.getSalaryDate());
+                return mav
+                        .addObject("error", "Payslip is created for employee for month " + calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
             }
 
-            if (insertResult > 0) {
-                LOGGER.info("Payroll category Added Successfully with id " + insertResult);
-                return mav
-                        .addObject("success", Utilities.getSpringMessage(messageSource, "payslip.add.success", locale));
-            } else {
-                LOGGER.info("Error while inserting ");
-                return mav
-                        .addObject("error", Utilities.getSpringMessage(messageSource, "payslip.add.error", locale));
-            }
         } else {
             return new ModelAndView("payslips", model);
         }
+    }
+
+    private List<MonthlyPayslips> getMonthlyPayslipByEmployee(Integer employeeId) {
+        return monthlyPayslipsDAO.getListByFromClause(" FROM MonthlyPayslips m WHERE m.employeeId=" + employeeId);
+    }
+
+    private boolean isPayslipCreated(Integer employeeId, Date createDate) {
+        Calendar createdatecal = Calendar.getInstance();
+        createdatecal.setTime(createDate);
+        Calendar salarycal = Calendar.getInstance();
+        List<MonthlyPayslips> monthlyPayslipsList = getMonthlyPayslipByEmployee(employeeId);
+        if (monthlyPayslipsList != null && !monthlyPayslipsList.isEmpty()) {
+            for (MonthlyPayslips monthlyPayslips : monthlyPayslipsList) {
+                salarycal.setTime(monthlyPayslips.getSalaryDate());
+                if (createdatecal.get(Calendar.MONTH) == salarycal.get(Calendar.MONTH) && createdatecal.get(Calendar.YEAR) == salarycal.get(Calendar.YEAR)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

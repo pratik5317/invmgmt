@@ -17,7 +17,7 @@
         <property name="payrollCategoryId" type="java.lang.Integer">
             <column name="payroll_category_id" />
         </property>
-        <property name="amount" type="string">
+        <property name="amount" type="java.lang.Double">
             <column name="amount" />
         </property>
         <property name="isApproved" type="boolean">
