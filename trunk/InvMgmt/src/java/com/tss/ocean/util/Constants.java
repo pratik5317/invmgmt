@@ -6,10 +6,6 @@
 
 package com.tss.ocean.util;
 
-/**
- *
- * @author Jenil
- */
 public class Constants {
     
     public final static int SUPPLIER = 1;
