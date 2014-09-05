@@ -11,10 +11,7 @@ import java.security.SecureRandom;
 import java.util.Locale;
 import org.springframework.context.MessageSource;
 
-/**
- *
- * @author Jenil
- */
+
 public class Utilities {
     private static final SecureRandom random = new SecureRandom();
 
