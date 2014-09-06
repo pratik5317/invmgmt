@@ -23,5 +23,15 @@
         <property name="isHalfDay" type="java.lang.Boolean">
             <column name="is_half_day" />
         </property>
+         <property name="inTime" type="string">
+            <column name="in_time" />
+        </property>
+         <property name="outTime" type="string">
+            <column name="out_time" />
+        </property>
+         <property name="isLeave" type="java.lang.Boolean">
+            <column name="is_leave" />
+        </property>
+        
     </class>
 </hibernate-mapping>
