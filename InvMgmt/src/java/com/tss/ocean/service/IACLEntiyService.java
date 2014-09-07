@@ -26,4 +26,5 @@ public interface IACLEntiyService {
     @Transactional
     void revokeAllACL(String aclId);
     
+    boolean hasACL(int entityId,int entityType,String aclId,int permissionLevel);
 }

@@ -657,20 +657,20 @@ CREATE TABLE purreq_item (
    PRIMARY KEY (purrequisition_id,item_id)
 );
 DROP TABLE IF EXISTS acl;
-CREATE TABLE acl (
-aclid varchar2(255) NOT NULL,
-aclmodule varchar2(255) NOT NULL,
-parentaclid varchar2(255) NULL
-PRIMARY KEY (aclid);
+CREATE TABLE `acl` (
+`aclid` varchar(255) NOT NULL,
+`aclmodule` varchar(255) NOT NULL,
+`parentaclid` varchar(255) DEFAULT NULL
+PRIMARY KEY (aclid)
 );
-DROP TABLE IF EXISTS acl_entity;
-CREATE TABLE acl_entity (
-id int(10) unsigned NOT NULL AUTO_INCREMENT,
-aclid varchar2(255) NOT NULL,
-entiyid int(10) unsigned NOT NULL,
-entiytype int(10) unsigned NOT NULL,
-permissionlevel int(10) unsigned NOT NULL,
-PRIMARY KEY (id);
+DROP TABLE IF EXISTS `acl_entity`;
+CREATE TABLE `acl_entity` (
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`aclid` varchar(255) NOT NULL,
+`entiyid` int(10) unsigned NOT NULL,
+`entiytype` int(10) unsigned NOT NULL,
+`permissionlevel` int(10) unsigned NOT NULL,
+PRIMARY KEY (id)
 );
 --
 -- Dumping data for table `usertype`
