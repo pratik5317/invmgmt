@@ -29,8 +29,8 @@ public class ACLEntityService implements IACLEntiyService {
         revokeACL(entityId, entityType, aclId);
         ACLEntity aCLEntity = new ACLEntity();
         aCLEntity.setAclId(aclId);
-        aCLEntity.setEntiyId(entityId);
-        aCLEntity.setEntiyType(entityType);
+        aCLEntity.setEntityId(entityId);
+        aCLEntity.setEntityType(entityType);
         aCLEntity.setPermissionLevel(permissionlevel);
         return aclEntityDAO.insert(aCLEntity);
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 4 Aug, 2014 6:30:11 PM by Hibernate Tools 3.2.1.GA -->
+
 <hibernate-mapping>
-    <class name="com.tss.ocean.pojo.ACLEnrity" table="acl_entity" catalog="invmgmt">        
+    <class name="com.tss.ocean.pojo.ACLEntity" table="acl_entity" catalog="invmgmt">
         <id name="Id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
