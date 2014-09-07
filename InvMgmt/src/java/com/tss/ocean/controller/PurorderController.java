@@ -101,6 +101,7 @@ public class PurorderController {
     }
 
     @RequestMapping(value = "/edit-purchase_order.html", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaseorder','update')")
     public ModelAndView edit_purorder_get(@RequestParam(value = "id") int id,
             Locale locale,
             @RequestParam(value = "success", required = false) String success,
@@ -126,7 +127,7 @@ public class PurorderController {
     }
 
     @RequestMapping(value = "/edit-purchase_order.html", method = RequestMethod.POST)
-    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaseorder','edit')")
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaseorder','update')")
     public ModelAndView edit_purorder_post(@ModelAttribute("purorder") @Valid Purorder purorder,
             BindingResult result,
             ModelMap model,

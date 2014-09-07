@@ -10,8 +10,7 @@ import java.util.logging.Logger;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -35,6 +34,7 @@ public class AccountController {
     private MessageSource messageSource;
     
     @RequestMapping(value="/add-account.html",method= RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('account','add')")
     public ModelAndView add_account_get(@RequestParam(value = "success",required = false)String success,
                                     @RequestParam(value = "error",required = false)String error) throws Exception {
         logger.log(Level.FINE,"add-account called.");
@@ -52,6 +52,7 @@ public class AccountController {
     }
     
     @RequestMapping(value="/add-account.html",method= RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('account','add')")
     public ModelAndView add_account_post(@ModelAttribute("account") @Valid Accounts account,
                                         BindingResult result,
                                         ModelMap model,
@@ -82,6 +83,7 @@ public class AccountController {
     }
     
     @RequestMapping(value="/edit-account.html",method= RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('account','update')")
     public ModelAndView edit_account_get(@RequestParam(value = "id")int id,
                                     @RequestParam(value = "success",required = false)String success,
                                     @RequestParam(value = "error",required = false)String error) throws Exception {
@@ -105,6 +107,7 @@ public class AccountController {
     }
     
     @RequestMapping(value="/edit-account.html",method= RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('account','update')")
     public ModelAndView edit_account_post(@ModelAttribute("account") @Valid Accounts account,
                                         BindingResult result,
                                         ModelMap model,
@@ -138,6 +141,7 @@ public class AccountController {
     }
     
     @RequestMapping(value="/account.html",method= RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('account','view')")
     public ModelAndView account(@RequestParam(value = "success",required = false)String success,
                                     @RequestParam(value = "error",required = false)String error) throws Exception {
         logger.log(Level.FINE,"add-account called.");
@@ -155,6 +159,7 @@ public class AccountController {
     
     @RequestMapping(value="/delete-account.html")
     @ResponseBody
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('account','delete')")
     public boolean delete_account(@RequestParam(value = "id")int id) throws Exception {
         logger.log(Level.FINE,"delete-account called.");        
         Accounts account = accountsDAO.getRecordByPrimaryKey(id);

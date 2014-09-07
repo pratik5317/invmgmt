@@ -6,16 +6,10 @@
 
 package com.tss.ocean.dao;
 
-import com.techshark.hibernate.base.GenericDAOImpl;
-import com.tss.ocean.idao.IEmployeeCategoryDAO;
-import com.tss.ocean.idao.IEmployeePositionDAO;
-import com.tss.ocean.pojo.EmployeeCategory;
-import com.tss.ocean.pojo.EmployeePostion;
-
 /**
  *
  * @author sweta
  */
-public class EmployeePositionDAO extends GenericDAOImpl<EmployeePostion, Integer> implements IEmployeePositionDAO {
+public class EmployeePositionDAO {
     
 }

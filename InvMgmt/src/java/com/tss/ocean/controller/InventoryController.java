@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,6 +47,7 @@ public class InventoryController {
     
 
     @RequestMapping(value = "/AddInventory.html", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('itemcategory','add')")
     public ModelAndView inventorymgmt(@ModelAttribute("itemTypeForm") @Valid Itemtype itemTypeForm, BindingResult result, Map<String, Object> model) throws Exception {
         logger.log(Level.OFF, "Add Inventory called with inventory details ####### ." + itemTypeForm);
 
@@ -62,6 +64,7 @@ public class InventoryController {
     }
 
     @RequestMapping(value = "/UpdateItemCategory.html", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('itemcategory','update')")
     public ModelAndView updateItemCategory(@ModelAttribute("itemTypeForm") @Valid Itemtype itemTypeForm, BindingResult result, Map<String, Object> model) throws Exception {
         logger.log(Level.WARNING, "Update Inventory called with inventory details ####### ." + itemTypeForm);
 
@@ -84,6 +87,7 @@ public class InventoryController {
     }
 
     @RequestMapping(value = "/AddItemUnits.html", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('itemunit','add')")
     public ModelAndView addItemUnits(@ModelAttribute("itemUnit") @Valid Itemunit itemUnit, BindingResult result, Map<String, Object> model) throws Exception {
         logger.log(Level.OFF, "Add Item Units with detail ####### ." + itemUnit);
 
@@ -109,6 +113,7 @@ public class InventoryController {
     }
 
     @RequestMapping(value = "/AddItem.html", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('item','add')")
     public ModelAndView addItem(@ModelAttribute("itemForm") @Valid Item item, BindingResult result, Map<String, Object> model) throws Exception {
         if(item.getId() == null) {
             logger.log(Level.OFF, "Add Item with detail ####### ." + item);
@@ -149,6 +154,7 @@ public class InventoryController {
         }
     }
     @RequestMapping(value = "/EditItem.html", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('item','update')")
     public ModelAndView editItem(@ModelAttribute("itemForm") @Valid Item item, BindingResult result, Map<String, Object> model) throws Exception {
         logger.log(Level.OFF, "Edit Item with detail ####### ." + item);
         if (result.hasErrors()) {
@@ -171,6 +177,7 @@ public class InventoryController {
         }
     }
     @RequestMapping(value = "/DeleteItemCategory.html", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('itemcategory','delete')")
     public ModelAndView deleteItemCategory(@RequestParam("deleteId") int deleteId, Map<String, Object> model) throws Exception {
         logger.log(Level.FINE, "Delete item category called.");
         Itemtype itemType = itemTypeDAO.getRecordByPrimaryKey(deleteId);
@@ -187,6 +194,7 @@ public class InventoryController {
     }
 
     @RequestMapping(value = "/DeleteItem.html", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('item','delete')")
     public ModelAndView deleteItem(@RequestParam("deleteId") int deleteId, Map<String, Object> model) throws Exception {
         logger.log(Level.FINE, "Delete item called.");
         Item itemBean = itemDAO.getRecordByPrimaryKey(deleteId);
@@ -203,6 +211,7 @@ public class InventoryController {
     }
 
     @RequestMapping(value = "/DeleteItemUnits.html", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('itemunit','delete')")
     public ModelAndView deleteItemUnits(@RequestParam("deleteId") int deleteId, Map<String, Object> model) throws Exception {
         logger.log(Level.FINE, "Delete item category units called.");
         Itemunit itemUnit = itemunitDAO.getRecordByPrimaryKey(deleteId);
@@ -219,6 +228,7 @@ public class InventoryController {
     }
 
     @RequestMapping(value = "/UpdateItemUnits.html")
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('itemunit','update')")
     public String updateItemUnits(@RequestParam("updateItemId") int updateItemId, Map<String, Object> model) throws Exception {
         logger.log(Level.OFF, "Update Item Unit called.");
         model.put("itemUnit", itemunitDAO.getRecordByPrimaryKey(updateItemId));
@@ -226,12 +236,14 @@ public class InventoryController {
     }
 
     @RequestMapping(value = "/UpdateItemCategory.html")
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('itemcategory','update')")
     public String updateItemCategory(@RequestParam("updateItemId") int updateItemId, Map<String, Object> model) throws Exception {
         logger.log(Level.OFF, "Update Item Category called.");
         model.put("itemTypeForm", itemTypeDAO.getRecordByPrimaryKey(updateItemId));
         return "update-item_category";
     }
     @RequestMapping(value = "/UpdateItem.html", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('item','update')")
     public String edit_item(@RequestParam("updateItemId") int updateItemId,Map<String, Object> model, HttpServletRequest request) throws Exception {
         logger.log(Level.OFF, "add-item called.");
         model.put("itemForm", itemDAO.getRecordByPrimaryKey(updateItemId));
