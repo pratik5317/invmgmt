@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.context.MessageSource;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -60,6 +61,7 @@ public class PurrequisitionController {
     }
     
     @RequestMapping(value="/add-purchase_requisition.html",method= RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaserequisition','add')")
     public ModelAndView add_purrequisition_get(@RequestParam(value = "success",required = false)String success,
                                                 @RequestParam(value = "error",required = false)String error,
                                                 Locale locale) throws Exception {
@@ -80,6 +82,7 @@ public class PurrequisitionController {
     }
     
     @RequestMapping(value="/add-purchase_requisition.html",method= RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaserequisition','add')")
     public ModelAndView add_purrequisition_post(@ModelAttribute("purrequisition") @Valid Purrequisition purrequisition,
                                         BindingResult result,
                                         ModelMap model,
@@ -113,6 +116,7 @@ public class PurrequisitionController {
     }
     
     @RequestMapping(value="/edit-purchase_requisition.html",method= RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaserequisition','update')")
     public ModelAndView edit_purrequisition_get(@RequestParam(value = "id")int id,
                                     Locale locale,
                                     @RequestParam(value = "success",required = false)String success,
@@ -140,6 +144,7 @@ public class PurrequisitionController {
     }
     
     @RequestMapping(value="/edit-purchase_requisition.html",method= RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaserequisition','update')")
     public ModelAndView edit_purrequisition_post(@ModelAttribute("purrequisition") @Valid Purrequisition purrequisition,
                                         BindingResult result,
                                         ModelMap model,                                        
@@ -171,6 +176,7 @@ public class PurrequisitionController {
     }
     
     @RequestMapping(value="/purchase_requisition.html",method= RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaserequisition','view')")
     public ModelAndView purrequisition(@RequestParam(value = "success",required = false)String success,
                                     @RequestParam(value = "error",required = false)String error,
                                     Locale locale) throws Exception {
@@ -195,6 +201,7 @@ public class PurrequisitionController {
     
     @RequestMapping(value="/delete-purchase_requisition.html")
     @ResponseBody
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaserequisition','delete')")
     public boolean delete_purrequisition(@RequestParam(value = "id")int id) throws Exception {
         logger.log(Level.FINE,"delete-purchase_requisition called.");        
         Purrequisition purrequisition = purrequisitionDAO.getRecordByPrimaryKey(id);

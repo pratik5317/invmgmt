@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +49,7 @@ public class ViewController {
     }
 
     @RequestMapping(value = "/item.html", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('item','view')")
     public String itemmgmt(Model model, HttpServletRequest request) throws Exception {
         logger.log(Level.OFF, "item called.");
         logger.log(Level.OFF, "item called size ### " + itemDAO.getList().size());
@@ -56,6 +58,7 @@ public class ViewController {
     }
 
     @RequestMapping(value = "/item_category.html", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('itemcategory','view')")
     public String item_category(Model model, HttpServletRequest request) throws Exception {
         logger.log(Level.OFF, "item_category called.");
         logger.log(Level.OFF, "List details are loaded by the system.");
@@ -65,6 +68,7 @@ public class ViewController {
     }
 
     @RequestMapping(value = "/item_unit.html", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('itemunit','view')")
     public String item_unit(Model model, HttpServletRequest request) throws Exception {
         logger.log(Level.OFF, "item_unit called.");
         model.addAttribute("itemUnit", itemunitDAO.getList());
@@ -72,6 +76,7 @@ public class ViewController {
     }
 
     @RequestMapping(value = "/add-item.html", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('item','add')")
     public String add_item(Map<String, Object> model, HttpServletRequest request) throws Exception {
         logger.log(Level.OFF, "add-item called.");
         model.put("itemForm", new Item());
@@ -81,6 +86,7 @@ public class ViewController {
     }
 
     @RequestMapping(value = "/add-item_category.html", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('itemcategory','add')")
     public String add_item_category(Map<String, Object> model, HttpServletRequest request) throws Exception {
         logger.log(Level.OFF, "add-item_category called.");
         Itemtype itemtype = new Itemtype();
@@ -89,6 +95,7 @@ public class ViewController {
     }
 
     @RequestMapping(value = "/add-item_unit.html", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('itemunit','add')")
     public String add_item_unit(Map<String, Object> model, HttpServletRequest request) throws Exception {
         logger.log(Level.OFF, "add-item_unit called.");
         model.put("itemUnit", new Itemunit());
