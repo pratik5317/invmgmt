@@ -52,6 +52,7 @@
                         <div id='cssmenu'>
                             <ul>
                                 <li class='has-sub active'><a href='employee.html'><span><spring:message code="menu.employeemanagement" text="Label value is missing !!!"/></span></a>
+                                    <li class=''><a href='access_control.html'><span><spring:message code="menu.empmanagement.acl" text="Label value is missing !!!"/></span></a></li>
                                 <li class=''><a href='payslips.html'><span><spring:message code="menu.payslips" text="Label value is missing !!!"/></span></a></li>
                                 <li class='last'><a href='#'><span><spring:message code="menu.employeeleavemanagement" text="Label value is missing !!!"/></span></a>
                                     <ul style='display: block;'>
