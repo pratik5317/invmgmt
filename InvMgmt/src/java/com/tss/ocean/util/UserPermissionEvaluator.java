@@ -41,6 +41,7 @@ public class UserPermissionEvaluator  implements PermissionEvaluator {
         if(authentication == null || authentication.getPrincipal() == null) {
             return false;
         }
+        logger.log(Level.SEVERE," Asking permission {0} {1} {2}",new Object[]{authentication.getPrincipal().toString(),targetDomainObject,permission});
         if(!authentication.isAuthenticated()) {
             return false;
         }
@@ -52,7 +53,7 @@ public class UserPermissionEvaluator  implements PermissionEvaluator {
         if(permission.toString().equalsIgnoreCase("VIEW")) {
             aclPermission = Constants.ACL_VIEW;
         }
-        else if(permission.toString().equalsIgnoreCase("CREATE")) {
+        else if(permission.toString().equalsIgnoreCase("ADD")) {
             aclPermission = Constants.ACL_CREATE;
         }
         else if(permission.toString().equalsIgnoreCase("UPDATE")) {
@@ -64,7 +65,6 @@ public class UserPermissionEvaluator  implements PermissionEvaluator {
         if(aclPermission == null) {
             return false;
         }
-        logger.log(Level.SEVERE," Asking permission {0} {1} {2}",new Object[]{authentication.getPrincipal().toString(),targetDomainObject,permission});        
         return aclEntityService.hasACL(user.getUsertypeid(), Constants.ENTITY_GROUP, targetDomainObject.toString().toLowerCase(), aclPermission);
     }
     @Override
