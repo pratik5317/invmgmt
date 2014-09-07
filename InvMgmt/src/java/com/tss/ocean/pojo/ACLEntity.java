@@ -24,11 +24,11 @@ public class ACLEntity implements Serializable{
     public ACLEntity() {
     }
 
-    public ACLEntity(Integer Id, String aclId, Integer entiyId, Integer entiyType, Integer permissionlevel) {
+    public ACLEntity(Integer Id, String aclId, Integer entityId, Integer entityType, Integer permissionlevel) {
         this.Id = Id;
         this.aclId = aclId;
-        this.entityId = entiyId;
-        this.entityType = entiyType;
+        this.entityId = entityId;
+        this.entityType = entityType;
         this.permissionLevel = permissionlevel;
     }
 
@@ -48,20 +48,20 @@ public class ACLEntity implements Serializable{
         this.aclId = aclId;
     }
 
-    public Integer getEntiyId() {
+    public Integer getEntityId() {
         return entityId;
     }
 
-    public void setEntiyId(Integer entiyId) {
+    public void setEntityId(Integer entiyId) {
         this.entityId = entiyId;
     }
 
-    public Integer getEntiyType() {
+    public Integer getEntityType() {
         return entityType;
     }
 
-    public void setEntiyType(Integer entiyType) {
-        this.entityType = entiyType;
+    public void setEntityType(Integer entityType) {
+        this.entityType = entityType;
     }
 
     public Integer getPermissionLevel() {
@@ -74,7 +74,7 @@ public class ACLEntity implements Serializable{
 
     @Override
     public String toString() {
-        return "ACLEntity{" + "Id=" + Id + ", aclId=" + aclId + ", entiyId=" + entityId + ", entiyType=" + entityType + ", permissionlevel=" + permissionLevel + '}';
+        return "ACLEntity{" + "Id=" + Id + ", aclId=" + aclId + ", entityId=" + entityId + ", entityType=" + entityType + ", permissionlevel=" + permissionLevel + '}';
     }
 
     @Override

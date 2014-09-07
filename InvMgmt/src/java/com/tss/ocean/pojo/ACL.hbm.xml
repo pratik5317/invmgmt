@@ -4,9 +4,9 @@
 <!-- Generated 4 Aug, 2014 6:30:11 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.tss.ocean.pojo.ACL" table="acl" catalog="invmgmt">        
-        <property name="aclId" type="string">
+        <id name="aclId" type="string">
             <column name="aclid" length="256" not-null="true" />
-        </property>
+        </id>
         <property name="aclModule" type="string">
             <column name="aclmodule" length="256" not-null="true" />
         </property>

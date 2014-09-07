@@ -13,6 +13,8 @@
     <property name="hibernate.connection.useUnicode">true</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
+    <mapping resource="com/tss/ocean/pojo/ACL.hbm.xml"/>
+    <mapping resource="com/tss/ocean/pojo/ACLEntity.hbm.xml"/>
     <mapping resource="com/tss/ocean/pojo/Accounts.hbm.xml"/>
     <mapping resource="com/tss/ocean/pojo/EmployeeLeaveTypes.hbm.xml"/>
     <mapping resource="com/tss/ocean/pojo/Item.hbm.xml"/>
@@ -34,7 +36,7 @@
     <mapping resource="com/tss/ocean/pojo/Purrequisitiondt.hbm.xml"/>
     <mapping resource="com/tss/ocean/pojo/MonthlyPayslips.hbm.xml"/>
     <mapping resource="com/tss/ocean/pojo/EmployeeCategory.hbm.xml"/>
-    <mapping resource="com/tss/ocean/pojo/EmployeeDepartment.hbm.xml"/>
+    <mapping resource="com/tss/ocean/pojo/EmployeeDepartment.hbm.xml"/>    
     <mapping resource="com/tss/ocean/pojo/Country.hbm.xml"/>
     <mapping resource="com/tss/ocean/pojo/Bank.hbm.xml"/>
   </session-factory>
