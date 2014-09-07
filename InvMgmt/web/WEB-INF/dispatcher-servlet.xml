@@ -51,14 +51,14 @@
     <context:component-scan base-package="com.tss.ocean.controller" />
     <context:component-scan base-package="com.tss.ocean.dao" />
     <context:component-scan base-package="com.tss.ocean.pojo" />
-    <mvc:resources location="/theme.css" mapping="/css/**" />
+    <mvc:resources location="/theme.css" mapping="/theme.css" />
     <mvc:resources location="/css/" mapping="/css/**" />
     <mvc:resources location="/fonts/" mapping="/fonts/**" />
     <mvc:resources location="/cssmenu/" mapping="/cssmenu/**" />
     <mvc:resources location="/img/" mapping="/img/**" /> 
     <mvc:resources location="/images/" mapping="/images/**" />
-    <mvc:resources location="/js/" mapping="/js/**" />    
-    <mvc:interceptors>  
+    <mvc:resources location="/js/" mapping="/js/**" />
+    <mvc:interceptors>
         <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
             <property name="paramName" value="lang" />
         </bean>
@@ -68,8 +68,8 @@
     
     <security:http entry-point-ref="loginUrlAuthenticationEntryPoint" use-expressions="true">        
         <security:intercept-url pattern="/**" access="permitAll" />
-        <security:custom-filter position="FORM_LOGIN_FILTER" ref="userAuthenticationProcessingFilter" />
-        <security:logout logout-url='/logout.html' />        
+        <security:custom-filter position="FORM_LOGIN_FILTER" ref="userAuthenticationProcessingFilter" />        
+        <security:logout logout-url='/logout.htm' />
     </security:http>
  
     <bean id="loginUrlAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
