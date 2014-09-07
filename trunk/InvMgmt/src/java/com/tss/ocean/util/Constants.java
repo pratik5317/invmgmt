@@ -16,6 +16,7 @@ public class Constants {
     public final static String DEFAULT_MESSSAGE="(DEFAULT TEXT)";
     
     public final static int ENTITY_GROUP = 2;
+    public final static int ACL_NONE = 0;
     public final static int ACL_VIEW = 1;
     public final static int ACL_CREATE = 2;
     public final static int ACL_UPDATE = 3;
