@@ -693,4 +693,4 @@ PRIMARY KEY (id)
 
 
 INSERT INTO users(name,password,usertypeid,isactive) VALUES('admin','admin',1,1);
-INSERT INTO acl_entity(aclid,entityid,entiytype,permissionlevel) VALUES('purchaseorder',1,2,1);
+INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES('purchaseorder',1,2,1);
