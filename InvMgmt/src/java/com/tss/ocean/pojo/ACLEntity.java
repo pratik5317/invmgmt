@@ -17,8 +17,8 @@ public class ACLEntity implements Serializable{
     
     private Integer Id;
     private String aclId;
-    private Integer entiyId;
-    private Integer entiyType;
+    private Integer entityId;
+    private Integer entityType;
     private Integer permissionLevel;
 
     public ACLEntity() {
@@ -27,8 +27,8 @@ public class ACLEntity implements Serializable{
     public ACLEntity(Integer Id, String aclId, Integer entiyId, Integer entiyType, Integer permissionlevel) {
         this.Id = Id;
         this.aclId = aclId;
-        this.entiyId = entiyId;
-        this.entiyType = entiyType;
+        this.entityId = entiyId;
+        this.entityType = entiyType;
         this.permissionLevel = permissionlevel;
     }
 
@@ -49,19 +49,19 @@ public class ACLEntity implements Serializable{
     }
 
     public Integer getEntiyId() {
-        return entiyId;
+        return entityId;
     }
 
     public void setEntiyId(Integer entiyId) {
-        this.entiyId = entiyId;
+        this.entityId = entiyId;
     }
 
     public Integer getEntiyType() {
-        return entiyType;
+        return entityType;
     }
 
     public void setEntiyType(Integer entiyType) {
-        this.entiyType = entiyType;
+        this.entityType = entiyType;
     }
 
     public Integer getPermissionLevel() {
@@ -74,7 +74,7 @@ public class ACLEntity implements Serializable{
 
     @Override
     public String toString() {
-        return "ACLEntity{" + "Id=" + Id + ", aclId=" + aclId + ", entiyId=" + entiyId + ", entiyType=" + entiyType + ", permissionlevel=" + permissionLevel + '}';
+        return "ACLEntity{" + "Id=" + Id + ", aclId=" + aclId + ", entiyId=" + entityId + ", entiyType=" + entityType + ", permissionlevel=" + permissionLevel + '}';
     }
 
     @Override
@@ -82,8 +82,8 @@ public class ACLEntity implements Serializable{
         int hash = 5;
         hash = 53 * hash + Objects.hashCode(this.Id);
         hash = 53 * hash + Objects.hashCode(this.aclId);
-        hash = 53 * hash + Objects.hashCode(this.entiyId);
-        hash = 53 * hash + Objects.hashCode(this.entiyType);
+        hash = 53 * hash + Objects.hashCode(this.entityId);
+        hash = 53 * hash + Objects.hashCode(this.entityType);
         hash = 53 * hash + Objects.hashCode(this.permissionLevel);
         return hash;
     }
@@ -103,10 +103,10 @@ public class ACLEntity implements Serializable{
         if (!Objects.equals(this.aclId, other.aclId)) {
             return false;
         }
-        if (!Objects.equals(this.entiyId, other.entiyId)) {
+        if (!Objects.equals(this.entityId, other.entityId)) {
             return false;
         }
-        if (!Objects.equals(this.entiyType, other.entiyType)) {
+        if (!Objects.equals(this.entityType, other.entityType)) {
             return false;
         }
         if (!Objects.equals(this.permissionLevel, other.permissionLevel)) {
