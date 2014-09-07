@@ -49,7 +49,7 @@ public class PurorderController {
     private MessageSource messageSource;
 
     @RequestMapping(value = "/add-purchase_order.html", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission(#ts_purchaseorder,'add')")
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaseorder','add')")
     public ModelAndView add_purorder_get(@RequestParam(value = "success", required = false) String success,
             @RequestParam(value = "error", required = false) String error,
             Locale locale) throws Exception {
@@ -69,7 +69,7 @@ public class PurorderController {
     }
 
     @RequestMapping(value = "/add-purchase_order.html", method = RequestMethod.POST)
-    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission(#ts_purchaseorder,'add')")
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaseorder','add')")
     public ModelAndView add_purorder_post(@ModelAttribute("purorder") @Valid Purorder purorder,
             BindingResult result,
             ModelMap model,
@@ -123,7 +123,7 @@ public class PurorderController {
     }
 
     @RequestMapping(value = "/edit-purchase_order.html", method = RequestMethod.POST)
-    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission(#ts_purchaseorder,'edit')")
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaseorder','edit')")
     public ModelAndView edit_purorder_post(@ModelAttribute("purorder") @Valid Purorder purorder,
             BindingResult result,
             ModelMap model,
@@ -151,7 +151,7 @@ public class PurorderController {
     }
 
     @RequestMapping(value = "/purchase_order.html", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission(#ts_purchaseorder,'view')")
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaseorder','view')")
     public ModelAndView purorder(@RequestParam(value = "success", required = false) String success,
             @RequestParam(value = "error", required = false) String error,
             Locale locale) throws Exception {
@@ -183,7 +183,7 @@ public class PurorderController {
 
     @RequestMapping(value = "/delete-purchase_order.html")
     @ResponseBody
-    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission(#ts_purchaseorder,'delete')")
+    @PreAuthorize("hasAnyRole('ROLE_USER') AND hasPermission('purchaseorder','delete')")
     public boolean delete_purorder(@RequestParam(value = "id") int id) throws Exception {
         logger.log(Level.FINE, "delete-purchase_order called.");
         Purorder purorder = purorderDAO.getRecordByPrimaryKey(id);

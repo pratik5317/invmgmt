@@ -667,7 +667,7 @@ DROP TABLE IF EXISTS `acl_entity`;
 CREATE TABLE `acl_entity` (
 `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 `aclid` varchar(255) NOT NULL,
-`entiyid` int(10) unsigned NOT NULL,
+`entityid` int(10) unsigned NOT NULL,
 `entiytype` int(10) unsigned NOT NULL,
 `permissionlevel` int(10) unsigned NOT NULL,
 PRIMARY KEY (id)
@@ -689,3 +689,8 @@ PRIMARY KEY (id)
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+
+
+INSERT INTO users(name,password,usertypeid,isactive) VALUES('admin','admin',1,1);
+INSERT INTO acl_entity(aclid,entityid,entiytype,permissionlevel) VALUES('purchaseorder',1,2,1);
