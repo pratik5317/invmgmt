@@ -41,6 +41,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="item.html"><spring:message code="menu.invmgmt"/></a></li>
                 <li><a href="hr_management.html"><spring:message code="menu.hr"/></a></li>
+                <li><a href="finance_management.html"><spring:message code="menu.finance"/></a></li>
                 <li><a href="#contact"><spring:message code="menu.reports"/></a></li>
                 <li><a href="#contact"><spring:message code="menu.setting"/></a></li>
                 <li><a href="#Alarms"><spring:message code="menu.alarms"/></a></li>

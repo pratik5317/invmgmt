@@ -6,6 +6,7 @@
 package com.tss.ocean.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -16,7 +17,9 @@ public class Country implements Serializable {
     private Integer id;
     private String name;
     private String code;
-
+    private String createdby;
+    private Date createdate;
+            
     public Integer getId() {
         return id;
     }
@@ -45,5 +48,23 @@ public class Country implements Serializable {
     public String toString() {
         return "Country{" + "id=" + id + ", name=" + name + ", code=" + code + '}';
     }
+
+    public String getCreatedby() {
+        return createdby;
+    }
+
+    public void setCreatedby(String createdby) {
+        this.createdby = createdby;
+    }
+
+    public Date getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
+    }
+    
+    
 
 }

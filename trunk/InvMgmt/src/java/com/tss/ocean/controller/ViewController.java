@@ -151,4 +151,11 @@ public class ViewController {
         return "hr/attendences";
     }
 
+    // Finance Management VInit Shah
+    @RequestMapping(value = "/finance_management.html", method = RequestMethod.GET)
+    public String finance_management(Model model, HttpServletRequest request) throws Exception {
+        logger.log(Level.OFF, "finance_management called.");
+        return "finance_management";
+    }
+    
 }
