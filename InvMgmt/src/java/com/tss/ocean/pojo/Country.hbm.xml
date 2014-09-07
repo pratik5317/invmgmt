@@ -14,6 +14,13 @@
         <property name="code" type="string">
             <column name="code" />
         </property>
+        <property name="createdby" type="string">
+            <column name="createdby" />
+        </property>
+        <property name="createdate" type="date">
+            <column name="createdate" />
+        </property>
+        
         
     </class>
 </hibernate-mapping>

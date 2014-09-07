@@ -8,6 +8,9 @@ import com.tss.ocean.pojo.Purorder;
 import com.tss.ocean.pojo.Purrequisition;
 import com.tss.ocean.util.Constants;
 import com.tss.ocean.util.Utilities;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -199,6 +202,91 @@ public class PurorderController {
         }
         logger.log(Level.INFO, "Purorder with id {0} is already deleted", id);
         return true;
+    }
+
+    @RequestMapping(value = "/purchase_order_recipt_finance.html", method = RequestMethod.GET)
+    public ModelAndView purorder_finance(@RequestParam(value = "success", required = false) String success,
+            @RequestParam(value = "error", required = false) String error,
+            Locale locale) throws Exception {
+        logger.log(Level.FINE, "purchase_order_recipt_finance called.");
+        ModelAndView mav = new ModelAndView("pur_order_finance_report");
+        List<Purrequisition> purrequisitionList = purrequisitionDAO.getList();
+        HashMap<Integer, String> purrequisitionMap = new HashMap<>(purrequisitionList.size());
+        for (Purrequisition purrequisition : purrequisitionList) {
+            purrequisitionMap.put(purrequisition.getId(), purrequisition.getPrno());
+        }
+
+        List<Accounts> accountsList = accountsDAO.getList();
+        HashMap<Integer, String> accountMap = new HashMap<>(accountsList.size());
+        for (Accounts account : accountsList) {
+            accountMap.put(account.getId(), account.getName());
+        }
+
+        mav.getModelMap().put("purrequisitionMap", purrequisitionMap);
+        mav.getModelMap().put("accountMap", accountMap);
+        mav.getModelMap().put("purorderList", purorderDAO.getList());
+        if (success != null) {
+            mav.getModelMap().put("success", success);
+        }
+        if (error != null) {
+            mav.getModelMap().put("error", error);
+        }
+        return mav;
+    }
+
+    @RequestMapping(value = "/get_purorder_daterange.html", method = RequestMethod.POST)
+    public ModelAndView get_purorder_daterange(@RequestParam(value = "fromDate") String strfromDate,
+            @RequestParam(value = "toDate") String strtoDate,
+            Locale locale,
+            @RequestParam(value = "success", required = false) String success,
+            @RequestParam(value = "error", required = false) String error) throws Exception {
+        logger.log(Level.FINE, "get_purorder_daterange called.");
+        ModelAndView mav = new ModelAndView("pur_order_finance_report");
+        if (strfromDate != null && strtoDate != null) {
+            
+            System.out.println("from Date : "+ strfromDate);
+            SimpleDateFormat sf=new SimpleDateFormat("yyyy/MM/dd");
+            Date fromDate = sf.parse(strfromDate);
+            Date toDate = sf.parse(strtoDate);
+            Calendar c=Calendar.getInstance();
+            c.setTime(fromDate);
+            c.set(Calendar.HOUR, 0);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.SECOND, 0);
+            fromDate=c.getTime();
+            
+            c.setTime(toDate);
+            c.set(Calendar.HOUR, 23);
+            c.set(Calendar.MINUTE, 59);
+            c.set(Calendar.SECOND, 59);
+            toDate=c.getTime();
+            
+            System.out.println("********** from Date "+fromDate);
+            System.out.println("********** to Date "+toDate);
+            List purorderList = purorderDAO.getPurOrderList_dateRange(fromDate,toDate);
+
+            List<Purrequisition> purrequisitionList = purrequisitionDAO.getList();
+            HashMap<Integer, String> purrequisitionMap = new HashMap<>(purrequisitionList.size());
+            for (Purrequisition purrequisition : purrequisitionList) {
+                purrequisitionMap.put(purrequisition.getId(), purrequisition.getPrno());
+            }
+
+            List<Accounts> accountsList = accountsDAO.getList();
+            HashMap<Integer, String> accountMap = new HashMap<>(accountsList.size());
+            for (Accounts account : accountsList) {
+                accountMap.put(account.getId(), account.getName());
+            }
+            mav.getModelMap().put("purrequisitionMap", purrequisitionMap);
+            mav.getModelMap().put("accountMap", accountMap);
+            mav.getModelMap().put("purorderList", purorderList);
+            if (success != null) {
+                mav.getModelMap().put("success", success);
+            }
+            if (error != null) {
+                mav.getModelMap().put("error", error);
+            }
+        }
+        return mav;
     }
 
     private List<Accounts> getSupplierList() {
