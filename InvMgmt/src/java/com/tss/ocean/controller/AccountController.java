@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -36,6 +38,7 @@ public class AccountController {
     public ModelAndView add_account_get(@RequestParam(value = "success",required = false)String success,
                                     @RequestParam(value = "error",required = false)String error) throws Exception {
         logger.log(Level.FINE,"add-account called.");
+        
         ModelAndView mav = new ModelAndView("account");
         Accounts account = new Accounts();
         if(success != null) {

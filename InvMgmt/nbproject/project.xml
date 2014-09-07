@@ -52,7 +52,6 @@
                 </library>
                 <library dirs="200">
                     <file>${file.reference.javax.el-api-2.2.4.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.jboss-logging-3.1.1.GA.jar}</file>
@@ -60,10 +59,6 @@
                 </library>
                 <library dirs="200">
                     <file>${file.reference.validation-api-1.1.0.Final.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.hibernate-validator-5.0.1.Final.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
@@ -76,6 +71,17 @@
                 </library>
                 <library dirs="200">
                     <file>${file.reference.joda-time-2.4.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.com.springsource.org.codehaus.jackson.mapper-1.4.2.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jackson-core-2.2.3.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jackson-mapper-asl-1.7.0.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>

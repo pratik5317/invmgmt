@@ -24,15 +24,15 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         logger.log(Level.OFF, "Interceptor: Pre-handle"+request.getRequestURI()+":"+request.getContextPath());
         // Avoid a redirect loop for some urls
-        if (!request.getRequestURI().equals(request.getContextPath()) 
-                // && !request.getRequestURI().equals("/sample-interc/login.failed")
-                && !request.getRequestURI().equals(request.getContextPath()+"/login.htm")) {
-            Users userData = (Users) request.getSession().getAttribute("LOGGEDIN_USER");
-            if (userData == null) {
-                response.sendRedirect(request.getContextPath()+"/login.htm");
-                return false;
-            }
-        }
+//        if (!request.getRequestURI().equals(request.getContextPath()) 
+//                // && !request.getRequestURI().equals("/sample-interc/login.failed")
+//                && !request.getRequestURI().equals(request.getContextPath()+"/login.html")) {
+//            Users userData = (Users) request.getSession().getAttribute("LOGGEDIN_USER");
+//            if (userData == null) {
+//                response.sendRedirect(request.getContextPath()+"/login.html");
+//                return false;
+//            }
+//        }
         return true;
     }
 

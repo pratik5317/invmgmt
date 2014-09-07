@@ -5,7 +5,8 @@
 --%>
 
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
@@ -237,18 +238,17 @@
         <!-- login.jsp -->
         <div id="login">
             <h1 id="login_title">LOGIN</h1>
-            <form:form action="login.htm" id="login_form" method="post"  modelAttribute="loginAttribute">
+            <form action="<c:url value="j_spring_security_check" />" id="login_form" method="post">
                 <div class="field_container">
-                    <form:input type="text" placeholder="User Name"  path="name" class="login-inp"/>
+                    <input type="text" placeholder="User Name"  name="j_username" class="login-inp" />
                 </div>
-
                 <div class="field_container">
-                    <form:input type="Password" placeholder="Password" name="pass" path="password" class="login-inp"/>
+                    <input type="Password" placeholder="Password" name="j_password" class="login-inp" />
                     <button id="sign_in_button">
                         <span class="button_text"><input type="submit" class="btn" value="Login"> </span>
                     </button>
                 </div>
-            </form:form>
+            </form>            
         </div>
     </body>
 </html>
