@@ -61,4 +61,10 @@ public class ACLEntityService implements IACLEntiyService {
            aclEntityDAO.delete(aCLEntity);
         }
     }
+    
+    @Override
+    public boolean hasACL(int entityId,int entityType,String aclId,int permissionLevel) {
+        int count = aclEntityDAO.count(" WHERE entityid="+entityId+" AND entitytype="+entityType+" AND permissionlevel>="+permissionLevel+" AND aclid='"+aclId+"'");
+        return (count > 0);
+    }
 }
