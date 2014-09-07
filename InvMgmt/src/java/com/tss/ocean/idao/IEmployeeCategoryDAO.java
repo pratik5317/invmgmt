@@ -8,7 +8,6 @@ package com.tss.ocean.idao;
 
 import com.techshark.hibernate.ibase.GenericDAO;
 import com.tss.ocean.pojo.EmployeeCategory;
-import com.tss.ocean.pojo.Employees;
 
 /**
  *

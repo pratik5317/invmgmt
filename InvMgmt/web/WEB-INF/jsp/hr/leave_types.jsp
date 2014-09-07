@@ -29,6 +29,7 @@
                         <div id='cssmenu'>
                             <ul>
                                 <li class=''><a href='employee.html'><span>Employee Management</span></a></li>
+                                <li class=''><a href='access_control.html'><span><spring:message code="menu.empmanagement.acl" text="Label value is missing !!!"/></span></a></li>
                                 <li class='active'><a href='payslips.html'><span>PaySlips</span></a></li>
                                 <li class='has-sub'><a href='#'><span>Employee Leave Management</span></a>
                                     <ul style='display: block;'>
