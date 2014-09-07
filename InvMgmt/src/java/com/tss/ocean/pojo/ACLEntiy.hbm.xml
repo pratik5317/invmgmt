@@ -14,8 +14,8 @@
         <property name="entityId" type="java.lang.Integer">
             <column name="entityid" />
         </property>
-        <property name="entiyType" type="java.lang.Integer">
-            <column name="entiytype" />
+        <property name="entityType" type="java.lang.Integer">
+            <column name="entitytype" />
         </property>
         <property name="permissionLevel" type="java.lang.Integer">
             <column name="permissionlevel" />
