@@ -668,7 +668,7 @@ CREATE TABLE `acl_entity` (
 `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 `aclid` varchar(255) NOT NULL,
 `entityid` int(10) unsigned NOT NULL,
-`entiytype` int(10) unsigned NOT NULL,
+`entitytype` int(10) unsigned NOT NULL,
 `permissionlevel` int(10) unsigned NOT NULL,
 PRIMARY KEY (id)
 );
