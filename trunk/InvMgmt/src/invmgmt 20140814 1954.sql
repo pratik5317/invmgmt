@@ -672,6 +672,7 @@ CREATE TABLE `acl_entity` (
 `permissionlevel` int(10) unsigned NOT NULL,
 PRIMARY KEY (id)
 );
+ALTER TABLE `acl_entity` ADD UNIQUE `unique_index`(`aclid`, `entiyid`, `entiytype`);
 --
 -- Dumping data for table `usertype`
 --
@@ -694,3 +695,6 @@ PRIMARY KEY (id)
 
 INSERT INTO users(name,password,usertypeid,isactive) VALUES('admin','admin',1,1);
 INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES('purchaseorder',1,2,1);
+INSERT INTO acl_entity(aclid,entiyid,entiytype,permissionlevel) VALUES('Items',2,2,1);
+INSERT INTO acl_entity(aclid,entiyid,entiytype,permissionlevel) VALUES('Purchase Requisition',2,2,1);
+INSERT INTO acl_entity(aclid,entiyid,entiytype,permissionlevel) VALUES('Account',2,2,1);
