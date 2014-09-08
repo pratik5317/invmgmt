@@ -6,7 +6,9 @@
 
 package com.tss.ocean.util;
 
+import com.tss.ocean.idao.IEmployeesDAO;
 import com.tss.ocean.idao.IUsersDAO;
+import com.tss.ocean.pojo.Employees;
 import com.tss.ocean.pojo.Users;
 import com.tss.ocean.service.IACLEntiyService;
 import java.io.Serializable;
@@ -30,6 +32,9 @@ public class UserPermissionEvaluator  implements PermissionEvaluator {
     @Autowired
     IUsersDAO usersDAO;
     
+    @Autowired
+    IEmployeesDAO employeesDAO;
+    
     @Override
     public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
         if(permission == null) {
@@ -49,6 +54,10 @@ public class UserPermissionEvaluator  implements PermissionEvaluator {
         if(user == null) {
             return false;
         }
+        Employees employee = employeesDAO.getRecordByKeyandValue("userid", user.getId());
+        if(employee == null) {
+            return false;
+        }
         Integer aclPermission = null;        
         if(permission.toString().equalsIgnoreCase("VIEW")) {
             aclPermission = Constants.ACL_VIEW;
@@ -65,7 +74,7 @@ public class UserPermissionEvaluator  implements PermissionEvaluator {
         if(aclPermission == null) {
             return false;
         }
-        return aclEntityService.hasACL(user.getUsertypeid(), Constants.ENTITY_GROUP, targetDomainObject.toString().toLowerCase(), aclPermission);
+        return aclEntityService.hasACL(employee.getEmployeeCategoryId(), Constants.ENTITY_GROUP, targetDomainObject.toString().toLowerCase(), aclPermission);
     }
     @Override
     public boolean hasPermission(Authentication authentication,Serializable targetId, String targetType, Object permission) {
