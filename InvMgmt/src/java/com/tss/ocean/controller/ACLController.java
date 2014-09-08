@@ -9,7 +9,6 @@ import com.tss.ocean.dto.EntityWiseACLDetailDTO;
 import com.tss.ocean.idao.IACLDAO;
 import com.tss.ocean.idao.IACLEntityDAO;
 import com.tss.ocean.idao.IEmployeeCategoryDAO;
-import com.tss.ocean.pojo.ACL;
 import com.tss.ocean.pojo.ACLEntity;
 import com.tss.ocean.pojo.EmployeeCategory;
 import com.tss.ocean.util.Constants;
@@ -64,14 +63,12 @@ public class ACLController {
         logger.info("access_control called.");
         ModelAndView mav = new ModelAndView("access_control");
         List<EmployeeCategory> employeeCategoryList = employeeCategoryDAO.getList();
-        logger.info("access_control called." + employeeCategoryDAO.getList());
+        logger.info("access_control called." + employeeCategoryList);
         mav.getModelMap().put("employeeCategoryList", employeeCategoryList);
 
         if (categoryId != null) {
             logger.info("Processing for category " + categoryId);
-            List<ACL> aclEntityList = aclDAO.getList();
-
-            List<Object[]> listByHQLQuery = aclEntityDAO.getListByHQLQuery("select aclEntity.Id,acl.aclModule,aclEntity.aclId,aclEntity.permissionLevel from ACL acl, ACLEntity aclEntity where acl.aclId = aclEntity.aclId and aclEntity.entityType = " + Constants.SECURITY_USER_TYPE_BASED + " and aclEntity.entityId = " + categoryId);
+            List<Object[]> listByHQLQuery = aclEntityDAO.getListByHQLQuery("select aclEntity.Id,acl.aclModule,aclEntity.aclId,aclEntity.permissionLevel from ACL acl, ACLEntity aclEntity where acl.aclId = aclEntity.aclId and aclEntity.entityType = " + Constants.ENTITY_GROUP + " and aclEntity.entityId = " + categoryId);
             List<EntityWiseACLDetailDTO> entityWiseACLDetails = new ArrayList<EntityWiseACLDetailDTO>();
             if (listByHQLQuery != null) {
                 for (Object[] values : listByHQLQuery) {
