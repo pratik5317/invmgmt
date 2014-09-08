@@ -692,20 +692,24 @@ ALTER TABLE `acl_entity` ADD UNIQUE `unique_index`(`aclid`, `entiyid`, `entiytyp
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 
 
+
+INSERT INTO users(name,password,usertypeid,isactive) VALUES('admin','admin',1,1);
+DELETE FROM employee_category;
+INSERT INTO employee_category(category,prefix,isactive) values('admin','admin',true);
+UPDATE employee_category SET id=1;
+DELETE FROM employee;
+INSERT INTO employees(employee_category_id,user_id,photo_data) VALUES SELECT 1,users.id,null FROM users WHERE users.name='admin';
+UPDATE employees SET id=1;
+INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES('purchaseorder',1,2,7);
+INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES('itemcategory',1,2,7);
+INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES('itemunit',1,2,7);
+INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES('item',1,2,7);
+INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES('account',1,2,7);
+INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES('purchaserequisition',1,2,7);
+
 INSERT INTO acl(aclid,aclmodule,parentaclid) VALUES('purchaseorder','Purchase Order',NULL);
 INSERT INTO acl(aclid,aclmodule,parentaclid) VALUES('itemcategory','Item Category',NULL);
 INSERT INTO acl(aclid,aclmodule,parentaclid) VALUES('itemunit','Item unit',NULL);
 INSERT INTO acl(aclid,aclmodule,parentaclid) VALUES('item','Item',NULL);
 INSERT INTO acl(aclid,aclmodule,parentaclid) VALUES('account','Accounts',NULL);
 INSERT INTO acl(aclid,aclmodule,parentaclid) VALUES('purchaserequisition','Purchase Requisition',NULL);
-/*
-INSERT INTO users(name,password,usertypeid,isactive) VALUES('admin','admin',1,1);
-INSERT INTO employee_category(category,prefix,isactive) values('admin','admin',true);
-INSERT INTO employees(employee_category_id,user_id,photo_data) VALUES SELECT employee_category.id,users.id,null FROM employee_category,users WHERE employee_category.category='admin' AND users.name='admin';
-INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES SELECT 'purchaseorder',employee_category.id,2,7 FROM employee_category WHERE employee_category.category='admin';
-INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES SELECT 'itemcategory',employee_category.id,2,7 FROM employee_category WHERE employee_category.category='admin';
-INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES SELECT 'itemunit',employee_category.id,2,7 FROM employee_category WHERE employee_category.category='admin';
-INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES SELECT 'item',employee_category.id,2,7 FROM employee_category WHERE employee_category.category='admin';
-INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES SELECT 'account',employee_category.id,2,7 FROM employee_category WHERE employee_category.category='admin';
-INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES SELECT 'purchaserequisition',employee_category.id,2,7 FROM employee_category WHERE employee_category.category='admin';
-*/

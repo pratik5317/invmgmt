@@ -112,7 +112,7 @@
                                                             <option value="1"  <c:if test="${aclEntity.permissionLevel == 1}"> SELECTED </c:if> ><spring:message code="label.accesstype.view" text="Label value is missing !!!"/></option>
                                                             <option value="2"  <c:if test="${aclEntity.permissionLevel == 2}"> SELECTED </c:if> ><spring:message code="label.accesstype.create" text="Label value is missing !!!"/></option>
                                                             <option value="3"  <c:if test="${aclEntity.permissionLevel == 3}"> SELECTED </c:if> ><spring:message code="label.accesstype.update" text="Label value is missing !!!"/></option>
-                                                            <option value="7"  <c:if test="${aclEntity.permissionLevel == 4}"> SELECTED </c:if> ><spring:message code="label.accesstype.delete" text="Label value is missing !!!"/></option>
+                                                            <option value="7"  <c:if test="${aclEntity.permissionLevel == 7}"> SELECTED </c:if> ><spring:message code="label.accesstype.delete" text="Label value is missing !!!"/></option>
                                                             </select>
                                                         </td>
                                                     </tr>                                        
