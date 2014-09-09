@@ -3,6 +3,7 @@ package com.tss.ocean.pojo;
 
 import java.sql.Blob;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -16,8 +17,8 @@ public class Employees implements java.io.Serializable {
     private Integer employeeCategoryId;
     @NotEmpty
     private String employeeNumber;
-    @NotEmpty
     @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @NotNull
     private Date joiningDate;
     @NotEmpty
     private String firstName;

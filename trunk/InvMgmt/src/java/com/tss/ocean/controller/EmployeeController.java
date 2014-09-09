@@ -362,7 +362,7 @@ public class EmployeeController {
 
         List<EmployeeCategory> categoryList = employeeCategoryDAO.getList();
         for (EmployeeCategory employeeCategory : categoryList) {
-            departmentMap.put(employeeCategory.getId(), employeeCategory.getCategory());
+            categoryMap.put(employeeCategory.getId(), employeeCategory.getCategory());
         }
         mav.getModelMap().put("categorymap", categoryMap);
         if (success != null) {
@@ -425,12 +425,10 @@ public class EmployeeController {
             mav.getModelMap().put("bankList", bankList);
             if (insertResult > 0) {
                 logger.info("Employee category Added Successfully with id " + insertResult);
-                return new ModelAndView("")
-                        .addObject("success", Utilities.getSpringMessage(messageSource, "employee.add.success", locale));
+                return mav.addObject("success", Utilities.getSpringMessage(messageSource, "employee.add.success", locale));
             } else {
                 logger.info("Error while inserting " + employees);
-                return new ModelAndView("add_employee", model)
-                        .addObject("error", Utilities.getSpringMessage(messageSource, "employee.add.error", locale));
+                return mav.addObject("error", Utilities.getSpringMessage(messageSource, "employee.add.error", locale));
             }
         } else {
             return new ModelAndView("add_employee", model);
@@ -449,6 +447,14 @@ public class EmployeeController {
         if (employees != null) {
             mav = new ModelAndView("edit_employee");
             mav.getModelMap().put("employee", employees);
+            List<Employees> employeeList = employeesDAO.getList();
+            List<EmployeeDepartment> departmentList = employeeDepartmentDAO.getList();
+            List<EmployeeCategory> categoryList = employeeCategoryDAO.getList();
+            List<Bank> bankList = bankDAO.getList();
+            mav.getModelMap().put("employeeDepartmentList", departmentList);
+            mav.getModelMap().put("employeeCategoryList", categoryList);
+            mav.getModelMap().put("employeeList", employeeList);
+            mav.getModelMap().put("bankList", bankList);
         } else {
 
             mav = new ModelAndView("redirect:employee.html");

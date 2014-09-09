@@ -214,7 +214,7 @@
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.reportingmanager" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">
                                                 <form:select class="form-control" path="reportingManagerId">
-                                                    <form:option value=""><spring:message code="label.employee.department.placeholder" text="Default Text"/></form:option>
+                                                    <form:option value=""><spring:message code="label.employee.reportingmanager.placeholder" text="Default Text"/></form:option>
                                                     <form:options items="${employeeList}" itemLabel="employeeNumber" itemValue="id"/>
                                                 </form:select>
                                                 <form:errors path="reportingManagerId" cssClass="error" />
@@ -473,7 +473,7 @@
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.uploadimage" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">                                            
                                                 <form:input path="fileData" type="file"/>
-                                                <img src="/employee_image.html?id=?id=${employee.id}" height="75px" width="75px" align="left" />
+<!--                                                <img src="/employee_image.html?id=?id=${employee.id}" height="75px" width="75px" align="left" />-->
                                                 <form:errors path="fileData" cssClass="error" />
                                             </div>
                                         </div>
