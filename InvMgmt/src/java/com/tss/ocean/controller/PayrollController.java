@@ -11,6 +11,7 @@ import com.tss.ocean.idao.IPayrollCategoriesDAO;
 import com.tss.ocean.pojo.Employees;
 import com.tss.ocean.pojo.MonthlyPayslips;
 import com.tss.ocean.pojo.PayrollCategories;
+import com.tss.ocean.pojo.Payslip;
 import com.tss.ocean.pojo.PayslipContainer;
 import com.tss.ocean.util.Utilities;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -306,4 +308,153 @@ public class PayrollController {
         }
         return false;
     }
+
+    @RequestMapping(value = "/payslips_list.html", method = RequestMethod.GET)
+    public ModelAndView getPayslipList(@RequestParam(value = "success", required = false) String success,
+            @RequestParam(value = "error", required = false) String error,
+            Locale locale) throws Exception {
+        LOGGER.info("payslips called.");
+        ModelAndView mav = new ModelAndView("payslips_list");
+
+        if (success != null) {
+            mav.getModelMap().put("success", success);
+        }
+        if (error != null) {
+            mav.getModelMap().put("error", error);
+        }
+        return mav;
+    }
+
+    @RequestMapping(value = "/get_payslip.html", method = RequestMethod.GET)
+    public ModelAndView getPayslipList(@RequestParam(value = "month") String month,
+            @RequestParam(value = "year") String year,
+            Locale locale,
+            @RequestParam(value = "success", required = false) String success,
+            @RequestParam(value = "error", required = false) String error) throws Exception {
+        LOGGER.info("payslips called.");
+        ModelAndView mav = new ModelAndView("payslips_list");
+
+        HashMap<Integer, Payslip> payslipMap = new HashMap<Integer, Payslip>();
+        if (month != null && year != null) {
+            List<MonthlyPayslips> payslips = getMonthlyPayslipsForMonthYear(Integer.valueOf(month), Integer.valueOf(year));
+            List<Integer> employeeList = new ArrayList<>();
+            if (payslips != null && !payslips.isEmpty()) {
+                for (MonthlyPayslips monthlyPayslips : payslips) {
+                    if (payslipMap.containsKey(monthlyPayslips.getEmployeeId())) {
+                        Payslip payslip = payslipMap.get(monthlyPayslips.getEmployeeId());
+                        PayrollCategories payrollCategories = payrollCategoriesDAO.getRecordByPrimaryKey(monthlyPayslips.getPayrollCategoryId());
+                        if (payrollCategories.getIsDeduction()) {
+                            payslip.setDeductions(payslip.getDeductions() + monthlyPayslips.getAmount());
+                            payslip.setTotal(payslip.getTotal() - monthlyPayslips.getAmount());
+                            payslip.getDeductionList().add(monthlyPayslips);
+                        } else {
+                            payslip.setSalary(payslip.getSalary() + monthlyPayslips.getAmount());
+                            payslip.setTotal(payslip.getTotal() + monthlyPayslips.getAmount());
+                            payslip.getSalaryList().add(monthlyPayslips);
+                        }
+
+                    } else {
+                        Payslip payslip = new Payslip();
+                        Employees employee = employeesDAO.getRecordByPrimaryKey(monthlyPayslips.getEmployeeId());
+                        payslip.setEmployeeId(monthlyPayslips.getEmployeeId());
+                        payslip.setEmployeeNumber(employee.getEmployeeNumber());
+                        payslip.setFirstName(employee.getFirstName());
+                        payslip.setLastName(employee.getLastName());
+
+                        PayrollCategories payrollCategories = payrollCategoriesDAO.getRecordByPrimaryKey(monthlyPayslips.getPayrollCategoryId());
+                        if (payrollCategories.getIsDeduction()) {
+                            payslip.setDeductions(monthlyPayslips.getAmount());
+                            payslip.setTotal(monthlyPayslips.getAmount() * -1);
+                            payslip.setDeductionList(new ArrayList<MonthlyPayslips>());
+                            payslip.getDeductionList().add(monthlyPayslips);
+                        } else {
+                            payslip.setSalary(monthlyPayslips.getAmount());
+                            payslip.setTotal(monthlyPayslips.getAmount());
+                            payslip.setSalaryList(new ArrayList<MonthlyPayslips>());
+                            payslip.getSalaryList().add(monthlyPayslips);
+                        }
+
+                        payslipMap.put(monthlyPayslips.getEmployeeId(), payslip);
+                        employeeList.add(monthlyPayslips.getEmployeeId());
+                    }
+                }
+
+                mav.getModelMap().put("employeeList", employeeList);
+                mav.getModelMap().put("payslipmap", payslipMap);
+
+            }
+        }
+
+        if (success != null) {
+            mav.getModelMap().put("success", success);
+        }
+        if (error != null) {
+            mav.getModelMap().put("error", error);
+        }
+        return mav;
+    }
+
+    List<MonthlyPayslips> getMonthlyPayslipsForMonthYear(int month, int year) {
+        List<MonthlyPayslips> list = monthlyPayslipsDAO.getList();
+        List<MonthlyPayslips> monthlyPayslipList = new ArrayList<>();
+        if (list != null && !list.isEmpty()) {
+            for (MonthlyPayslips payslip : list) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(payslip.getSalaryDate());
+                LOGGER.info("salary yeaar : " + cal.get(Calendar.YEAR));
+                LOGGER.info("salary month : " + cal.get(Calendar.MONTH));
+                LOGGER.info("param yeaar : " + year);
+                LOGGER.info("param month : " + month);
+
+                if (month == (cal.get(Calendar.MONTH)) && year == (cal.get(cal.get(Calendar.YEAR)))) {
+                    monthlyPayslipList.add(payslip);
+                }
+            }
+        }
+        return monthlyPayslipList;
+    }
+
+    @RequestMapping(value = "/payslip_detail.html", method = RequestMethod.GET)
+    public ModelAndView getDetailedPayslip(@RequestParam(value = "id") Integer id,
+            Locale locale,
+            @RequestParam(value = "success", required = false) String success,
+            @RequestParam(value = "error", required = false) String error, @ModelAttribute("payslipmap") @Valid HashMap<Integer, Payslip> payslipMap,
+            BindingResult result,
+            ModelMap model
+    ) throws Exception {
+        LOGGER.info("payslip_detail called.");
+        ModelAndView mav = new ModelAndView("payslip_detail");
+        List<MonthlyPayslips> monthlyPayslips = new ArrayList<>();
+        List<PayrollCategories> payrollCategorieses = payrollCategoriesDAO.getList();
+        Map<Integer, String> payrollCategoryMap = new HashMap<Integer, String>();
+        if (payrollCategorieses != null && !payrollCategorieses.isEmpty()) {
+            for (PayrollCategories payrollCategories : payrollCategorieses) {
+                payrollCategoryMap.put(payrollCategories.getId(), payrollCategories.getName());
+            }
+        }
+        if (id != null) {
+            Payslip payslip = payslipMap.get(id);
+            mav.getModelMap().put("payslip", payslip);
+            if (payslip != null) {
+                for (MonthlyPayslips monthlyPayslips1 : payslip.getSalaryList()) {
+                    monthlyPayslips.add(monthlyPayslips1);
+                }
+                for (MonthlyPayslips monthlyPayslips2 : payslip.getDeductionList()) {
+                    monthlyPayslips2.setAmount(monthlyPayslips2.getAmount() * (-1));
+                    monthlyPayslips.add(monthlyPayslips2);
+                }
+            }
+        }
+        mav.getModelMap().put("monthlyPayslips", monthlyPayslips);
+        mav.getModelMap().put("payrollcategormap", payrollCategoryMap);
+
+        if (success != null) {
+            mav.getModelMap().put("success", success);
+        }
+        if (error != null) {
+            mav.getModelMap().put("error", error);
+        }
+        return mav;
+    }
+
 }
