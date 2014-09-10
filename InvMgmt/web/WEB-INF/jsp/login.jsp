@@ -238,12 +238,12 @@
         <!-- login.jsp -->
         <div id="login">
             <h1 id="login_title">LOGIN</h1>
-            <form action="<c:url value="j_spring_security_check" />" id="login_form" method="post">
+            <form action="login.htm" id="login_form" method="post">
                 <div class="field_container">
-                    <input type="text" placeholder="User Name"  name="j_username" class="login-inp" />
+                    <input type="text" placeholder="User Name"  name="username" class="login-inp" />
                 </div>
                 <div class="field_container">
-                    <input type="Password" placeholder="Password" name="j_password" class="login-inp" />
+                    <input type="Password" placeholder="Password" name="password" class="login-inp" />
                     <button id="sign_in_button">
                         <span class="button_text"><input type="submit" class="btn" value="Login"> </span>
                     </button>

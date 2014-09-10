@@ -4,7 +4,6 @@
  */
 package com.tss.ocean.interceptor;
 
-import com.tss.ocean.pojo.Users;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -22,17 +21,14 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        logger.log(Level.OFF, "Interceptor: Pre-handle"+request.getRequestURI()+":"+request.getContextPath());
-        // Avoid a redirect loop for some urls
-//        if (!request.getRequestURI().equals(request.getContextPath()) 
-//                // && !request.getRequestURI().equals("/sample-interc/login.failed")
-//                && !request.getRequestURI().equals(request.getContextPath()+"/login.html")) {
-//            Users userData = (Users) request.getSession().getAttribute("LOGGEDIN_USER");
-//            if (userData == null) {
-//                response.sendRedirect(request.getContextPath()+"/login.html");
-//                return false;
-//            }
-//        }
+        logger.log(Level.OFF, "Interceptor: Pre-handle{0}:{1}", new Object[]{request.getRequestURI(), request.getContextPath()});
+        if (!request.getRequestURI().equals(request.getContextPath()) && !request.getRequestURI().equals(request.getContextPath()+"/login.html")) {
+            boolean allow = request.isUserInRole("ROLE_USER");
+            if(!allow) {
+                response.sendRedirect(request.getContextPath()+"/login.html");
+                return false;
+            }
+        }
         return true;
     }
 
