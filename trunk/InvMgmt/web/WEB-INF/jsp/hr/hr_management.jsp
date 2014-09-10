@@ -31,7 +31,7 @@
                             <ul>
                                 <li class=''><a href='employee.html'><span>Employee Management</span></a></li>
                                 <li class=''><a href='access_control.html'><span><spring:message code="menu.empmanagement.acl" text="Label value is missing !!!"/></span></a></li>
-                                <li class=''><a href='payslips.html'><span>PaySlips</span></a></li>
+                                <li class=''><a href='payslips_list.html'><span>PaySlips</span></a></li>
                                 <li class='has-sub'><a href='#'><span>Employee Leave Management</span></a>
                                     <ul style='display: block;'>
                                         <li><a href='leave_types.html'><span>Add Leave Type</span></a></li>
