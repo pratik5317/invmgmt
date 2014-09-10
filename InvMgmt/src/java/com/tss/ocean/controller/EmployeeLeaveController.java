@@ -13,6 +13,7 @@ import com.tss.ocean.pojo.EmployeeAttendances;
 import com.tss.ocean.pojo.EmployeeLeaveTypes;
 import com.tss.ocean.pojo.Employees;
 import com.tss.ocean.util.Utilities;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -215,13 +216,14 @@ public class EmployeeLeaveController {
         ModelAndView mav = new ModelAndView("add_attendance");
         List<Employees> employeeList = employeesDAO.getList();
         List<EmployeeLeaveTypes> employeeLeaveTypeList = employeeLeaveTypesDAO.getList();
-        List<Integer> hoursList = new ArrayList<>();
+        DecimalFormat decimalFormat = new DecimalFormat("00");
+        List<String> hoursList = new ArrayList<>();
         for (int i = 0; i < 23; i++) {
-            hoursList.add(i);
+            hoursList.add(decimalFormat.format(i));
         }
-        List<Integer> minutesList = new ArrayList<>();
+        List<String> minutesList = new ArrayList<>();
         for (int i = 0; i < 59; i++) {
-            minutesList.add(i);
+            minutesList.add(decimalFormat.format(i));
         }
         if (success != null) {
             mav.getModelMap().put("success", success);
@@ -246,13 +248,15 @@ public class EmployeeLeaveController {
         if (!result.hasErrors()) {
             List<Employees> employeeList = employeesDAO.getList();
             List<EmployeeLeaveTypes> employeeLeaveTypeList = employeeLeaveTypesDAO.getList();
-            List<Integer> hoursList = new ArrayList<>();
+
+            DecimalFormat decimalFormat = new DecimalFormat("00");
+            List<String> hoursList = new ArrayList<>();
             for (int i = 0; i < 23; i++) {
-                hoursList.add(i);
+                hoursList.add(decimalFormat.format(i));
             }
-            List<Integer> minutesList = new ArrayList<>();
+            List<String> minutesList = new ArrayList<>();
             for (int i = 0; i < 59; i++) {
-                minutesList.add(i);
+                minutesList.add(decimalFormat.format(i));
             }
             ModelAndView mav = new ModelAndView("add_attendance");
             mav.getModelMap().put("employeeList", employeeList);
@@ -269,11 +273,11 @@ public class EmployeeLeaveController {
             int insertResult = employeeAttendancesDAO.insert(employeeAttendances);
             if (insertResult > 0) {
                 logger.info("Employee attendance Added Successfully with id " + insertResult);
-                return new ModelAndView("redirect:add_attendance.html")
+                return mav
                         .addObject("success", Utilities.getSpringMessage(messageSource, "attendance.add.success", locale));
             } else {
                 logger.info("Error while inserting " + employeeAttendances);
-                return new ModelAndView("add_attendance", model)
+                return mav
                         .addObject("error", Utilities.getSpringMessage(messageSource, "attendance.add.error", locale));
             }
         } else {
@@ -340,7 +344,7 @@ public class EmployeeLeaveController {
         for (EmployeeAttendances employeeAttendance : employeeAttendanceses) {
             if (attendanceMap.containsKey(employeeAttendance.getEmployeeId())) {
                 cal.setTime(employeeAttendance.getAttendanceDate());
-                setsetAttendanceData(attendanceMap.get(employeeAttendance.getEmployeeId()), cal, employeeAttendance);
+                setAttendanceData(attendanceMap.get(employeeAttendance.getEmployeeId()), cal, employeeAttendance);
 
             } else {
                 AttendanceDate attendanceDate1 = new AttendanceDate();
@@ -350,7 +354,7 @@ public class EmployeeLeaveController {
                 attendanceDate1.setFromDate(attendanceDate.getFromDate());
                 attendanceDate1.setToDate(attendanceDate.getToDate());
                 cal.setTime(employeeAttendance.getAttendanceDate());
-                setsetAttendanceData(attendanceMap.get(employeeAttendance.getEmployeeId()), cal, employeeAttendance);
+                setAttendanceData(attendanceDate1, cal, employeeAttendance);
                 attendanceMap.put(employeeAttendance.getEmployeeId(), attendanceDate1);
             }
         }
@@ -370,17 +374,22 @@ public class EmployeeLeaveController {
         return employeeAttendancesDAO.getEmployeeAttendanceBetweenDates(fromDate, toDate);
     }
 
-    private void setsetAttendanceData(AttendanceDate attendanceDate, Calendar cal, EmployeeAttendances employeeAttendances) {
+    private void setAttendanceData(AttendanceDate attendanceDate, Calendar cal, EmployeeAttendances employeeAttendances) {
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-        if (!(dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY)) {
+        logger.info("setAttendanceData called " + dayOfWeek + "   " + Calendar.SATURDAY + "  " + Calendar.SUNDAY);
+//        if (!(dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY)) {
+            logger.info(" 111 setAttendanceData called");
             attendanceDate.setTotalDays(attendanceDate.getTotalDays() + 1);
             if (employeeAttendances.getIsLeave()) {
                 logger.info("isleave");
                 attendanceDate.setAbsentDays(attendanceDate.getAbsentDays() + 1);
             } else {
-                 logger.info("isleave no");
+                logger.info("isleave no");
                 attendanceDate.setPresentDays(attendanceDate.getPresentDays() + 1);
             }
-        }
+//        }else{
+//             logger.info(" 222 setAttendanceData called");
+//        }
     }
+    
 }

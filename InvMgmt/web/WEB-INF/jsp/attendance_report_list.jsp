@@ -100,7 +100,7 @@
                                                 <spring:message code="label.attendance.absentdays" text="Label value is missing !!!"/>
                                             </th>  -
                                             <th data-hide="phone" data-name="Delete">
-                                                <spring:message code="label.attendance.totaldys" text="Label value is missing !!!"/> 
+                                                <spring:message code="label.attendance.totaldays" text="Label value is missing !!!"/> 
                                             </th>
                                         </tr>
                                     </thead>
