@@ -64,11 +64,15 @@
         <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
             <property name="paramName" value="lang" />
         </bean>
+        <mvc:interceptor>
+            <mvc:mapping path="/*"/>
+            <bean class="com.tss.ocean.interceptor.AuthenticationInterceptor" />
+        </mvc:interceptor>
     </mvc:interceptors>
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
     
-    <security:http entry-point-ref="loginUrlAuthenticationEntryPoint" use-expressions="true">        
+    <security:http entry-point-ref="loginUrlAuthenticationEntryPoint" use-expressions="true">
         <security:intercept-url pattern="/**" access="permitAll" />
         <security:custom-filter position="FORM_LOGIN_FILTER" ref="userAuthenticationProcessingFilter" />        
         <security:logout logout-url='/logout.htm' />
@@ -88,6 +92,10 @@
         <property name="authenticationManager" ref="authenticationManager" />
         <property name="authenticationFailureHandler" ref="loginMappingFailureHandler" />
         <property name="authenticationSuccessHandler" ref="loginSuccessHandler" />
+        <property name="filterProcessesUrl" value="/login.htm" />
+        <property name="usernameParameter" value="username"/>
+        <property name="passwordParameter" value="password"/>
+        <property name="postOnly" value="true"/>
     </bean>
  
     <bean id="loginMappingFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
