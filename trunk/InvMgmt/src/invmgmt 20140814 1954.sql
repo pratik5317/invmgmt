@@ -691,14 +691,23 @@ ALTER TABLE `acl_entity` ADD UNIQUE `unique_index`(`aclid`, `entiyid`, `entiytyp
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 
+DROP TABLE IF EXISTS `employee_category`;
+CREATE TABLE `employee_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `category` varchar(100) NOT NULL,
+  `prefix` varchar(45) NOT NULL,
+  `isactive` int(10) unsigned zerofill NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO users(name,password,usertypeid,isactive) VALUES('admin','admin',1,1);
 DELETE FROM employee_category;
 INSERT INTO employee_category(category,prefix,isactive) values('admin','admin',true);
 UPDATE employee_category SET id=1;
-DELETE FROM employee;
-INSERT INTO employees(employee_category_id,user_id,photo_data) VALUES SELECT 1,users.id,null FROM users WHERE users.name='admin';
+DELETE FROM employees;
+INSERT INTO `employees` (`id`,`employee_category_id`,`employee_number`,`joining_date`,`first_name`,`middle_name`,`last_name`,`gender`,`job_title`,`employee_position_id`,`employee_department_id`,`reporting_manager_id`,`employee_grade_id`,`qualification`,`experience_detail`,`experience_year`,`experience_month`,`status`,`status_description`,`date_of_birth`,`marital_status`,`children_count`,`father_name`,`mother_name`,`husband_name`,`blood_group`,`nationality_id`,`home_address_line1`,`home_address_line2`,`home_city`,`home_state`,`home_country_id`,`home_pin_code`,`office_address_line1`,`office_address_line2`,`office_city`,`office_state`,`office_country_id`,`office_pin_code`,`office_phone1`,`office_phone2`,`mobile_phone`,`home_phone`,`email`,`fax`,`photo_file_name`,`photo_content_type`,`photo_data`,`created_at`,`updated_at`,`photo_file_size`,`user_id`) 
+ SELECT 1,1,NULL,NULL,'admin',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,id FROM users;
 UPDATE employees SET id=1;
 INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES('purchaseorder',1,2,7);
 INSERT INTO acl_entity(aclid,entityid,entitytype,permissionlevel) VALUES('itemcategory',1,2,7);
