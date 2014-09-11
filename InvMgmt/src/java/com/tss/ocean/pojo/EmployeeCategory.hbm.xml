@@ -16,8 +16,6 @@
         </property>
          <property name="isActive" type="java.lang.Integer">
             <column name="isactive" />
-        </property>
-                                                            
-                                                            
+        </property>                                                                                                                        
     </class>
 </hibernate-mapping>

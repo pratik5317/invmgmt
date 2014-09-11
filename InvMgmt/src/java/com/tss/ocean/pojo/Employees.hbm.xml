@@ -161,7 +161,7 @@
         <property name="userId" type="java.lang.Integer">
             <column name="user_id" />
         </property>
-        <property name="passportNumber" type="string">
+        <!--<property name="passportNumber" type="string">
             <column name="passport_number" />
         </property>
         <property name="passportExpiryDate" type="timestamp">
@@ -178,7 +178,7 @@
         </property>
         <property name="codeNumber" type="string">
             <column name="code_number" />
-        </property>
+        </property>-->
 
     </class>
 </hibernate-mapping>
