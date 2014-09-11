@@ -281,7 +281,25 @@ public class EmployeeLeaveController {
                         .addObject("error", Utilities.getSpringMessage(messageSource, "attendance.add.error", locale));
             }
         } else {
-            return new ModelAndView("add_attendance", model);
+            ModelAndView mav = new ModelAndView("add_attendance");
+            List<Employees> employeeList = employeesDAO.getList();
+            List<EmployeeLeaveTypes> employeeLeaveTypeList = employeeLeaveTypesDAO.getList();
+            DecimalFormat decimalFormat = new DecimalFormat("00");
+            List<String> hoursList = new ArrayList<>();
+            for (int i = 0; i < 23; i++) {
+                hoursList.add(decimalFormat.format(i));
+            }
+            List<String> minutesList = new ArrayList<>();
+            for (int i = 0; i < 59; i++) {
+                minutesList.add(decimalFormat.format(i));
+            }
+
+            mav.getModelMap().put("employeeList", employeeList);
+            mav.getModelMap().put("employeeLeaveTypeList", employeeLeaveTypeList);
+            mav.getModelMap().put("hoursList", hoursList);
+            mav.getModelMap().put("minutesList", minutesList);
+            mav.getModelMap().put("attendance", new EmployeeAttendances());
+            return mav;
         }
 
     }
@@ -378,18 +396,18 @@ public class EmployeeLeaveController {
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
         logger.info("setAttendanceData called " + dayOfWeek + "   " + Calendar.SATURDAY + "  " + Calendar.SUNDAY);
 //        if (!(dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY)) {
-            logger.info(" 111 setAttendanceData called");
-            attendanceDate.setTotalDays(attendanceDate.getTotalDays() + 1);
-            if (employeeAttendances.getIsLeave()) {
-                logger.info("isleave");
-                attendanceDate.setAbsentDays(attendanceDate.getAbsentDays() + 1);
-            } else {
-                logger.info("isleave no");
-                attendanceDate.setPresentDays(attendanceDate.getPresentDays() + 1);
-            }
+        logger.info(" 111 setAttendanceData called");
+        attendanceDate.setTotalDays(attendanceDate.getTotalDays() + 1);
+        if (employeeAttendances.getIsLeave()) {
+            logger.info("isleave");
+            attendanceDate.setAbsentDays(attendanceDate.getAbsentDays() + 1);
+        } else {
+            logger.info("isleave no");
+            attendanceDate.setPresentDays(attendanceDate.getPresentDays() + 1);
+        }
 //        }else{
 //             logger.info(" 222 setAttendanceData called");
 //        }
     }
-    
+
 }
