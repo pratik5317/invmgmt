@@ -54,7 +54,7 @@ public class UserPermissionEvaluator  implements PermissionEvaluator {
         if(user == null) {
             return false;
         }
-        Employees employee = employeesDAO.getRecordByKeyandValue("userid", user.getId());
+        Employees employee = employeesDAO.getRecordByKeyandValue("userId", user.getId());
         if(employee == null) {
             return false;
         }
