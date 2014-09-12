@@ -123,32 +123,27 @@
                     <div class="catagory-main-box top-radius">
                         <div class="cat-box-title cat-title-font top-radius"><spring:message code="label.employee" text="Default Text"/></div>
                         <div class="row text-pad-top visible-lg visible-md visible-sm">
+
                             <form:form action="add_employee.html" method="POST" modelAttribute="employee" enctype="multipart/form-data">                                
                                 <div class="row tb-margin">
                                     <div class="col-sm-2"></div>
                                     <div class="col-sm-8">
+
                                         <c:if test="${not empty error}">  
                                             <div class="row text-pad-top visible-lg visible-md visible-sm"><div class="errorblock">${error}</div></div>
                                             </c:if>
                                             <c:if test="${not empty success}">  
                                             <div class="row text-pad-top visible-lg visible-md visible-sm"><div class="successblock">${success}</div></div>
                                             </c:if>
+                                        <div style="font-weight : bold;padding : 10px 0 30px 0;"> Fields marked with <span style=" color : #f00;font-size : 1.1em;">*</span> must be filled.</div>
+                                        <span style="font-weight: bold; padding-top:10px;"><spring:message code="label.employee.generaldetail" text="Default Text"/></span>
+                                        <hr style="background:#9E0F15;height: 1px;border: none; margin-bottom: 15px;">
 
                                         <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.number" text="Default Text"/></label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.number" text="Default Text"/></label><span style=" color : #f00;font-size : 1.1em;">*</span>
                                             <div class="col-sm-8 col-xs-12">                                            
                                                 <form:input type="text" class="form-control" path="employeeNumber" placeholder="${employeenumberplaceholder}" />
                                                 <form:errors path="employeeNumber" cssClass="error" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.category" text="Default Text"/></label>
-                                            <div class="col-sm-8 col-xs-12">
-                                                <form:select class="form-control" path="employeeCategoryId">
-                                                    <form:option value=""><spring:message code="label.employee.category.placeholder" text="Default Text"/></form:option>
-                                                    <form:options items="${employeeCategoryList}" itemLabel="category" itemValue="id"/>
-                                                </form:select>
-                                                <form:errors path="employeeCategoryId" cssClass="error" />
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -158,8 +153,10 @@
                                                 <form:errors path="joiningDate" cssClass="error" />
                                             </div>
                                         </div>
+
+
                                         <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.firstname" text="Default Text"/></label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.firstname" text="Default Text"/></label><span style=" color : #f00;font-size : 1.1em;">*</span>
                                             <div class="col-sm-8 col-xs-12">                                            
                                                 <form:input type="text" class="form-control" path="firstName" placeholder="${firstnameplaceholder}" />
                                                 <form:errors path="firstName" cssClass="error" />
@@ -167,7 +164,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.lastname" text="Default Text"/></label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.lastname" text="Default Text"/></label><span style=" color : #f00;font-size : 1.1em;">*</span>
                                             <div class="col-sm-8 col-xs-12">                                            
                                                 <form:input type="text" class="form-control" path="lastName" placeholder="${lastnameplaceholder}" />
                                                 <form:errors path="lastName" cssClass="error" />
@@ -182,6 +179,13 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.email" text="Default Text"/></label>
+                                            <div class="col-sm-8 col-xs-12">                                            
+                                                <form:input type="text" class="form-control" path="email" placeholder="${emailplaceholder}" />
+                                                <form:errors path="email" cssClass="error" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.gender" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">
                                                 <div class="form-control">
@@ -192,20 +196,38 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.jobtitle" text="Default Text"/></label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.employee.birthdate" text="Default Text"/></label><span style=" color : #f00;font-size : 1.1em;">*</span>
                                             <div class="col-sm-8 col-xs-12">                                            
-                                                <form:input type="text" class="form-control" path="jobTitle" placeholder="${jobtitleplaceholder}" />
-                                                <form:errors path="jobTitle" cssClass="error" />
+                                                <form:input type="date" class="form-control" path="dateOfBirth" placeholder="${birthdateplaceholder}" />
+                                                <form:errors path="dateOfBirth" cssClass="error" />
                                             </div>
                                         </div>
+
                                         <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.department" text="Default Text"/></label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.department" text="Default Text"/></label><span style=" color : #f00;font-size : 1.1em;">*</span>
                                             <div class="col-sm-8 col-xs-12">
-                                                <form:select class="form-control" path="employeeCategoryId">
+                                                <form:select class="form-control" path="employeeDepartmentId">
                                                     <form:option value=""><spring:message code="label.employee.department.placeholder" text="Default Text"/></form:option>
                                                     <form:options items="${employeeDepartmentList}" itemLabel="department" itemValue="id"/>
                                                 </form:select>
                                                 <form:errors path="employeeDepartmentId" cssClass="error" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.category" text="Default Text"/></label><span style=" color : #f00;font-size : 1.1em;">*</span>
+                                            <div class="col-sm-8 col-xs-12">
+                                                <form:select class="form-control" path="employeeCategoryId">
+                                                    <form:option value=""><spring:message code="label.employee.category.placeholder" text="Default Text"/></form:option>
+                                                    <form:options items="${employeeCategoryList}" itemLabel="category" itemValue="id"/>
+                                                </form:select>
+                                                <form:errors path="employeeCategoryId" cssClass="error" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.jobtitle" text="Default Text"/></label>
+                                            <div class="col-sm-8 col-xs-12">                                            
+                                                <form:input type="text" class="form-control" path="jobTitle" placeholder="${jobtitleplaceholder}" />
+                                                <form:errors path="jobTitle" cssClass="error" />
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -235,24 +257,32 @@
                                         <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.expyears" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">                                            
-                                                <form:input type="text" class="form-control" path="experienceYear" placeholder="${experienceyearsplaceholder}" />
-                                                <form:errors path="experienceYear" cssClass="error" />
+                                                <form:select class="form-control" path="experienceYear">
+                                                    <form:options items="${yearList}"/>
+                                                </form:select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.expmonths" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">                                            
-                                                <form:input type="text" class="form-control" path="experienceMonth" placeholder="${experiencemonthsplaceholder}" />
-                                                <form:errors path="experienceMonth" cssClass="error" />
+
+                                                <form:select class="form-control" path="experienceMonth">
+                                                    <form:options items="${monthList}"/>
+                                                </form:select>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text visible-lg visible-md visible-sm"><spring:message code="label.employee.birthdate" text="Default Text"/></label>
-                                            <div class="col-sm-8 col-xs-12">                                            
-                                                <form:input type="date" class="form-control" path="dateOfBirth" placeholder="${birthdateplaceholder}" />
-                                                <form:errors path="dateOfBirth" cssClass="error" />
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.status" text="Default Text"/></label>
+                                            <div class="col-sm-8 col-xs-12">
+                                                <div class="form-control">
+                                                    <form:radiobutton path="status" value="1" checked="checked"/><spring:message code="label.empcategory.status.active" text="Default Text"/>
+                                                    <form:radiobutton path="status" value="0" /><spring:message code="label.empcategory.status.inactive" text="Default Text"/>
+                                                </div>
+                                                <form:errors path="status" cssClass="error" />
                                             </div>
                                         </div>
+                                        <span style="font-weight: bold; padding-top:10px;"><spring:message code="label.employee.personaldetail" text="Default Text"/></span>
+                                        <hr style="background:#9E0F15;height: 1px;border: none; margin-bottom: 15px;">
                                         <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.maritalstatus" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">
@@ -293,18 +323,18 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.bloodgroup.placeholder" text="Default Text"/></label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.bloodgroup" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">
                                                 <form:select class="form-control" path="bloodGroup">
                                                     <form:option value=""><spring:message code="label.employee.bloodgroup.placeholder" text="Default Text"/></form:option>
-                                                    <form:option value=""><spring:message code="label.employee.bloodgroup.apos" text="Default Text"/></form:option>
-                                                    <form:option value=""><spring:message code="label.employee.bloodgroup.aneg" text="Default Text"/></form:option>
-                                                    <form:option value=""><spring:message code="label.employee.bloodgroup.bpos" text="Default Text"/></form:option>
-                                                    <form:option value=""><spring:message code="label.employee.bloodgroup.bneg" text="Default Text"/></form:option>
-                                                    <form:option value=""><spring:message code="label.employee.bloodgroup.opos" text="Default Text"/></form:option>
-                                                    <form:option value=""><spring:message code="label.employee.bloodgroup.oneg" text="Default Text"/></form:option>
-                                                    <form:option value=""><spring:message code="label.employee.bloodgroup.abpos" text="Default Text"/></form:option>
-                                                    <form:option value=""><spring:message code="label.employee.bloodgroup.abneg" text="Default Text"/></form:option>
+                                                    <form:option value="A+"><spring:message code="label.employee.bloodgroup.apos" text="Default Text"/></form:option>
+                                                    <form:option value="A-"><spring:message code="label.employee.bloodgroup.aneg" text="Default Text"/></form:option>
+                                                    <form:option value="B+"><spring:message code="label.employee.bloodgroup.bpos" text="Default Text"/></form:option>
+                                                    <form:option value="B-"><spring:message code="label.employee.bloodgroup.bneg" text="Default Text"/></form:option>
+                                                    <form:option value="O+"><spring:message code="label.employee.bloodgroup.opos" text="Default Text"/></form:option>
+                                                    <form:option value="O-"><spring:message code="label.employee.bloodgroup.oneg" text="Default Text"/></form:option>
+                                                    <form:option value="AB+"><spring:message code="label.employee.bloodgroup.abpos" text="Default Text"/></form:option>
+                                                    <form:option value="AB-"><spring:message code="label.employee.bloodgroup.abneg" text="Default Text"/></form:option>
                                                 </form:select>
                                                 <form:errors path="bloodGroup" cssClass="error" />
                                             </div>
@@ -407,13 +437,7 @@
                                                 <form:errors path="homePhone" cssClass="error" />
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.email" text="Default Text"/></label>
-                                            <div class="col-sm-8 col-xs-12">                                            
-                                                <form:input type="text" class="form-control" path="email" placeholder="${emailplaceholder}" />
-                                                <form:errors path="email" cssClass="error" />
-                                            </div>
-                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.fax" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">                                            
@@ -460,7 +484,7 @@
                                                 <form:errors path="accountNumber" cssClass="error" />
                                             </div>
                                         </div>
-                                            <div class="form-group">
+                                        <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.employee.codeno" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">                                            
                                                 <form:input type="text" class="form-control" path="codeNumber" placeholder="${codenoplaceholder}" />
