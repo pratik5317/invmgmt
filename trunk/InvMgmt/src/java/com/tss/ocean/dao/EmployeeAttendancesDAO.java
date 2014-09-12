@@ -22,14 +22,8 @@ public class EmployeeAttendancesDAO extends GenericDAOImpl<EmployeeAttendances, 
     @Override
     public List<EmployeeAttendances> getEmployeeAttendanceBetweenDates(Date fromdate, Date todate) {
 
+        Map< String, Object> parameterNameAndValues = new HashMap<String, Object>();
 
-        Map < String
-        , Object > parameterNameAndValues = new HashMap<String, Object>();
-
-        Date startDate;
-        Date endDate;
-
-// Assign values to startDate and endDate
         parameterNameAndValues.put("startDate", fromdate);
         parameterNameAndValues.put("endDate", todate);
 
@@ -43,4 +37,43 @@ public class EmployeeAttendancesDAO extends GenericDAOImpl<EmployeeAttendances, 
 
         return query.list();
     }
+
+    @Override
+    public List<EmployeeAttendances> getEmployeeAttendanceBetweenDatesByEmployee(Integer employeeId, Date fromdate, Date todate) {
+
+        Map< String, Object> parameterNameAndValues = new HashMap<String, Object>();
+
+        parameterNameAndValues.put("startDate", fromdate);
+        parameterNameAndValues.put("endDate", todate);
+        parameterNameAndValues.put("employeeId", employeeId);
+
+        String hqlQuery = "FROM EmployeeAttendances e WHERE e.attendanceDate  BETWEEN :startDate AND :endDate AND e.employeeId=:employeeId";
+
+        Query query = HibernateUtil.getCurrentSession().createQuery(hqlQuery);
+
+        for (Entry<String, Object> e : parameterNameAndValues.entrySet()) {
+            query.setParameter(e.getKey(), e.getValue());
+        }
+
+        return query.list();
+    }
+
+    @Override
+    public List<EmployeeAttendances> getEmployeeAttendanceByDateByEmployeeId(Date attendanceDate, Integer employeeId) {
+        Map< String, Object> parameterNameAndValues = new HashMap<String, Object>();
+
+        parameterNameAndValues.put("attendanceDate", attendanceDate);
+        parameterNameAndValues.put("employeeId", employeeId);
+
+        String hqlQuery = "FROM EmployeeAttendances e WHERE e.attendanceDate=:attendanceDate AND e.employeeId=:employeeId";
+
+        Query query = HibernateUtil.getCurrentSession().createQuery(hqlQuery);
+
+        for (Entry<String, Object> e : parameterNameAndValues.entrySet()) {
+            query.setParameter(e.getKey(), e.getValue());
+        }
+
+        return query.list();
+    }
+   
 }

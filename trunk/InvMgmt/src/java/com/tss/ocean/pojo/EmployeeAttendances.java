@@ -14,6 +14,7 @@ public class EmployeeAttendances implements java.io.Serializable {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @NotNull
     private Date attendanceDate;
+    @NotNull
     private Integer employeeId;
     private Integer employeeLeaveTypeId;
     private String reason;

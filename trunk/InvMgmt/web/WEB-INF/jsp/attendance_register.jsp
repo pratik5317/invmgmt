@@ -32,7 +32,7 @@
                         <div id='cssmenu'>
                             <ul>
                                 <li class='has-sub active'><a href='employee.html'><span><spring:message code="menu.employeemanagement" text="Label value is missing !!!"/></span></a>
-                                    <li class=''><a href='access_control.html'><span><spring:message code="menu.empmanagement.acl" text="Label value is missing !!!"/></span></a></li>
+                                <li class=''><a href='access_control.html'><span><spring:message code="menu.empmanagement.acl" text="Label value is missing !!!"/></span></a></li>
                                 <li class=''><a href='payslips_list.html'><span><spring:message code="menu.payslips" text="Label value is missing !!!"/></span></a></li>
                                 <li class='last'><a href='#'><span><spring:message code="menu.employeeleavemanagement" text="Label value is missing !!!"/></span></a>
                                     <ul style='display: block;'>
@@ -67,18 +67,27 @@
                                     <div class="col-sm-4">
                                         <a href="add_attendance.html" class="btn btn-info add-row addrow-btn-left"><spring:message code="add.attendance" text="Label value is missing !!!"/></a>
                                     </div>
+                                    <div class="col-sm-4">
+                                        <form method="post" action="get_attendance_register.html">
+                                            <table width="100%">
+                                                <tr>
+                                                    <td width="30%">From Date: <input type="text" name="fromDate" id="fromDate" /></td> 
+                                                    <td width="5%">&nbsp;</td> 
+                                                    <td width="30%">To Date: <input type="text" name="toDate" id="toDate" /></td>
+                                                    <td width="30%">Employee: <select  name="employee">
+                                                            <c:forEach var="employee" items="${employeeList}">
+                                                                <option value="${employee.id}">${employee.employeeNumber}</option>
+                                                            </c:forEach>
+
+
+                                                        </select></td>
+                                                    <td width="25%"><input type="submit" value="Date Search" class="btn btn-info add-row addrow-btn-left" /></td>
+                                                </tr>
+                                            </table>
+                                        </form>
+                                    </div>
                                     <div class="col-sm-8">
-                                        <div class="form-group visible-sm visible-md visible-lg">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.search" text="Label value is missing !!!"/></label>
-                                            <div class="col-sm-8 col-xs-12">
-                                                <input id="filter" class="form-control" type="text"/>
-                                            </div>
-                                        </div>
-                                        <!--                                        <div class="form-group visible-xs">
-                                                                                    <div class="col-xs-12">
-                                                                                        <input id="filter" placeholder="${search}" class="form-control" type="text"/>
-                                                                                    </div>
-                                                                                </div>-->
+
                                     </div>
                                 </div>
                                 <table id="dttable" class="table table-bordered table-striped" data-filter="#filter" data-page-size="5">
@@ -98,24 +107,22 @@
                                             </th>  
                                             <th data-toggle="true">
                                                 <spring:message code="label.attendance.isleave" text="Label value is missing !!!"/>
-                                            </th>  -
-                                            <th data-hide="phone" data-name="Delete">
-                                                <spring:message code="label.purorder.action" text="Label value is missing !!!"/> 
-                                            </th>
+                                            </th> 
+                                           
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <c:forEach var="attendance" items="${attendanceList}">
                                             <tr>
-                                                <td>${employeeMap[attendance.employeeId]}</td>
-                                                <td>${attendance.attendancedate}</td>
+                                                <td>${employee.firstName}(${employee.employeeNumber})</td>
+                                                <td>${attendance.attendanceDate}</td>
                                                 <td>${attendance.inTime}</td>
                                                 <td>${attendance.outTime}</td>
                                                 <td>${attendance.isLeave}</td>
-                                                <td>
+<!--                                                <td>
                                                     <a href="edit_payroll_category.html?id=${attendance.id}" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</a>
-                                                    
-                                                </td>
+
+                                                </td>-->
                                             </tr>                                        
                                         </c:forEach>
                                     </tbody>
@@ -135,27 +142,19 @@
             <div class=""></div>
             <div class=""></div>
         </div>
-        <!-- /container -->
-        <!--Responsive Table-->
-        <script type="text/javascript">
-        </script>
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="js/bootstrap.min.js"></script>
-        <!-- Jquery UI Javascript -->
-        <script src="js/jquery-ui.js"></script>
-        <script type="text/javascript">
-                                            $('input[type=date]').datepicker({dateFormat: 'dd/mm/yy'});
-        </script>
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="js/bootstrap.min.js"></script>
+       <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.dataTables.min.js"></script>
         <script src="js/dataTables.responsive.min.js"></script>
         <script src="js/ajax-bootstrap3.js"></script>
-        <script src="js/docs.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
+                $("#fromDate").datepicker({
+                    dateFormat: 'yy/mm/dd'
+                });
+                $("#toDate").datepicker(
+                        {dateFormat: 'yy/mm/dd'});
+                var table = $('#dttable').DataTable();
                 $('.row-delete').click(function(eve) {
                     var row = this;
                     eve.preventDefault();
@@ -163,14 +162,13 @@
                         url: $(row).attr('href')
                         , success: function(response) {
                             if (response === true) {
-                                $(row).closest('tr').remove();
+                                table.row($(row).closest('tr')).remove().draw(false);
                             }
                         }
                     });
                     return false;
                 });
             });
-            
         </script>
     </body>
 </html>
