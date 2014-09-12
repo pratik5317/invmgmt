@@ -14,11 +14,11 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 public class Employees implements java.io.Serializable {
 
     private Integer id;
+    @NotNull
     private Integer employeeCategoryId;
     @NotEmpty
     private String employeeNumber;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @NotNull
     private Date joiningDate;
     @NotEmpty
     private String firstName;
@@ -28,6 +28,7 @@ public class Employees implements java.io.Serializable {
     private Boolean gender;
     private String jobTitle;
     private Integer employeePositionId;
+   @NotNull
     private Integer employeeDepartmentId;
     private Integer reportingManagerId;
     private Integer employeeGradeId;
@@ -38,6 +39,7 @@ public class Employees implements java.io.Serializable {
     private Boolean status;
     private String statusDescription;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @NotNull
     private Date dateOfBirth;
     private String maritalStatus;
     private Integer childrenCount;

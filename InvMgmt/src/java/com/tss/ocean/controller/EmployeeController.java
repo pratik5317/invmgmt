@@ -15,6 +15,7 @@ import com.tss.ocean.pojo.EmployeeDepartment;
 import com.tss.ocean.pojo.Employees;
 import com.tss.ocean.util.Utilities;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -387,6 +388,16 @@ public class EmployeeController {
         if (error != null) {
             mav.getModelMap().put("error", error);
         }
+        List<Integer> yearsList = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            yearsList.add(i);
+        }
+        List<Integer> monthList = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            monthList.add(i);
+        }
+        mav.getModelMap().put("yearList", yearsList);
+        mav.getModelMap().put("monthList", monthList);
         List<Employees> employeeList = employeesDAO.getList();
         List<EmployeeDepartment> departmentList = employeeDepartmentDAO.getList();
         List<EmployeeCategory> categoryList = employeeCategoryDAO.getList();
@@ -396,6 +407,7 @@ public class EmployeeController {
         mav.getModelMap().put("employeeCategoryList", categoryList);
         mav.getModelMap().put("employeeList", employeeList);
         mav.getModelMap().put("bankList", bankList);
+
         return mav;
     }
 
@@ -406,32 +418,58 @@ public class EmployeeController {
             Locale locale) throws Exception {
         logger.info("add_employee_category-post called.");
         ModelAndView mav = new ModelAndView("redirect:add_employee.html");
+        List<Employees> employeeList = employeesDAO.getList();
+        List<EmployeeDepartment> departmentList = employeeDepartmentDAO.getList();
+        List<EmployeeCategory> categoryList = employeeCategoryDAO.getList();
+        List<Bank> bankList = bankDAO.getList();
+        List<Integer> yearsList = new ArrayList<>();
+        for (int i = 0; i < 13; i++) {
+            yearsList.add(i);
+        }
+        List<Integer> monthList = new ArrayList<>();
+        for (int i = 1; i <= 12; i++) {
+            monthList.add(i);
+        }
+        mav.getModelMap().put("yearList", yearsList);
+        mav.getModelMap().put("monthList", monthList);
+        mav.getModelMap().put("employee", employees);
+        mav.getModelMap().put("employeeDepartmentList", departmentList);
+        mav.getModelMap().put("employeeCategoryList", categoryList);
+        mav.getModelMap().put("employeeList", employeeList);
+        mav.getModelMap().put("bankList", bankList);
         if (!result.hasErrors()) {
-            if (employees.getFileData() != null) {
-                employees.setPhotoData(Hibernate.createBlob(employees.getFileData().getInputStream()));
-                employees.setPhotoFileName(employees.getFileData().getOriginalFilename());
-                employees.setPhotoContentType(employees.getFileData().getContentType());
-                employees.setPhotoFileSize(new Long(employees.getFileData().getSize()).intValue());
-            }
-            int insertResult = employeesDAO.insert(employees);
-            List<Employees> employeeList = employeesDAO.getList();
-            List<EmployeeDepartment> departmentList = employeeDepartmentDAO.getList();
-            List<EmployeeCategory> categoryList = employeeCategoryDAO.getList();
-            List<Bank> bankList = bankDAO.getList();
-            mav.getModelMap().put("employee", employees);
-            mav.getModelMap().put("employeeDepartmentList", departmentList);
-            mav.getModelMap().put("employeeCategoryList", categoryList);
-            mav.getModelMap().put("employeeList", employeeList);
-            mav.getModelMap().put("bankList", bankList);
-            if (insertResult > 0) {
-                logger.info("Employee category Added Successfully with id " + insertResult);
-                return mav.addObject("success", Utilities.getSpringMessage(messageSource, "employee.add.success", locale));
+            List<Employees> employeeNumberList = getEmployeeByEmployeeNumber(employees.getEmployeeNumber());
+            if (employeeNumberList != null && !employeeNumberList.isEmpty()) {
+                logger.info("Employee number already exist");
+                return mav.addObject("error", Utilities.getSpringMessage(messageSource, "employee.add.employeenumberexist.error", locale));
             } else {
-                logger.info("Error while inserting " + employees);
-                return mav.addObject("error", Utilities.getSpringMessage(messageSource, "employee.add.error", locale));
+                if (employees.getFileData() != null) {
+                    employees.setPhotoData(Hibernate.createBlob(employees.getFileData().getInputStream()));
+                    employees.setPhotoFileName(employees.getFileData().getOriginalFilename());
+                    employees.setPhotoContentType(employees.getFileData().getContentType());
+                    employees.setPhotoFileSize(new Long(employees.getFileData().getSize()).intValue());
+                }
+                int insertResult = employeesDAO.insert(employees);
+
+                if (insertResult > 0) {
+                    logger.info("Employee category Added Successfully with id " + insertResult);
+                    return mav.addObject("success", Utilities.getSpringMessage(messageSource, "employee.add.success", locale));
+                } else {
+                    logger.info("Error while inserting " + employees);
+                    return mav.addObject("error", Utilities.getSpringMessage(messageSource, "employee.add.error", locale));
+                }
             }
         } else {
-            return new ModelAndView("add_employee", model);
+            ModelAndView mav1 = new ModelAndView("add_employee", model);
+            mav.getModelMap().put("yearList", yearsList);
+            mav.getModelMap().put("monthList", monthList);
+            mav1.getModelMap().put("employee", employees);
+            mav1.getModelMap().put("employeeDepartmentList", departmentList);
+            mav1.getModelMap().put("employeeCategoryList", categoryList);
+            mav1.getModelMap().put("employeeList", employeeList);
+            mav1.getModelMap().put("bankList", bankList);
+            return mav1;
+
         }
 
     }
@@ -444,6 +482,15 @@ public class EmployeeController {
         logger.info("edit_employee called.");
         ModelAndView mav;
         Employees employees = employeesDAO.getRecordByPrimaryKey(id);
+        List<Integer> yearsList = new ArrayList<>();
+        for (int i = 0; i < 13; i++) {
+            yearsList.add(i);
+        }
+        List<Integer> monthList = new ArrayList<>();
+        for (int i = 1; i <= 12; i++) {
+            monthList.add(i);
+        }
+
         if (employees != null) {
             mav = new ModelAndView("edit_employee");
             mav.getModelMap().put("employee", employees);
@@ -455,6 +502,8 @@ public class EmployeeController {
             mav.getModelMap().put("employeeCategoryList", categoryList);
             mav.getModelMap().put("employeeList", employeeList);
             mav.getModelMap().put("bankList", bankList);
+            mav.getModelMap().put("yearList", yearsList);
+            mav.getModelMap().put("monthList", monthList);
         } else {
 
             mav = new ModelAndView("redirect:employee.html");
@@ -473,6 +522,7 @@ public class EmployeeController {
                 categoryMap.put(employeeCategory.getId(), employeeCategory.getCategory());
             }
             mav.getModelMap().put("categorymap", categoryMap);
+
         }
         if (success != null) {
             mav.getModelMap().put("success", success);
@@ -490,6 +540,14 @@ public class EmployeeController {
             Locale locale) throws Exception {
         logger.info("edit_employee-post called.");
         ModelAndView mav = new ModelAndView("redirect:employee.html");
+        List<Integer> yearsList = new ArrayList<>();
+        for (int i = 0; i < 13; i++) {
+            yearsList.add(i);
+        }
+        List<Integer> monthList = new ArrayList<>();
+        for (int i = 1; i <= 12; i++) {
+            monthList.add(i);
+        }
         if (!result.hasErrors()) {
             if (employees.getFileData() != null) {
                 employees.setPhotoData(Hibernate.createBlob(employees.getFileData().getInputStream()));
@@ -526,8 +584,20 @@ public class EmployeeController {
                         .addObject("error", Utilities.getSpringMessage(messageSource, "employee.update.error", locale));
             }
         } else {
+            mav = new ModelAndView("edit_employee", model);
+            mav.getModelMap().put("employee", employees);
+            List<Employees> employeeList = employeesDAO.getList();
+            List<EmployeeDepartment> departmentList = employeeDepartmentDAO.getList();
+            List<EmployeeCategory> categoryList = employeeCategoryDAO.getList();
+            List<Bank> bankList = bankDAO.getList();
+            mav.getModelMap().put("employeeDepartmentList", departmentList);
+            mav.getModelMap().put("employeeCategoryList", categoryList);
+            mav.getModelMap().put("employeeList", employeeList);
+            mav.getModelMap().put("bankList", bankList);
+            mav.getModelMap().put("yearList", yearsList);
+            mav.getModelMap().put("monthList", monthList);
             logger.warn("Employee  values are not valid:", employees);
-            return new ModelAndView("edit_employee", model);
+            return  mav;
         }
     }
 
@@ -588,5 +658,9 @@ public class EmployeeController {
         logger.info("Employee Department with id {0} is already deleted", employees.getId());
         return mav
                 .addObject("success", Utilities.getSpringMessage(messageSource, "employee.delete.error", locale));
+    }
+
+    private List<Employees> getEmployeeByEmployeeNumber(String employeeNumber) {
+        return employeesDAO.getListByFromClause(" FROM Employees e WHERE e.employeeNumber= '" + employeeNumber + "'");
     }
 }
