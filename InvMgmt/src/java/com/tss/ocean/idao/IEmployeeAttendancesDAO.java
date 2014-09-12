@@ -6,5 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 public interface IEmployeeAttendancesDAO extends GenericDAO<EmployeeAttendances, Integer> {
-List<EmployeeAttendances> getEmployeeAttendanceBetweenDates(Date fromdate,Date todate);
+
+    List<EmployeeAttendances> getEmployeeAttendanceBetweenDates(Date fromdate, Date todate);
+
+    List<EmployeeAttendances> getEmployeeAttendanceBetweenDatesByEmployee(Integer employeeId, Date fromdate, Date todate);
+    List<EmployeeAttendances> getEmployeeAttendanceByDateByEmployeeId(Date attendanceDate,Integer employeeId);
 }
