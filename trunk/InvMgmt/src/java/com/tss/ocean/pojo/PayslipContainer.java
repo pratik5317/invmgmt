@@ -8,6 +8,7 @@ package com.tss.ocean.pojo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -17,9 +18,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class PayslipContainer implements Serializable{
 
    
+   @NotNull
     private Integer employeeId;
     private List<MonthlyPayslips> monthlyPayslipList;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @NotNull
     private Date salaryDate;
 
     public Integer getEmployeeId() {

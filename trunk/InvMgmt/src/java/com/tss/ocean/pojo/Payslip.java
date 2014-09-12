@@ -96,6 +96,11 @@ public class Payslip implements Serializable{
     public void setDeductionList(List<MonthlyPayslips> deductionList) {
         this.deductionList = deductionList;
     }
+
+    @Override
+    public String toString() {
+        return "Payslip{" + "employeeId=" + employeeId + ", firstName=" + firstName + ", lastName=" + lastName + ", employeeNumber=" + employeeNumber + ", salary=" + salary + ", deductions=" + deductions + ", total=" + total + ", salaryList=" + salaryList + ", deductionList=" + deductionList + '}';
+    }
     
     
     

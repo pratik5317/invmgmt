@@ -286,7 +286,16 @@ public class PayrollController {
             }
 
         } else {
-            return new ModelAndView("payslips", model);
+            LOGGER.info("Payslip created not");
+            PayslipContainer payslipContainer1 = new PayslipContainer();
+            ModelAndView mav1 = new ModelAndView("payslips", model);
+            List<MonthlyPayslips> monthlyPayslipList = new ArrayList<>();
+            payslipContainer1.setMonthlyPayslipList(monthlyPayslipList);
+            mav1.getModelMap().put("employeeList", employeeList);
+            mav1.getModelMap().put("payslipContainer", payslipContainer1);
+            mav1.getModelMap().put("payrollcategoryList", payrollCategoryList);
+            return mav1;
+//            return new ModelAndView("payslips", model);
         }
     }
 
@@ -365,16 +374,17 @@ public class PayrollController {
                         payslip.setDeductions(0d);
                         payslip.setTotal(0d);
                         PayrollCategories payrollCategories = payrollCategoriesDAO.getRecordByPrimaryKey(monthlyPayslips.getPayrollCategoryId());
-
+                        payslip.setDeductionList(new ArrayList<MonthlyPayslips>());
+                        payslip.setSalaryList(new ArrayList<MonthlyPayslips>());
                         if (payrollCategories.getIsDeduction()) {
                             payslip.setDeductions(payslip.getDeductions() + monthlyPayslips.getAmount());
                             payslip.setTotal(payslip.getTotal() - monthlyPayslips.getAmount());
-                            payslip.setDeductionList(new ArrayList<MonthlyPayslips>());
+
                             payslip.getDeductionList().add(monthlyPayslips);
                         } else {
                             payslip.setSalary(payslip.getSalary() + monthlyPayslips.getAmount());
                             payslip.setTotal(payslip.getTotal() + monthlyPayslips.getAmount());
-                            payslip.setSalaryList(new ArrayList<MonthlyPayslips>());
+
                             payslip.getSalaryList().add(monthlyPayslips);
                         }
 
@@ -382,7 +392,7 @@ public class PayrollController {
                         employeeList.add(monthlyPayslips.getEmployeeId());
                     }
                 }
-
+                System.out.println("map is " + payslipMap);
                 mav.getModelMap().put("employeeList", employeeList);
                 mav.getModelMap().put("payslipmap", payslipMap);
                 request.getSession().setAttribute("payslipmap", payslipMap);
@@ -416,6 +426,7 @@ public class PayrollController {
                 }
             }
         }
+        System.out.println("Monthly Payslip " + monthlyPayslipList);
         return monthlyPayslipList;
     }
 
