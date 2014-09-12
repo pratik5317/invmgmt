@@ -70,7 +70,7 @@
                             <div class="tab-pane active" id="demo">
                                 <div class="row tb-margin">
                                      <div class="col-sm-4">
-                                        <a href="payslips_list.html" class="btn btn-info add-row addrow-btn-left"><spring:message code="label.createpayslip" text="Label value is missing !!!"/></a>
+                                        <a href="payslips.html" class="btn btn-info add-row addrow-btn-left"><spring:message code="label.createpayslip" text="Label value is missing !!!"/></a>
                                     </div>
                                     <div class="col-sm-4">
                                         <form method="post" action="get_payslip.html">
@@ -154,7 +154,7 @@
                                                 <td>${payslipmap[employee].deductions}</td>   
                                                 <td>${payslipmap[employee].total}</td>   
                                                 <td>
-                                                    <a href="payslip_detail.html?id=${employee}" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</a>
+                                                    <a href="payslip_detail.html?id=${employee}" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>View</a>
                                                 </td>
                                             </tr>                                        
                                         </c:forEach>
