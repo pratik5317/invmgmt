@@ -19,7 +19,7 @@ public class EmployeeCategory implements Serializable {
     private String category;
     @NotEmpty
     private String prefix;
-    private Integer isActive;
+    private Boolean isActive;
 
     public Integer getId() {
         return id;
@@ -45,11 +45,11 @@ public class EmployeeCategory implements Serializable {
         this.prefix = prefix;
     }
 
-    public Integer getIsActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(Integer isActive) {
+    public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
     }
 
@@ -58,4 +58,5 @@ public class EmployeeCategory implements Serializable {
         return "EmployeeCategory{" + "id=" + id + ", category=" + category + ", prefix=" + prefix + ", isActive=" + isActive + '}';
     }
 
+  
 }

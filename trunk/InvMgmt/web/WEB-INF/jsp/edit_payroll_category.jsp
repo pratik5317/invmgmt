@@ -96,8 +96,9 @@
                                             <div class="row text-pad-top visible-lg visible-md visible-sm"><div class="successblock">${success}</div></div>
                                             </c:if>
 
+                                       <div style="font-weight : bold;padding : 10px 0 30px 0;"> Fields marked with <span style=" color : #f00;font-size : 1.1em;">*</span> must be filled.</div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.payrollcategory.category" text="Default Text"/></label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.payrollcategory.category" text="Default Text"/></label><span style=" color : #f00;font-size : 1.1em;">*</span>
                                             <div class="col-sm-8 col-xs-12">                                            
                                                 <form:input type="text" class="form-control" path="name" placeholder="${categoryplaceholder}" />
                                                 <form:errors path="name" cssClass="error" />
@@ -110,7 +111,6 @@
                                                 <form:errors path="percentage" cssClass="error" />
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.payrollcategory.percentageof" text="Default Text"/></label>
                                             <div class="col-sm-8 col-xs-12">
@@ -142,15 +142,12 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-sm-2"></div>
                                     </div>
-
-                                    <div class="col-sm-2"></div>
-                                </div>
-
-                                <div class="div-center">
-                                    <button type="submit" class="btn btn-orange" onclick="return submitDetailsForm();"><spring:message code="label.update" text="Default Text"/></button>
-                                    <button type="button" class="btn btn-orange" onclick="javascript:history.back();"><spring:message code="label.cancel" text="Default Text"/></button>
-                                </div>
+                                    <div class="div-center">
+                                        <button type="submit" class="btn btn-orange" onclick="return submitDetailsForm();"><spring:message code="label.save" text="Default Text"/></button>
+                                        <button type="button" class="btn btn-orange" onclick="javascript:history.back();"><spring:message code="label.cancel" text="Default Text"/></button>
+                                    </div>
                             </form:form>
                         </div>
                     </div>

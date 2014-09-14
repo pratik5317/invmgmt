@@ -14,7 +14,7 @@
          <property name="code" type="string">
             <column name="code" />
         </property>
-         <property name="isActive" type="java.lang.Integer">
+         <property name="isActive" type="java.lang.Boolean">
             <column name="isactive" />
         </property>
                                                             

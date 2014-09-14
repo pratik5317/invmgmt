@@ -14,7 +14,7 @@
          <property name="prefix" type="string">
             <column name="prefix" />
         </property>
-         <property name="isActive" type="java.lang.Integer">
+         <property name="isActive" type="java.lang.Boolean">
             <column name="isactive" />
         </property>                                                                                                                        
     </class>

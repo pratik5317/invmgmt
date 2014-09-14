@@ -20,7 +20,7 @@ public class EmployeeDepartment implements Serializable{
     private String department;
     @NotEmpty
     private String code;
-    private Integer isActive;
+    private Boolean isActive;
 
     public Integer getId() {
         return id;
@@ -46,11 +46,11 @@ public class EmployeeDepartment implements Serializable{
         this.code = code;
     }
 
-    public Integer getIsActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(Integer isActive) {
+    public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
     }
 
@@ -58,8 +58,6 @@ public class EmployeeDepartment implements Serializable{
     public String toString() {
         return "EmployeeDepartment{" + "id=" + id + ", department=" + department + ", code=" + code + ", isActive=" + isActive + '}';
     }
-    
-    
-    
-    
+
+      
 }
