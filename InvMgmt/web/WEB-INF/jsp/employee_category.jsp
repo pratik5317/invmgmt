@@ -87,15 +87,9 @@
                                             <th data-toggle="true">
                                                 <spring:message code="label.employeecategory" text="Label value is missing !!!"/>
                                             </th>
-                                            <!--                                            <th data-hide="phone">
-                                            <spring:message code="label.purorder.supplier" text="Label value is missing !!!"/> 
-                                        </th>
-                                        <th data-hide="phone">
-                                            <spring:message code="label.purorder.price" text="Label value is missing !!!"/> 
-                                        </th>
-                                        <th data-hide="phone">
-                                            <spring:message code="label.purorder.createdat" text="Label value is missing !!!"/> 
-                                        </th>                                            -->
+                                            <th data-toggle="true">
+                                                <spring:message code="label.empcategory.isactive" text="Label value is missing !!!"/>
+                                            </th>
                                             <th data-hide="phone" data-name="Delete">
                                                 <spring:message code="label.purorder.action" text="Label value is missing !!!"/> 
                                             </th>
@@ -104,7 +98,8 @@
                                     <tbody>
                                         <c:forEach var="employeeCategory" items="${employeeCategoryList}">
                                             <tr>
-                                                <td>${employeeCategory.category}</td>
+                                                <td>${employeeCategory.category} (${employeeCategory.prefix})</td>
+                                                <td>${employeeCategory.isActive}</td>
                                                 <td>
                                                     <a href="edit_employee_category.html?id=${employeeCategory.id}" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</a>
                                                     <a href="delete_employee_category.html?id=${employeeCategory.id}" class="btn btn-default btn-sm row-delete" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</a>

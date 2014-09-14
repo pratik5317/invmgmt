@@ -90,7 +90,9 @@
                                             <th data-toggle="true">
                                                 <spring:message code="label.employeedepartment.code" text="Label value is missing !!!"/>
                                             </th>
-                                            <!--                                                                            -->
+                                            <th data-toggle="true">
+                                                <spring:message code="label.empdepartment.isactive" text="Label value is missing !!!"/>
+                                            </th>
                                             <th data-hide="phone" data-name="Delete">
                                                 <spring:message code="label.action" text="Label value is missing !!!"/> 
                                             </th>
@@ -101,6 +103,7 @@
                                             <tr>
                                                 <td>${employeeDepartment.department}</td>
                                                 <td>${employeeDepartment.code}</td>
+                                                <td>${employeeDepartment.isActive}</td>
                                                 <td>
                                                     <a href="edit_employee_department.html?id=${employeeDepartment.id}" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</a>
                                                     <a href="delete_employee_department.html?id=${employeeDepartment.id}" class="btn btn-default btn-sm row-delete" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</a>

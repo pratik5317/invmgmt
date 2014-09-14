@@ -98,7 +98,7 @@
                                             </th>  
                                             <th data-toggle="true">
                                                 <spring:message code="label.payrollcategory.isdeduction" text="Label value is missing !!!"/>
-                                            </th>  -
+                                            </th> 
                                             <th data-hide="phone" data-name="Delete">
                                                 <spring:message code="label.purorder.action" text="Label value is missing !!!"/> 
                                             </th>

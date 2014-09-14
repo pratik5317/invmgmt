@@ -113,7 +113,6 @@ public class EmployeeController {
             Locale locale) throws Exception {
         logger.info("add_employee_category-post called.");
         if (!result.hasErrors()) {
-            employeeCategory.setIsActive(1);
             int insertResult = employeeCategoryDAO.insert(employeeCategory);
             if (insertResult > 0) {
                 logger.info("Employee category Added Successfully with id " + insertResult);
@@ -493,6 +492,7 @@ public class EmployeeController {
 
         if (employees != null) {
             mav = new ModelAndView("edit_employee");
+            logger.info("file data " + employees.getFileData());
             mav.getModelMap().put("employee", employees);
             List<Employees> employeeList = employeesDAO.getList();
             List<EmployeeDepartment> departmentList = employeeDepartmentDAO.getList();

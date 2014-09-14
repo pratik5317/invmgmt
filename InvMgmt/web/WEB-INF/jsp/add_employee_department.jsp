@@ -91,16 +91,16 @@
                                             <c:if test="${not empty success}">  
                                             <div class="row text-pad-top visible-lg visible-md visible-sm"><div class="successblock">${success}</div></div>
                                             </c:if>
-
+                                        <div style="font-weight : bold;padding : 10px 0 30px 0;"> Fields marked with <span style=" color : #f00;font-size : 1.1em;">*</span> must be filled.</div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.empdepartment.department" text="Default Text"/></label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.empdepartment.department" text="Default Text"/></label><span style=" color : #f00;font-size : 1.1em;">*</span>
                                             <div class="col-sm-8 col-xs-12">                                            
                                                 <form:input type="text" class="form-control" path="department" placeholder="${departmentplaceholder}" />
                                                 <form:errors path="department" cssClass="error" />
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.empdepartment.code" text="Default Text"/></label>
+                                            <label class="col-sm-4 col-xs-12 control-label search-text"><spring:message code="label.empdepartment.code" text="Default Text"/></label><span style=" color : #f00;font-size : 1.1em;">*</span>
                                             <div class="col-sm-8 col-xs-12">                                            
                                                 <form:input type="text" class="form-control" path="code" placeholder="${codeplaceholder}" />
                                                 <form:errors path="code" cssClass="error" />
@@ -148,7 +148,7 @@
         <!-- Jquery UI Javascript -->
         <script src="js/jquery-ui.js"></script>
         <script type="text/javascript">
-                                    $('input[type=date]').datepicker({dateFormat: 'dd/mm/yy'});
+                                            $('input[type=date]').datepicker({dateFormat: 'dd/mm/yy'});
         </script>
     </body>
 </html>

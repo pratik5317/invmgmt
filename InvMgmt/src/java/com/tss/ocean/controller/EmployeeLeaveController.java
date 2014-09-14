@@ -108,7 +108,10 @@ public class EmployeeLeaveController {
                         .addObject("error", Utilities.getSpringMessage(messageSource, "leavetype.add.error", locale));
             }
         } else {
-            return new ModelAndView("add_leave_type", model);
+            ModelAndView mav = new ModelAndView("add_leave_type", model);
+            EmployeeLeaveTypes leaveType = new EmployeeLeaveTypes();
+            mav.getModelMap().put("leaveType", leaveType);
+            return mav;
         }
 
     }
@@ -162,7 +165,7 @@ public class EmployeeLeaveController {
             }
         } else {
             logger.warn("Leave types values are not valid:", employeeLeaveTypes);
-            return new ModelAndView("edit_employee_category", model);
+            return new ModelAndView("edit_leave_type", model);
         }
     }
 
@@ -266,29 +269,29 @@ public class EmployeeLeaveController {
             mav.getModelMap().put("hoursList", hoursList);
             mav.getModelMap().put("minutesList", minutesList);
             mav.getModelMap().put("attendance", new EmployeeAttendances());
-            
-             if (employeeAttendances.getInHour() != null && employeeAttendances.getInMinutes() != null) {
-                        employeeAttendances.setInTime(decimalFormat.format(employeeAttendances.getInHour()) + ":" + decimalFormat.format(employeeAttendances.getInMinutes()));
-                    }
-                    if (employeeAttendances.getOutHour() != null && employeeAttendances.getOutMinutes() != null) {
-                        employeeAttendances.setOutTime(decimalFormat.format(employeeAttendances.getOutHour()) + ":" + decimalFormat.format(employeeAttendances.getOutHour()));
-                    }
+
+            if (employeeAttendances.getInHour() != null && employeeAttendances.getInMinutes() != null) {
+                employeeAttendances.setInTime(decimalFormat.format(employeeAttendances.getInHour()) + ":" + decimalFormat.format(employeeAttendances.getInMinutes()));
+            }
+            if (employeeAttendances.getOutHour() != null && employeeAttendances.getOutMinutes() != null) {
+                employeeAttendances.setOutTime(decimalFormat.format(employeeAttendances.getOutHour()) + ":" + decimalFormat.format(employeeAttendances.getOutHour()));
+            }
 //            employeeAttendances.setInTime(employeeAttendances.getInHour() + ":" + employeeAttendances.getInMinutes());
 //            employeeAttendances.setOutTime(employeeAttendances.getOutHour() + ":" + employeeAttendances.getOutMinutes());
             if (!employeeAttendances.getIsLeave()) {
 
                 employeeAttendances.setEmployeeLeaveTypeId(null);
             }
-            List<EmployeeAttendances> employeeAttendanceses = getAttendanceByDateByEmployeeId(employeeAttendances.getAttendanceDate(),employeeAttendances.getEmployeeId());
-            if(employeeAttendanceses != null && !employeeAttendanceses.isEmpty()){
+            List<EmployeeAttendances> employeeAttendanceses = getAttendanceByDateByEmployeeId(employeeAttendances.getAttendanceDate(), employeeAttendances.getEmployeeId());
+            if (employeeAttendanceses != null && !employeeAttendanceses.isEmpty()) {
                 employeeAttendances.setId(employeeAttendanceses.get(0).getId());
             }
-             employeeAttendancesDAO.insertOrUpdate(employeeAttendances);
-           
-                logger.info("Employee attendance Added Successfully with id ");
-                return mav
-                        .addObject("success", Utilities.getSpringMessage(messageSource, "attendance.add.success", locale));
-          
+            employeeAttendancesDAO.insertOrUpdate(employeeAttendances);
+
+            logger.info("Employee attendance Added Successfully with id ");
+            return mav
+                    .addObject("success", Utilities.getSpringMessage(messageSource, "attendance.add.success", locale));
+
         } else {
             ModelAndView mav = new ModelAndView("add_attendance", model);
             List<Employees> employeeList = employeesDAO.getList();
@@ -464,7 +467,7 @@ public class EmployeeLeaveController {
         return employeeAttendancesDAO.getEmployeeAttendanceBetweenDatesByEmployee(employeeId, fromDate, toDate);
     }
 
-    private List<EmployeeAttendances> getAttendanceByDateByEmployeeId(Date attendanceDate,Integer employeeId) {
+    private List<EmployeeAttendances> getAttendanceByDateByEmployeeId(Date attendanceDate, Integer employeeId) {
         return employeeAttendancesDAO.getEmployeeAttendanceByDateByEmployeeId(attendanceDate, employeeId);
     }
 }

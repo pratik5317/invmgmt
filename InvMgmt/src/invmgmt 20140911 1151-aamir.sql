@@ -908,3 +908,8 @@ CREATE TABLE `usertype` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+/*!change in employee_category table */;
+ALTER TABLE `invmgmt`.`employee_category` MODIFY COLUMN `isactive` TINYINT UNSIGNED NOT NULL;
+/*!change in employee_department table */;
+ALTER TABLE `invmgmt`.`employee_department` MODIFY COLUMN `isactive` TINYINT UNSIGNED NOT NULL;
