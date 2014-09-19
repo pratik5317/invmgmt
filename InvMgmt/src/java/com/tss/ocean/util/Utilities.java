@@ -20,6 +20,6 @@ public class Utilities {
     }
     
     public static String getRandomString(int length) {
-        return new BigInteger(130, random).toString(length);
+        return new BigInteger(length, random).toString();
     }
 }
