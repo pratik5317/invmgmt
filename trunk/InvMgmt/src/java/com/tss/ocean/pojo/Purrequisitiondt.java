@@ -13,6 +13,7 @@ public class Purrequisitiondt  implements java.io.Serializable {
      private Integer id;
      private int purreqid;
      private int itemid;
+     private Item item;
      private int qty;
      private BigDecimal price;
 
@@ -20,15 +21,17 @@ public class Purrequisitiondt  implements java.io.Serializable {
     }
 
 	
-    public Purrequisitiondt(int purreqid, int itemid, int qty) {
+    public Purrequisitiondt(int purreqid, int itemid, int qty,Item item) {
         this.purreqid = purreqid;
         this.itemid = itemid;
         this.qty = qty;
+        this.item = item;
     }
-    public Purrequisitiondt(int purreqid, int itemid, int qty, BigDecimal price) {
+    public Purrequisitiondt(int purreqid, int itemid, int qty,Item item, BigDecimal price) {
        this.purreqid = purreqid;
        this.itemid = itemid;
        this.qty = qty;
+        this.item = item;
        this.price = price;
     }
    
@@ -66,6 +69,14 @@ public class Purrequisitiondt  implements java.io.Serializable {
     
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 
 

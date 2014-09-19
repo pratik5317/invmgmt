@@ -611,4 +611,25 @@ public class Employees implements java.io.Serializable {
         this.codeNumber = codeNumber;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        try {
+            if (obj instanceof Employees) {
+                Employees emp = (Employees) obj;
+                if (emp.getId().intValue() == this.getId().intValue()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return super.equals(obj);
+    }
+
+    
+    
 }

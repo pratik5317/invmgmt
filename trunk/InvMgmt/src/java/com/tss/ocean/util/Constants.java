@@ -11,6 +11,8 @@ public class Constants {
     public final static int CREATED = 1;
     public final static int SUSPENDED = 2;
     public final static int PLACED = 3;
+    public final static int APPROVED = 4;
+    public final static int APPROVEDBYALL=5;
 
     public final static String DEFAULT_MESSSAGE = "(DEFAULT TEXT)";
 

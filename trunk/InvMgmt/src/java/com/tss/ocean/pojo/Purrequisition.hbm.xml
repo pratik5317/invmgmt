@@ -20,6 +20,12 @@
         <property name="approvedby" type="java.lang.Integer">
             <column name="approvedby" />
         </property>
+        <property name="approvedbydate" type="java.util.Date">
+            <column name="approvedbydate" />
+        </property>
+        <property name="nextapprovedby" type="java.lang.Integer">
+            <column name="nextapprovedby" />
+        </property>
         <property name="createdat" type="timestamp">
             <column name="createdat" length="19" not-null="true" />
         </property>

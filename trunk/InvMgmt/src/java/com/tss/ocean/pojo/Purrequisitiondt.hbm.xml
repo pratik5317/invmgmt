@@ -20,5 +20,7 @@
         <property name="price" type="big_decimal">
             <column name="price" precision="15" />
         </property>
+        <many-to-one name="item" column="itemid" unique="true" class="com.tss.ocean.pojo.Item" 
+        not-null="true" insert="false" update="false" />
     </class>
 </hibernate-mapping>
