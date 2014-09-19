@@ -2,24 +2,5 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="invmgmt"/>
-  <table-filter match-name="item"/>
-  <table-filter match-name="purorderdt"/>
-  <table-filter match-name="users"/>
-  <table-filter match-name="prstatus"/>
-  <table-filter match-name="usertype"/>
-  <table-filter match-name="employee_leaves"/>
-  <table-filter match-name="purrequisitiondt"/>
-  <table-filter match-name="itemtype"/>
-  <table-filter match-name="purrequisition"/>
-  <table-filter match-name="itemunit"/>
-  <table-filter match-name="employee_leave_types"/>
-  <table-filter match-name="payroll_categories"/>
-  <table-filter match-name="alarms"/>
-  <table-filter match-name="monthly_payslips"/>
-  <table-filter match-name="employees"/>
-  <table-filter match-name="apply_leaves"/>
-  <table-filter match-name="alarmevent"/>
-  <table-filter match-name="accounts"/>
-  <table-filter match-name="purorder"/>
-  <table-filter match-name="employee_attendances"/>
+  <table-filter match-name="purord_approvers"/>
 </hibernate-reverse-engineering>
