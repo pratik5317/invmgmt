@@ -1,5 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
@@ -95,15 +97,36 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="listVar" items="${itemList}">
+                                        <c:forEach var="item" items="${itemList}">
                                             <tr>
-                                                <td><a href="UpdateItem.html?updateItemId=${listVar.id}"><c:out value="${listVar.name}"/></a></td>
-                                                <td><c:out value="${listVar.typeid.name}"/></td>
-                                                <td><c:out value="${listVar.currstock}"/></td>
-                                                <td data-value="78025368997"><c:out value="${listVar.unitid.name}"/></td>
-                                                <td data-value="1"><span class="status-metro status-active" title="Active"><c:out value="${listVar.price}"/></span></td>
+                                                <td>
+                                                    <c:set var="hasdelperm" value="${false}"/>
+                                                    <sec:accesscontrollist var="hasperm" hasPermission="delete" domainObject="item">
+                                                        <c:set var="authenticated" value="${true}"/>
+                                                    </sec:accesscontrollist>
+                                                        
+                                                    <c:choose>
+                                                        <c:when test="${hasdelperm}">
+                                                            <a href="UpdateItem.html?updateItemId=${item.id}"><c:out value="${item.name}"/></a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <c:out value="${item.name}"/>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td><c:out value="${item.typeid.name}"/></td>
+                                                <td><c:out value="${item.currstock}"/></td>
+                                                <td data-value="78025368997"><c:out value="${item.unitid.name}"/></td>
+                                                <td data-value="1"><span class="status-metro status-active" title="Active"><c:out value="${item.price}"/></span></td>
                                                 <td data-value="78025368997" style="text-align:center;">
-                                                    <button onclick="submitDelete(<c:out value="${listVar.id}"/>);" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                                                    <c:choose>
+                                                        <c:when test="${hasperm}">
+                                                            <button onclick="submitDelete(<c:out value="${item.id}"/>);" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            Delete
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </td>
 
                                             </tr>
@@ -180,6 +203,55 @@ $(&#39;.add-row&#39;).click(function(e) {
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" language="javascript" src="js/dataTables.responsive.min.js"></script>
-        <script src="js/ajax-bootstrap3.js"></script>
+        <script >
+            $(document).ready(function () {
+
+                var tableElement = $('#dttable');
+                tableElement.dataTable();
+                
+                var extensions = {
+                    "sFilter": "dataTables_filter custom_filter_class",
+                    "sLength": "dataTables_length custom_length_class"
+                }
+                // Used when bJQueryUI is false
+                $.extend($.fn.dataTableExt.oStdClasses, extensions);
+                // Used when bJQueryUI is true
+                //$.extend($.fn.dataTableExt.oJUIClasses, extensions);
+                
+                //init pdf and print buttons...
+                TableTools.DEFAULTS.aButtons = [  "pdf" ];
+                
+                tableElement.dataTable( {
+                    "sDom": 'lf<"pull-right">Wrtip',
+                    "bJQueryUI": false,
+                    "sPaginationType": "full_numbers",
+                    "bServerSide":true,
+                    "bProcessing":true,
+                    "sAjaxSource":"<%= request.getContextPath() %>/User/Manager/?oper=getusers",
+                    "oSearch": {"bSmart": false},
+                    "iDisplayLength": 10,
+//                    "aLengthMenu": [[5, 10, 25, 50,100, 500], [5, 10, 25, 50,100, 500]],
+                    "aoColumnDefs":[{
+                            "aTargets": [ 4 ],"bSearchable":false, "bSortable": false,"sWidth":"20%",sClass:"alignleft  "
+                            , "mRender": function ( data, type, full )  {
+                                return  "<a class=\"btn btn-mini\" HREF=\"#\" onclick=\"onedit("+data+")\" style='margin-top: 0px;margin-left: 10px'><i class=\"icon-edit\"></i> Edit</a> \n\
+                                    <a class=\"btn btn-mini\" HREF=\"#\" onclick=\"ondelete("+data+")\" style='margin-top: 0px;margin-left:10px'><i class=\"icon-trash\"></i> Delete</a> \n\
+                                    <a class=\"btn btn-mini\" HREF=\"#\" onclick=\"onlogin("+data+")\" style='margin-top: 0px;margin-left:10px'><i class=\"icon-user\"></i> Login</a>";
+                            }
+                        },{"aTargets":[1],"sWidth":"30%"},{"aTargets":[0],"sClass":"aligrnleft"}
+                        ,{"aTargets":[2],"sClass":"aligrnleft"}
+                    ],
+                    "oColumnFilterWidgets": {
+                        "aiExclude": [ 0,1,4 ]
+                        ,"iMaxSelections":1
+                    },
+                    "oLanguage": {
+                        "sLengthMenu": " _MENU_ ",
+                        "sSearch": "_INPUT_"
+                    }
+                } );
+
+            }
+        </script>
     </body>
 </html>
