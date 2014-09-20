@@ -913,3 +913,6 @@ CREATE TABLE `usertype` (
 ALTER TABLE `invmgmt`.`employee_category` MODIFY COLUMN `isactive` TINYINT UNSIGNED NOT NULL;
 /*!change in employee_department table */;
 ALTER TABLE `invmgmt`.`employee_department` MODIFY COLUMN `isactive` TINYINT UNSIGNED NOT NULL;
+
+ALTER TABLE `invmgmt`.`employees` ADD COLUMN `username` VARCHAR(45) AFTER `employee_number`,
+ ADD COLUMN `password` VARCHAR(45) AFTER `username`;
