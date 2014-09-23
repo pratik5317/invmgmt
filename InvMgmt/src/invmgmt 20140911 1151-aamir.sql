@@ -916,3 +916,23 @@ ALTER TABLE `invmgmt`.`employee_department` MODIFY COLUMN `isactive` TINYINT UNS
 
 ALTER TABLE `invmgmt`.`employees` ADD COLUMN `username` VARCHAR(45) AFTER `employee_number`,
  ADD COLUMN `password` VARCHAR(45) AFTER `username`;
+/*!New tables for finance module */;
+CREATE TABLE `invmgmt`.`credit_debit` (
+  `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  `referencenumber` VARCHAR(45) NOT NULL,
+  `creditdebit` VARCHAR(45) NOT NULL,
+  `amount` NUMERIC NOT NULL,
+  `date` DATETIME NOT NULL,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE `invmgmt`.`receivable_order` (
+  `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  `billno` VARCHAR(45) NOT NULL,
+  `amount` NUMERIC NOT NULL,
+  `date` DATETIME NOT NULL,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB;
+
