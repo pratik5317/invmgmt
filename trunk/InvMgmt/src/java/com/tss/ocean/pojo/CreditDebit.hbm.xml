@@ -14,9 +14,7 @@
         <property name="creditOrDebit" type="string">
             <column name="creditdebit" />
         </property>
-        <property name="creditOrDebit" type="string">
-            <column name="creditdebit" />
-        </property>
+        
         <property name="amount" type="java.lang.Double">
             <column name="amount" />
         </property>

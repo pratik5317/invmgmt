@@ -5,18 +5,27 @@
  */
 package com.tss.ocean.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
  * @author ssweta
  */
-public class CreditDebit {
+public class CreditDebit implements Serializable{
 
     private Integer id;
+    @NotNull
     private String referenceNumber;
+    @NotEmpty
     private String creditOrDebit;
+    @NotNull
     private Double amount;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @NotNull
     private Date date;
 
     public Integer getId() {
