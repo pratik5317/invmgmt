@@ -40,7 +40,7 @@
             <spring:message code="label.creditdebit.save" text="Default Text" var="savebutton" />
         </c:if>
         <c:if test="${creditDebit.id != null}">
-            <c:set var="formaction" value="edit_creditdebit.html?id=${bank.id}" />
+            <c:set var="formaction" value="edit_creditdebit.html?id=${creditDebit.id}" />
             <spring:message code="label.creditdebit" text="Default Text" var="pagetitletext" />
             <spring:message code="label.edit.creditdebit" text="Default Text" var="catboxtitle" />
             <spring:message code="label.creditdebit.update" text="Default Text" var="savebutton" />

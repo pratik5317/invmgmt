@@ -18,7 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class CreditDebit implements Serializable{
 
     private Integer id;
-    @NotNull
+    @NotEmpty
     private String referenceNumber;
     @NotEmpty
     private String creditOrDebit;
