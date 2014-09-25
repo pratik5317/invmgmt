@@ -131,12 +131,14 @@ public class CreditDebitController {
                         .addObject("success", Utilities.getSpringMessage(messageSource, "creditdebit.update.success", locale));
             } else {
                 logger.log(Level.WARNING, "Error occurred updating creditdebit:{0}", creditDebit);
-                return new ModelAndView("add_bank", model)
+                return new ModelAndView("add_creditdebit", model)
                         .addObject("error", Utilities.getSpringMessage(messageSource, "creditdebit.update.error", locale));
             }
         } else {
-            logger.log(Level.WARNING, "Purchase_order values are not valid:", creditDebit);
-            return new ModelAndView("purchase_order", model);
+            logger.log(Level.WARNING, "creditDebit values are not valid:", creditDebit);
+            ModelAndView mav = new ModelAndView("add_creditdebit",model);
+            mav.getModelMap().put("creditDebit", creditDebit);
+            return mav;
         }
     }
 
