@@ -40,5 +40,6 @@
     <mapping resource="com/tss/ocean/pojo/Country.hbm.xml"/>
     <mapping resource="com/tss/ocean/pojo/Bank.hbm.xml"/>
     <mapping resource="com/tss/ocean/pojo/CreditDebit.hbm.xml"/>
+    <mapping resource="com/tss/ocean/pojo/ReceivableOrder.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -11,9 +11,7 @@
         <property name="billNumber" type="string">
             <column name="billno" />
         </property>
-        <property name="creditOrDebit" type="string">
-            <column name="creditdebit" />
-        </property>
+       
         <property name="amount" type="java.lang.Double">
             <column name="amount" />
         </property>
