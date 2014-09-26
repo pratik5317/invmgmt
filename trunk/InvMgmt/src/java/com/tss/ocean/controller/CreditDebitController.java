@@ -73,7 +73,7 @@ public class CreditDebitController {
             } else {
                 logger.log(Level.WARNING, "Error occurred inserting bank:{0}", creditDebit);
                
-                return new ModelAndView("purchase_order", model)
+                return new ModelAndView("add_creditdebit", model)
                         .addObject("error", Utilities.getSpringMessage(messageSource, "creditdebit.add.error", locale));
             }
         } else {

@@ -6,17 +6,25 @@
 
 package com.tss.ocean.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
  * @author ssweta
  */
-public class ReceivableOrder {
+public class ReceivableOrder implements Serializable{
     
     private Integer id;
+    @NotEmpty
     private String billNumber;
+    @NotNull
     private Double amount;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @NotNull
     private Date date;
 
     public Integer getId() {
